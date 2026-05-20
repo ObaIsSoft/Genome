@@ -553,6 +553,74 @@ export class GenomeSequencer {
                 'none', 'micro', 'enter_exit', 'continuous', 'orchestrated'
             ]),
         });
+        // ── ch35: Signature Motif ────────────────────────────────────────────
+        // A typographic device threading through all content types.
+        // Derived entirely from continuous entropy — no fixed category lookup.
+        const ch35_signature_motif = getForced('ch35_signature_motif', (() => {
+            // Character space: position in this array is a continuous float index
+            const CHARS = ['_', '/', '—', '·', '•', '+', '×', '|', '~', '°',
+                ':', '→', '↗', '∞', '▸', '◦', '/', ' / ', ' — ', ' · '];
+            const HOVER_CHARS = ['→', '+', '↗', '•', '—', '›', '↪', '⟶', '▸', '⇢',
+                '∟', '↱', '»', '→', '+', '⬆', '↑', '⤴', '✦', '⟩'];
+            // Continuous position in character-space (not a switch)
+            const charIdx = b(240) * (CHARS.length - 1);
+            const hoverIdx = b(241) * (HOVER_CHARS.length - 1);
+            const floorChar = Math.floor(charIdx);
+            const floorHover = Math.floor(hoverIdx);
+            const sep = CHARS[floorChar];
+            const hover = HOVER_CHARS[floorHover];
+            // Case style: continuous float → threshold
+            const caseStyle = b(242) < 0.33 ? 'upper' : b(242) < 0.66 ? 'title' : 'lower';
+            const prefix = b(243) < 0.5; // separator before or after
+            const fmt = (label, n) => {
+                const l = caseStyle === 'upper' ? label.toUpperCase()
+                    : caseStyle === 'lower' ? label.toLowerCase()
+                        : label;
+                return prefix ? `${sep}${l}${n !== undefined ? n : ''}` : `${l}${n !== undefined ? n : ''}${sep}`;
+            };
+            // Date separator: same character but may add spacing
+            const dateSep = sep.trim().length === 1 ? sep : sep.trim()[0] ?? '_';
+            // Character family label for documentation only
+            const families = {
+                '_': 'underscore', '/': 'slash', '—': 'em_dash', '·': 'mid_dot',
+                '•': 'bullet', '+': 'plus', '×': 'multiply', '|': 'pipe',
+                '~': 'tilde', '°': 'degree', ':': 'colon', '→': 'arrow',
+                '↗': 'diagonal_arrow', '∞': 'infinity', '▸': 'triangle',
+                '◦': 'ring', ' / ': 'spaced_slash', ' — ': 'spaced_dash', ' · ': 'spaced_dot',
+            };
+            return {
+                separator: sep,
+                numberFormat: fmt('', Math.round(b(244) * 99 + 1)), // sample: "_25" or "25_"
+                dateFormat: `${String(Math.round(b(245) * 27 + 1)).padStart(2, '0')}${dateSep}${String(Math.round(b(246) * 11 + 1)).padStart(2, '0')}${dateSep}${String(Math.round(b(247) * 98 + 25)).padStart(2, '0')}`,
+                locationFormat: fmt('CITY', undefined).replace('CITY', caseStyle === 'upper' ? 'CITY' : 'City') + sep + (caseStyle === 'upper' ? 'COUNTRY' : 'Country'),
+                labelFormat: fmt('Section'),
+                hoverIndicator: hover,
+                deployment: b(248),
+                characterFamily: families[sep] ?? 'custom',
+            };
+        })());
+        // ── ch36: Tension Rhythm ─────────────────────────────────────────────
+        // Two alternating surface registers from the concept tension.
+        // Primary = base surface from ch6; secondary = derived from primary hue.
+        const ch36_tension_rhythm = getForced('ch36_tension_rhythm', (() => {
+            const base = ch6_color_temp.surfaceStack?.[0] ?? '#ffffff';
+            const contrast = b(249) * 0.6 + (ch12_signature.entropy * 0.4);
+            // Compute secondary surface as a hue-tinted gray.
+            // Use primary hue at low saturation + contrast-driven lightness shift.
+            const hue = ch5_color_primary.hue ?? 210;
+            const sat = Math.round(8 + contrast * 14); // 8–22% — just a tint
+            const lightShift = ch6_color_temp.isDark
+                ? Math.round(28 + contrast * 22) // dark mode: lighter secondary
+                : Math.round(72 - contrast * 22); // light mode: darker secondary
+            const secondarySurface = `hsl(${Math.round(hue)}, ${sat}%, ${lightShift}%)`;
+            return {
+                primarySurface: base,
+                secondarySurface,
+                surfaceContrast: contrast,
+                sharedConstants: ['typeface', 'signature_motif', 'nav_style', 'text_color'],
+                alternationWeight: b(250) * 0.7,
+            };
+        })());
         return {
             ch0_sector_primary,
             ch0_sector_secondary,
@@ -597,6 +665,8 @@ export class GenomeSequencer {
             ch32_token_inheritance,
             ch33_composition_strategy,
             ch34_component_topology,
+            ch35_signature_motif,
+            ch36_tension_rhythm,
         };
     }
     /**

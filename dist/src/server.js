@@ -704,6 +704,28 @@ class DesignGenomeServer {
                         },
                         required: ["intent"]
                     }
+                },
+                {
+                    name: "generate_component_tokens",
+                    description: "L0.8 LAYER — Parametric Component Decision Engine. Translates L0 Creator Genome latent coordinates + L1 Design Genome into exact CSS token decisions for every component. ALL values are continuous derivations — unique cubic-bezier curves, precise px border-radius values, multi-layer shadows, computed backdrop-filter. No presets, no hardcoded defaults. Every genome produces a distinct visual system. Returns ComponentTokenMap with per-component filled/ghost/flat variants across all interaction states, plus CSS custom properties block. AI INSTRUCTION: Call after generate_design_genome or generate_design_through_persona to get per-component CSS tokens before implementing UI.",
+                    inputSchema: {
+                        type: "object",
+                        properties: {
+                            genome: { type: "object", description: "L1 Design Genome from generate_design_genome or generate_design_through_persona (required — must include chromosomes)" },
+                            creator_genome: { type: "object", description: "L0 Creator Genome (optional — if omitted, a creator genome is auto-derived from genome.dnaHash)" },
+                            components: {
+                                type: "array",
+                                items: { type: "string" },
+                                description: "Subset of components to generate tokens for. Omit to generate all 20+. Options: button, card, nav, input, select, textarea, badge, chip, modal, tooltip, avatar, checkbox, radio, toggle, table, progress, skeleton, spinner, alert, tabs"
+                            },
+                            output_format: {
+                                type: "string",
+                                enum: ["tokens", "css_variables", "both"],
+                                description: "Output format: 'tokens' returns full ComponentTokenMap JSON, 'css_variables' returns only the :root CSS block, 'both' returns both. Default: 'both'"
+                            }
+                        },
+                        required: ["genome"]
+                    }
                 }
             ]
         }));
@@ -2452,6 +2474,64 @@ class DesignGenomeServer {
                                             }]
                                     }, null, 2)
                                 }]
+                        };
+                    }
+                    case "generate_component_tokens": {
+                        if (!args.genome) {
+                            throw new McpError(ErrorCode.InvalidParams, "Missing required parameter: 'genome'");
+                        }
+                        const designGenome = args.genome;
+                        if (!designGenome.chromosomes || !designGenome.chromosomes.ch5_color_primary) {
+                            throw new McpError(ErrorCode.InvalidParams, "genome must be a complete L1 Design Genome with chromosomes (from generate_design_genome or generate_design_through_persona). Do not pass a Creator Genome here.");
+                        }
+                        // Derive or use provided creator genome
+                        let creatorGenome;
+                        if (args.creator_genome && args.creator_genome.c9_material_affinity) {
+                            creatorGenome = args.creator_genome;
+                        }
+                        else {
+                            const { generateCreatorGenome } = await import("./creator/generator.js");
+                            const seed = designGenome.dnaHash ?? designGenome.traits?.seed ?? "genome-default";
+                            creatorGenome = generateCreatorGenome(seed);
+                        }
+                        const { generateComponentTokens, ALL_COMPONENTS } = await import("./component-tokens/engine.js");
+                        // Parse component subset
+                        let targetComponents;
+                        if (args.components && Array.isArray(args.components) && args.components.length > 0) {
+                            targetComponents = args.components.filter((c) => ALL_COMPONENTS.includes(c));
+                        }
+                        const tokenMap = generateComponentTokens(creatorGenome, designGenome, {
+                            components: targetComponents,
+                        });
+                        const fmt = args.output_format ?? "both";
+                        const output = {
+                            material_label: tokenMap.vec.materialLabel,
+                            easing_label: tokenMap.vec.easingLabel,
+                            easing_curve: tokenMap.vec.easingCurve,
+                            duration_base_ms: tokenMap.vec.durationBase,
+                            shadow_layers: tokenMap.vec.shadowLayers,
+                            backdrop_blur_px: tokenMap.vec.backdropBlur,
+                            motif: tokenMap.motif,
+                            rationale: {
+                                surface: `material="${tokenMap.vec.materialLabel}"; ${tokenMap.vec.backdropBlur > 0 ? `glassmorphism blur=${tokenMap.vec.backdropBlur}px saturate=${tokenMap.vec.backdropSaturate}%` : "solid surface"}`,
+                                motion: `${tokenMap.vec.durationBase}ms ${tokenMap.vec.easingLabel} (${tokenMap.vec.easingCurve}); lift up to ${tokenMap.vec.hoverDistance}px`,
+                                shadow: `${tokenMap.vec.shadowLayers}-layer shadow; softness=${tokenMap.vec.shadowSoftness.toFixed(2)}; scale=${tokenMap.vec.shadowScale.toFixed(2)}`,
+                                typography: `letter-spacing-base=${tokenMap.vec.letterSpacingBase.toFixed(4)}em; tabular=${tokenMap.vec.tabulaNumeric}; text-wrap=${tokenMap.vec.textWrapBalance}`,
+                            },
+                            suggested_next: [{
+                                    tool: "generate_design_brief",
+                                    how: "Pass the L1 genome to generate a full design philosophy document",
+                                    why: "Component tokens are one layer — the brief gives the conceptual framework that ties them together"
+                                }]
+                        };
+                        if (fmt === "tokens" || fmt === "both") {
+                            output.component_tokens = tokenMap.components;
+                        }
+                        if (fmt === "css_variables" || fmt === "both") {
+                            output.css_variables = tokenMap.cssVariables;
+                        }
+                        return {
+                            content: [{ type: "text", text: JSON.stringify(output, null, 2) }]
                         };
                     }
                     default:

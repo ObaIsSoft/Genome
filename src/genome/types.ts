@@ -1694,6 +1694,44 @@ export interface DesignGenome {
             /** Scope of animations within components */
             animationScope: AnimationScope;
         };
+
+        // ── Designer Synergy Chromosomes (35–36) ────────────────────────────
+        // Derived from creator latent coordinates + brief concept tension.
+        // Provide cross-component synergy: a typographic motif that threads
+        // through all content types, and a tension rhythm that alternates
+        // visual registers while sharing structural constants.
+
+        ch35_signature_motif: {
+            /** The exact separator character(s) — derived, not selected from a fixed list */
+            separator: string;
+            /** How counts/numbers are formatted: "_25", "· 25", "/ 25" */
+            numberFormat: string;
+            /** How dates are formatted: "22_04_26", "22 · 04 · 26" */
+            dateFormat: string;
+            /** How locations are formatted: "CITY_COUNTRY", "City · Country" */
+            locationFormat: string;
+            /** Section label format: "_About", "/ About", "· About" */
+            labelFormat: string;
+            /** Character shown on hover: "→", "+", "↗", "•", "—" */
+            hoverIndicator: string;
+            /** 0–1: how pervasively the motif is deployed across the design */
+            deployment: number;
+            /** Human-readable label for documentation (not used for CSS logic) */
+            characterFamily: string;
+        };
+
+        ch36_tension_rhythm: {
+            /** Primary surface hex — warmer/lighter register */
+            primarySurface: string;
+            /** Secondary surface hex — cooler/darker register */
+            secondarySurface: string;
+            /** 0–1: how dramatically different the two surfaces are */
+            surfaceContrast: number;
+            /** What never changes between registers */
+            sharedConstants: string[];
+            /** 0–1: how frequently secondary register appears (0=rare, 1=equal) */
+            alternationWeight: number;
+        };
     };
 
     constraints: {

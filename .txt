@@ -1,0 +1,363 @@
+# Design Synergy Engine: Covenant + Derived Tokens
+
+## The Problem: Synergy, Not Just Precision
+
+Right now Genome has:
+- **L0** — Creator Genome (cultural latent vectors, chaos tolerance, aesthetic sensibility)
+- **L0.5** — Persona (biography, instincts, worldview)
+- **L0.75** — Creative Brief (component language philosophy: `"buttons feel like slow exhales"`)
+- **L1** — Design Genome (32 chromosomes: color, edge, motion, grid...)
+
+But there is a **missing translation layer**:
+
+> The brief says _"buttons feel like slow exhales"_ but never generates `border-radius: 24px; transition: all 600ms cubic-bezier(0.34,1.56,0.64,1); background: rgba(180,140,255,0.15)`
+
+A real designer in Figma or Paper.design makes **100+ deliberate micro-decisions per component**:
+- Not just "rounded" — exactly `16px` radius on a button
+- Not just "has animation" — `cubic-bezier(0.22,1,0.36,1)` with `450ms` duration
+- Not just "uses shadow" — `0 8px 32px rgba(0,0,0,0.12)` with inset `0 1px 0 rgba(255,255,255,0.1)`
+- Not just "translucent" — `backdrop-filter: blur(20px) saturate(180%)` with `rgba(255,255,255,0.08)`
+
+The L0 creator coordinates (`c6_aesthetic_sensibility`, `c9_material_affinity`, `c11_chaos_tolerance`, `c14_sensory_weights` etc.) are **computed but never wired into per-component CSS generation**.
+
+---
+
+## The Fix: `generate_component_tokens` — L0.8 Layer
+
+A new engine that sits between the Creative Brief and L1 genome output. It reads the creator's genome latent coordinates AND the L1 chromosome values and produces **exact, deliberate CSS tokens for every property of every component** — like a real designer making choices.
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> This adds a new MCP tool `generate_component_tokens`. This tool outputs a `ComponentTokenMap` — a per-component parametric token set. It doesn't replace existing tools; it enriches them. Agents can call it after `generate_design_genome` to get designer-quality per-component specifications before writing code.
+
+> [!WARNING]
+> This does NOT call an LLM for each component decision. The parametric engine is deterministic — driven by the SHA-256 hash chain + creator latent coordinates. The persona shapes the **distribution** of choices. No LLM needed for token generation.
+
+---
+
+## Architecture
+
+### New Layer: L0.8 Parametric Decision Engine
+
+```
+L0 Creator Genome (continuous latent coords)
+         ↓
+L0.5 Persona (biography, instincts)
+         ↓
+L0.75 Creative Brief (component language philosophy)
+         ↓  ← NEW LAYER
+L0.8 Component Token Engine  ← Translates brief into CSS token decisions
+         ↓
+L1 Design Genome (32 chromosomes: color, edge, motion...)
+         ↓
+L2 Ecosystem (organisms)
+```
+
+### How a Designer's Decisions Translate to Code
+
+The creator genome latent coords map to design axes:
+
+| Chromosome | Axis | Component Impact |
+|---|---|---|
+| `c6_aesthetic_sensibility[0]` | minimal ↔ maximal | padding scale, border weight, decoration density |
+| `c6_aesthetic_sensibility[1]` | precise ↔ organic | border-radius precision, grid snap tolerance |
+| `c6_aesthetic_sensibility[2]` | clean ↔ textured | backdrop-filter usage, noise overlay, grain |
+| `c9_material_affinity[0]` | digital ↔ analog | glassmorphism vs paper texture vs plastic feel |
+| `c9_material_affinity[1]` | polished ↔ rough | shadow softness, edge sharpness, surface quality |
+| `c9_material_affinity[2]` | synthetic ↔ natural | color saturation, warmth, hue shifts |
+| `c11_chaos_tolerance` | ordered ↔ chaotic | animation easing variability, color deviation |
+| `c12_cross_pollination` | focused ↔ eclectic | unexpected material combinations |
+| `c14_sensory_weights.visual` | weight | contrast, color intensity, visual hierarchy depth |
+| `c14_sensory_weights.tactile` | weight | shadow depth, border presence, hover states |
+| `c14_sensory_weights.kinesthetic` | weight | animation distance, spring energy, bounce |
+
+---
+
+## Proposed Changes
+
+### New File: `src/component-tokens/engine.ts` [NEW]
+
+The **Parametric Component Decision Engine**. Given a creator genome + L1 genome, generates exact CSS token values for every component property.
+
+```typescript
+// Produces this kind of output for a single button:
+{
+  button: {
+    // Shape
+    borderRadius: { value: "14px", rationale: "c6[1]=0.72 → organic precision bias" },
+    borderWidth: { value: "1.5px", rationale: "c9[1]=0.81 → polished surface signals edge" },
+    borderStyle: { value: "solid", rationale: "material affinity: digital+polished" },
+    
+    // Color (base state)
+    background: { value: "rgba(124,58,237,0.12)", rationale: "glassmorphism from c9[0]=-0.3 + ch5 primary" },
+    backdropFilter: { value: "blur(20px) saturate(180%)", rationale: "c9[0]<0 → material: translucent-digital" },
+    color: { value: "#F5F0FF", rationale: "high contrast on translucent from ch17_accessibility" },
+    
+    // Shadow
+    boxShadow: { value: "0 4px 24px rgba(124,58,237,0.2), inset 0 1px 0 rgba(255,255,255,0.15)", rationale: "c14.tactile=0.78 → high tactile weight = layered shadow" },
+    
+    // Spacing
+    paddingX: { value: "20px", rationale: "c6[0]=-0.1 → slightly maximal → generous padding" },
+    paddingY: { value: "12px", rationale: "ch2.baseSpacing=16 * 0.75 from rhythm scale" },
+    
+    // Typography
+    fontSize: { value: "14px", rationale: "ch16.baseFontSize=16 reduced for button context" },
+    fontWeight: { value: "600", rationale: "c6[1]=0.72 → precise → strong weight signals" },
+    letterSpacing: { value: "0.04em", rationale: "c4[2]=0.4 → controlled tracking" },
+    textTransform: { value: "none", rationale: "c4[1]=-0.2 → organic voice, no shouting" },
+    
+    // Hover state
+    hover: {
+      background: { value: "rgba(124,58,237,0.22)", rationale: "10% opacity increase, not full fill" },
+      transform: { value: "translateY(-2px)", rationale: "c14.kinesthetic=0.6 → subtle lift" },
+      boxShadow: { value: "0 8px 32px rgba(124,58,237,0.3), inset 0 1px 0 rgba(255,255,255,0.2)" },
+    },
+    
+    // Animation
+    transition: { value: "all 380ms cubic-bezier(0.22,1,0.36,1)", rationale: "c11=0.62 → spring easing, moderate chaos tolerance" },
+    
+    // Active/pressed
+    active: {
+      transform: { value: "translateY(0) scale(0.98)", rationale: "physical press feedback from c14.tactile" },
+      transition: { value: "all 120ms cubic-bezier(0.4,0,1,1)" }
+    }
+  }
+}
+```
+
+**Component coverage** (all 20+ standard components):
+- Button (primary, secondary, ghost, danger, icon)
+- Input, Textarea, Select
+- Card (elevated, glass, outlined, flat)
+- Badge, Tag, Chip
+- Modal, Drawer, Popover, Tooltip
+- Navigation (header, sidebar, mobile)
+- Avatar, Image
+- Progress, Skeleton, Spinner
+- Table, List
+- Form elements (Checkbox, Radio, Switch)
+
+---
+
+### New File: `src/component-tokens/material-engine.ts` [NEW]
+
+Translates `c9_material_affinity` into a **Material System**:
+
+```typescript
+// The 5 surface archetypes a designer chooses from:
+type MaterialArchetype = 
+  | 'glass'        // backdrop-filter blur + translucent bg  
+  | 'plastic'      // solid fill, sharp shadow, high saturation
+  | 'paper'        // flat, soft edge, no shadow, warm bg
+  | 'metal'        // border gradient, specular highlight, cool
+  | 'fabric'       // noise texture overlay, warm, organic
+  | 'mineral'      // crystalline structure, angular, cold
+  | 'liquid'       // fluid borders, animated gradient bg
+  | 'ether'        // near-invisible, blur-only, no borders
+```
+
+Each material archetype generates a full token set. Creator genome `c9` determines which archetype and how intensely it's applied. The `c12_cross_pollination` score can **blend** two archetypes.
+
+---
+
+### New File: `src/component-tokens/motion-choreographer.ts` [NEW]
+
+Translates `c8_motion` + `c11_chaos_tolerance` + `c14_sensory_weights.kinesthetic` into a **per-component motion spec**:
+
+```typescript
+// Every component gets deliberate motion decisions:
+{
+  // Entry/exit
+  entrance: { 
+    type: 'slide_up' | 'fade' | 'scale' | 'blur_in' | 'spring_in' | 'glitch',
+    duration: 320,           // ms — derived from c11 + ch8.speed
+    easing: 'cubic-bezier(0.22,1,0.36,1)',  // spring from c11
+    delay: 0 | 'stagger',
+    distance: 16,            // px for translate — from c14.kinesthetic
+  },
+  // Hover microinteraction
+  hover: {
+    type: 'lift' | 'glow' | 'scale' | 'border_pulse' | 'color_shift' | 'morphs',
+    duration: 240,
+    properties: ['transform', 'box-shadow', 'background'],
+  },
+  // Active/pressed
+  press: {
+    scale: 0.97,
+    duration: 120,
+  },
+  // Continuous (if applicable)
+  idle: {
+    type: 'none' | 'breathe' | 'shimmer' | 'float' | 'pulse',
+    period: 3000,
+    amplitude: 4,
+  }
+}
+```
+
+---
+
+### New File: `src/component-tokens/shadow-engine.ts` [NEW]
+
+Real designers have a deliberate **shadow philosophy**. Not just "md shadow" — but:
+- How many layers (2–5 box-shadows stacked)
+- Directional vs ambient vs inset
+- Color-tinted vs neutral
+- Whether to include a subtle border-glow (common in glass)
+- Whether surfaces have inner-glow (convex/concave feel)
+
+Driven by `c9_material_affinity[1]` (polished ↔ rough) and `c14_sensory_weights.tactile`.
+
+---
+
+### New File: `src/component-tokens/typography-decisions.ts` [NEW]
+
+Per-component typography goes far beyond the base scale. Designers decide:
+- `font-variant-numeric: tabular-nums` for numbers in cards
+- `font-feature-settings: 'ss01', 'cv01'` for specific stylistic sets
+- `text-wrap: balance` for headings
+- `hyphens: auto` for body text in narrow columns
+- `font-size` hierarchy relative to parent context, not just the global scale
+- `letter-spacing` per context (buttons, badges, labels differ)
+
+Driven by `c4_authorial_embedding` (the voice/writing style latent).
+
+---
+
+### New MCP Tool: `generate_component_tokens` [NEW]
+
+**Tool definition** added to `src/server.ts`:
+
+```typescript
+{
+  name: "generate_component_tokens",
+  description: "L0.8 LAYER — Parametric Component Decision Engine. Translates Creator Genome latent coordinates + L1 Design Genome chromosomes into exact, deliberate CSS token decisions for every component property — exactly like a designer in Figma making conscious choices about border-radius, shadow layers, animation easing, material treatment, hover states, and typography for each component. Returns ComponentTokenMap with rationale for every decision.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      genome: { type: "object", description: "L1 Design Genome from generate_design_genome" },
+      creator_genome: { type: "object", description: "L0 Creator Genome (optional). If omitted, derived from genome.dnaHash" },
+      components: {
+        type: "array",
+        description: "Which components to generate tokens for. Omit for all.",
+        items: { type: "string" }
+      },
+      output_format: {
+        type: "string",
+        enum: ["tokens", "css_variables", "tailwind_config", "figma_tokens", "css_classes"],
+        default: "tokens"
+      }
+    },
+    required: ["genome"]
+  }
+}
+```
+
+---
+
+### Modified: `src/server.ts` [MODIFY]
+
+1. Add `generate_component_tokens` to the `ListToolsRequestSchema` handler
+2. Add `generate_component_tokens` case to the `CallToolRequestSchema` handler
+3. Wire creator genome into the token engine via the existing `creatorGenome` object already generated in `generate_design_genome`
+
+---
+
+### Modified: `src/brief/generator.ts` [MODIFY]
+
+Extend `generateBriefWithLLM` to also return `component_decisions` — the raw parametric intent that will drive the token engine. This ensures the brief's language maps to specific parameter axes:
+
+```typescript
+// Brief now includes:
+"component_decisions": {
+  "material_archetype": "glass",    // → material-engine.ts
+  "shadow_philosophy": "layered",   // → shadow-engine.ts
+  "motion_energy": 0.72,            // → motion-choreographer.ts
+  "tactile_weight": 0.68,           // → shadow-engine.ts
+  "typography_voice": "editorial",  // → typography-decisions.ts
+  "chaos_variance": 0.31            // → how much per-component deviation is allowed
+}
+```
+
+---
+
+### Modified: `src/creator/types.ts` [MODIFY]
+
+Add `ComponentDecisionVector` type — the intermediate representation between brief and CSS tokens:
+
+```typescript
+export interface ComponentDecisionVector {
+  // Material
+  materialArchetype: MaterialArchetype;
+  materialIntensity: number;      // 0-1: how strongly the material is applied
+  crossPollination: number;       // 0-1: blend of secondary material
+  secondaryMaterial?: MaterialArchetype;
+  
+  // Shape
+  radiusPhilosophy: 'pill' | 'soft' | 'balanced' | 'sharp' | 'zero' | 'organic';
+  radiusBase: number;             // px base value for the system
+  radiusVariance: number;         // how much components deviate from base
+  
+  // Shadow
+  shadowStyle: 'none' | 'subtle' | 'natural' | 'dramatic' | 'colored' | 'inset';
+  shadowLayers: number;           // 1-5
+  shadowColorTinted: boolean;
+  
+  // Motion
+  motionEnergy: number;           // 0-1: still=0, explosive=1
+  easingPersonality: 'spring' | 'ease' | 'linear' | 'snap' | 'bounce' | 'drift';
+  hoverPhilosophy: 'lift' | 'glow' | 'fill' | 'scale' | 'border' | 'none';
+  
+  // Typography
+  typographicVoice: 'editorial' | 'functional' | 'expressive' | 'technical' | 'organic';
+  letterSpacingBias: number;      // negative → tight, positive → airy
+  
+  // Surface
+  usesBackdropFilter: boolean;
+  glassOpacity: number;           // if glass
+  surfaceGrain: number;           // 0-1 noise overlay intensity
+}
+```
+
+---
+
+## Verification Plan
+
+### Automated Tests
+- Build: `npm run build` — ensure all new TS compiles
+- Test the MCP tool schema is correctly registered
+
+### Manual Verification
+1. Call `generate_design_genome` with a seed
+2. Call `generate_component_tokens` with the genome
+3. Verify output contains per-component token values with rationale
+4. Check that different seeds produce meaningfully different token sets (not just color changes — different border-radius philosophies, shadow styles, motion energies, material archetypes)
+5. Check that the same seed always produces the same output (determinism)
+
+### Quality Bar: The "Figma Test"
+A good output should be indistinguishable from deliberate designer choices. A reviewer should look at the token output and say "someone clearly thought about this" — not "this is a template". Specifically:
+- Border radii are not all `8px` or `4px` — they follow an **organic or deliberate** system
+- Shadows have 2-4 stacked layers, not just `box-shadow: 0 2px 4px rgba(0,0,0,0.1)`
+- Hover states feel **intentional** — not just opacity-0.8
+- Motion has `cubic-bezier` values that aren't preset browser keywords
+- Colors use `rgba` with meaningful opacity choices, not just full hex
+- At least one "surprising" decision per component (a design signature)
+
+---
+
+## Open Questions
+
+> [!IMPORTANT]
+> **Q1: Should `generate_component_tokens` be auto-called inside `generate_design_genome`?**
+> Currently `generate_design_genome` already returns CSS variables. Adding component tokens to it would make the response very large. The alternative is keeping it as a separate step agents call explicitly. Preference?
+
+> [!IMPORTANT]
+> **Q2: How many component variants to generate?**
+> A button has: default, hover, active, disabled, loading, focus, and potentially size variants (sm/md/lg) and style variants (primary/ghost/outline/danger). Should we generate all states, or just the main + hover + active?
+
+> [!IMPORTANT]
+> **Q3: Should the output include CSS classes (ready to paste) or just token values (for agent to use)?**
+> `output_format: "css_classes"` would return ready `.btn { ... } .btn:hover { ... }` CSS. `output_format: "tokens"` returns structured JSON agents can template from. Both formats are useful for different workflows.

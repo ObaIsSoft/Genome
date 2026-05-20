@@ -216,6 +216,74 @@ export interface CreativeBrief {
 }
 
 /**
+ * ComponentDecisionVector — intermediate representation between genome chromosomes
+ * and per-component CSS token decisions.
+ *
+ * All fields are continuous numeric values derived from creator latent coordinates
+ * + L1 chromosome values. No named presets — the values drive CSS directly.
+ * Labels (materialLabel, easingLabel) are documentation only.
+ */
+export interface ComponentDecisionVector {
+  // ── Surface quality (from c9_material_affinity 3D vector) ──────────────────
+  /** px — 0 means no backdrop blur; 12–40 when c9[0] is strongly negative */
+  backdropBlur: number;
+  /** % — saturate() in backdrop-filter; 120–220 */
+  backdropSaturate: number;
+  /** 0.04–1.0 — surface bg opacity; lower = more translucent */
+  surfaceOpacity: number;
+  /** 0–0.5 — grain/noise overlay intensity from ch11_texture.noiseLevel */
+  surfaceGrain: number;
+  /** inset top border glow — true when c9[1] (polished) > 0.6 */
+  specularHighlight: boolean;
+  /** 0–1 — color temperature bias; 0=cool, 1=warm; from c9[2] */
+  surfaceWarmth: number;
+
+  // ── Shape (from c6_aesthetic_sensibility + ch7_edge) ───────────────────────
+  /** px — ch7_edge.componentRadius (already genome-derived) */
+  radiusBase: number;
+  /** ±factor — how much components deviate from radiusBase; from c6[1] */
+  radiusVariance: number;
+
+  // ── Shadow (from c14_sensory_weights.tactile + ch10_hierarchy.shadowScale) ─
+  /** 1–4 stacked box-shadow layers */
+  shadowLayers: 1 | 2 | 3 | 4;
+  /** primary-color tinted shadow when c14.visual > 0.6 */
+  shadowColorTinted: boolean;
+  /** blur multiplier; 0=polished/sharp, 1=rough/diffuse; from c9[1] inverted */
+  shadowSoftness: number;
+  /** raw shadowScale from ch10_hierarchy */
+  shadowScale: number;
+
+  // ── Motion (from c11 + c14.kinesthetic + ch8_motion) ──────────────────────
+  /** computed cubic-bezier string — never a keyword like "ease-out" */
+  easingCurve: string;
+  /** ms base — ch8_motion.durationScale × 200 */
+  durationBase: number;
+  /** px — translateY on hover; c14.kinesthetic × 16 */
+  hoverDistance: number;
+  /** 0.55–0.85 — opacity target for opacity-style hovers */
+  hoverOpacity: number;
+  /** null | CSS animation name — idle animation for expressive genomes */
+  idleAnimation: string | null;
+
+  // ── Typography (from c4_authorial_embedding) ────────────────────────────────
+  /** em — c4[0] mapped to [-0.02, 0.08] */
+  letterSpacingBase: number;
+  /** font-variant-numeric: tabular-nums — from c4[3] > 0.5 */
+  tabulaNumeric: boolean;
+  /** text-wrap: balance for headings — from c7_cognitive_pattern[0] > 0.5 */
+  textWrapBalance: boolean;
+
+  // ── Motif (from ch35_signature_motif) ───────────────────────────────────────
+  separator: string;
+  hoverIndicator: string;
+
+  // ── Meta (documentation only — never used as CSS switch) ─────────────────
+  materialLabel: string;
+  easingLabel: string;
+}
+
+/**
  * Validation: Check if genome is valid
  */
 export function validateCreatorGenome(genome: CreatorGenome): string[] {
