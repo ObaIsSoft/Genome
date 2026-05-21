@@ -27,6 +27,9 @@ Genome generates four interlocking genomes from a single seed:
 **Layer 0 — CreatorGenome:** *Who is designing this?* (NEW)
 16-chromosome latent-space DNA encoding a simulated designer persona: cultural vector, temporal nostalgia, obsession traversal, formative era, authorial voice, technical spectrum, aesthetic sensibility, cognitive style, social positioning, material affinity, narrative instinct, chaos tolerance, cross-pollination, temporal perception, sensory priority, and coherence style. Decoded via LLM into unique personas with voices like "whispered forest diaries" or "Forged industrial poetry" — each interpreting the same intent through different creative lenses.
 
+**Layer 0.8 — ComponentTokenMap:** *What does each component specifically look like?*
+Per-component CSS token decisions derived entirely from continuous latent math — never a preset lookup. Every genome produces unique border-radius values (7px, not "rounded-md"), unique multi-layer shadow stacks, computed `cubic-bezier` easing curves, gradient fills, blend modes, element filters, stroke styles, inner shadows, text shadows, and spacing grids. Components are described by free-form name + description; semantic properties (interactivity, elevation, density, media content) are inferred from the description — no hardcoded component type list. The same "card" component on an ecommerce site and an editorial site gets different tokens because their descriptions signal different things.
+
 **Layer 1 — DesignGenome:** *What does it look like?*
 40-chromosome DNA (ch0–ch32, some with sub-chromosomes): color system (with dark-mode-safe variants), typography, motion physics, grid logic, edge style, hero strategy, trust signals, copy intelligence, state topology, routing pattern, token inheritance. Generated directly or influenced by L0 Creator Persona — the persona's worldview shapes how the LLM interprets the intent, not just post-hoc numeric tweaks.
 
@@ -97,29 +100,33 @@ Your agent builds from the genome tokens and brief. Call `validate_design` befor
 
 ---
 
-## Tool Workflow (8 tools) — ENFORCED
+## Tool Workflow (12 tools) — ENFORCED
 
 ```
-STEP 1  generate_design_genome    ← ALWAYS START HERE
+STEP 1  generate_design_genome         ← ALWAYS START HERE
         [BLOCKING: Write genome.json checkpoint]
         [VERIFY: 32 chromosomes accessible]
         
-STEP 2  generate_design_brief     ← MANDATORY before any code
+STEP 2  generate_component_tokens      ← L0.8 LAYER — per-component CSS tokens
+        [INPUT: genome from Step 1]
+        [OUTPUT: filled/ghost/flat variants × all interaction states]
+        
+STEP 3  generate_design_brief          ← MANDATORY before any code
         [OUTPUT: DESIGN_SYSTEM.md constitution]
         
-STEP 3  generate_ecosystem        ← REQUIRED for components
+STEP 4  generate_ecosystem             ← REQUIRED for components
         [RULE: microbial → flora → fauna hierarchy]
         [RULE: Use containment relationships]
         
-STEP 4  generate_civilization     ← REQUIRED if complexity ≥ 0.68
-        [INPUT: ecosystem from Step 3]
+STEP 5  generate_civilization          ← REQUIRED if complexity ≥ 0.68
+        [INPUT: ecosystem from Step 4]
         
-FINAL   validate_design           ← SHIPPING GATE (blocking)
+FINAL   validate_design                ← SHIPPING GATE (blocking)
         [CHECK: slop patterns, chromosome drift, utilization ≥ 80%]
 
-ALTERNATIVE  extract_genome_from_url  ← use instead of STEP 1 when you have a reference site
-EXPORT       generate_formats         ← export tokens to Figma/Style Dictionary after STEP 1
-ITERATE      update_design_genome     ← adjust chromosomes after STEP 1 ("make it warmer")
+ALTERNATIVE  extract_genome_from_url   ← use instead of STEP 1 when you have a reference site
+EXPORT       generate_formats          ← export tokens to Figma/Style Dictionary after STEP 1
+ITERATE      update_design_genome      ← adjust chromosomes after STEP 1 ("make it warmer")
 ```
 
 The `generate_design_genome` response includes `suggested_next` — a dynamic list telling the agent which tools to call next based on the genome's complexity score.
@@ -141,13 +148,34 @@ Full pipeline: structural analysis → LLM extraction → DNA sequencing across 
 
 Match the provider to the font. If `extract_genome_from_url` returns a Fontshare font (e.g., `satoshi`), pass `font_provider: "fontshare"`.
 
-### `generate_design_brief` — STEP 2
-Converts all three genome layers into human/agent-readable design direction: visual strategy, component relationships, architecture direction, copy tone. Read this before writing any code.
+### `generate_component_tokens` — STEP 2 (L0.8 Layer)
+Parametric Component Decision Engine. Translates the genome's continuous latent coordinates into exact CSS token decisions for every component you describe. Pass `component_specs` — an array of objects with a `name` and free-form `description`. The engine infers each component's semantic properties (interactivity, elevation, content density, media, circularity) from the description text, then derives all CSS properties through continuous math — no lookup tables, no presets.
 
-### `generate_ecosystem` — STEP 3 (optional)
+```json
+{
+  "component_specs": [
+    { "name": "hero-cta", "description": "primary call-to-action button, above fold, initiates checkout" },
+    { "name": "product-tile", "description": "product listing card with thumbnail, price, rating — repeats in a grid" },
+    { "name": "filter-pill", "description": "compact toggleable chip for category filtering, appears in dense rows" }
+  ]
+}
+```
+
+Returns:
+- `component_tokens` — per-component `filled` / `ghost` / `flat` variants with `default`, `hover`, `active`, `focus`, `disabled` states
+- `css_variables` — `:root {}` block of `--genome-*` custom properties
+- Each component entry includes a `specs` sub-object: `fill`, `blend`, `filter`, `stroke`, `spacing`, `innerShadow`, `textShadow` — the full engine output, not just CSS strings
+- `rationale` per component explaining why each value was chosen
+
+If `component_specs` is omitted, generates 12 archetypal semantic contexts as a fallback.
+
+### `generate_design_brief` — STEP 3
+Converts all genome layers into human/agent-readable design direction: visual strategy, component relationships, architecture direction, copy tone. Read this before writing any code.
+
+### `generate_ecosystem` — STEP 4 (optional)
 Generates a biological component hierarchy from the EcosystemGenome (L2): microbial (atomic), flora (composite), fauna (complex). Returns component specs, prop contracts, and containment relationships — **not code**. Includes `ecosystem_report` markdown and `ecosystemGenome` for the civilization layer.
 
-### `generate_civilization` — STEP 4 (optional, complexity ≥ 0.68)
+### `generate_civilization` — STEP 5 (optional, complexity ≥ 0.68)
 Returns application architecture direction from the CivilizationGenome (L3): state topology, routing patterns, token inheritance rules. **Specs by default.** Pass `generate_code: true` to opt into TSX output. Includes `civilization_report` markdown.
 
 ### `validate_design` — FINAL STEP
@@ -327,8 +355,9 @@ Tests cover: determinism, uniqueness (10 seeds), sector-awareness, epistasis enf
 
 ## Documentation
 
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** — Three-layer genome chain, StructuralProps, chromosome reference, gravity system, tier calibration
-- **[.cursorrules](./.cursorrules)** — Agent workflow rules (10 rules for correct tool usage)
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** — Four-layer genome chain, StructuralProps, chromosome reference, gravity system, tier calibration
+- **[USAGE.md](./USAGE.md)** — Tool parameter reference, examples, prompt patterns
+- **[.cursorrules](./.cursorrules)** — Agent workflow rules (13 rules for correct tool usage)
 
 ---
 

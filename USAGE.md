@@ -78,13 +78,16 @@ The Genome MCP server **enforces** a strict workflow. AI agents CANNOT skip step
 ```
 STEP 1 → generate_design_genome
     ↓ [MUST write genome.json]
-STEP 2 → generate_design_brief  
+STEP 2 → generate_component_tokens
+    ↓ [Pass component_specs describing your actual components]
+    ↓ [Returns per-component filled/ghost/flat tokens + :root CSS vars]
+STEP 3 → generate_design_brief  
     ↓ [MUST read before any code]
-STEP 3 → generate_ecosystem (if building components)
+STEP 4 → generate_ecosystem (if building components)
     ↓ [MUST compose: microbial → flora → fauna]
-STEP 4 → generate_civilization (if complexity ≥ 0.68)
+STEP 5 → generate_civilization (if complexity ≥ 0.68)
     ↓
-IMPLEMENTATION → Use ALL 32 chromosomes
+IMPLEMENTATION → Use ALL 32 chromosomes + component tokens
     ↓
 FINAL → validate_design [MUST pass before shipping]
 ```
@@ -100,7 +103,9 @@ STEP 2 → generate_persona           ← LLM decodes into unique designer
     ↓
 STEP 3 → generate_design_through_persona  ← Persona interprets intent → L1
     ↓
-STEP 4 → generate_design_brief      ← Read before writing code
+STEP 4 → generate_component_tokens  ← Per-component tokens from L0.8 layer
+    ↓ [Pass component_specs describing your actual components]
+STEP 5 → generate_design_brief      ← Read before writing code
     ↓
 ... continue with standard workflow
 ```
@@ -222,6 +227,8 @@ Each tool has a `description` field that the AI reads. Descriptions include keyw
 |---------------|------------------------|
 | "Generate a **design genome** for..." | `generate_design_genome` |
 | "Create **design DNA** from..." | `generate_design_genome` |
+| "Generate **component tokens** for..." | `generate_component_tokens` |
+| "What CSS should my **button / card / nav** use?" | `generate_component_tokens` |
 | "**Update** the colors to..." | `update_design_genome` |
 | "**Extract design** from this URL..." | `extract_genome_from_url` |
 | "Create a **design brief**..." | `generate_design_brief` |
@@ -348,44 +355,192 @@ const civilization = generate_civilization(
 
 ---
 
-## All 8 Tools
+## All 12 Tools
 
 ### Tool Workflow (Enforced)
 
 ```
-STEP 1  generate_design_genome    ← ALWAYS START HERE
+STEP 1  generate_design_genome         ← ALWAYS START HERE
         [OUTPUT: Write genome.json — BLOCKING]
         [VERIFY: Check chromosome_utilization.checklist]
         
-STEP 2  generate_design_brief     ← MANDATORY before any code
+STEP 2  generate_component_tokens      ← L0.8 LAYER — before writing any component
+        [INPUT: genome from Step 1 + component_specs]
+        [OUTPUT: per-component CSS tokens, :root vars, full engine specs]
+        
+STEP 3  generate_design_brief          ← MANDATORY before any code
         [INPUT: Full genome object]
         [OUTPUT: DESIGN_SYSTEM.md constitution]
         
-STEP 3  generate_ecosystem        ← REQUIRED for components
+STEP 4  generate_ecosystem             ← REQUIRED for components
         [RULE: Compose microbial → flora → fauna]
         [RULE: Use containment relationships]
         
-STEP 4  generate_civilization     ← REQUIRED if complexity ≥ 0.68
-        [INPUT: Ecosystem from Step 3]
+STEP 5  generate_civilization          ← REQUIRED if complexity ≥ 0.68
+        [INPUT: Ecosystem from Step 4]
         [OUTPUT: State/routing architecture]
         
-IMPLEMENT  Build from genome specs
+IMPLEMENT  Build from genome specs + component tokens
         [RULE: Apply ALL 32 chromosomes]
+        [RULE: Use component token values for all CSS properties they cover]
         [RULE: Follow organism hierarchy]
         
-FINAL   validate_design           ← MANDATORY GATE
+FINAL   validate_design                ← MANDATORY GATE
         [BLOCKING: Cannot ship without passing]
         [CHECK: Pattern violations, chromosome drift, utilization rate]
 
-ALTERNATIVE  extract_genome_from_url  ← Reference site analysis
-EXPORT       generate_formats         ← External tool export
-ITERATE      update_design_genome     ← Chromosome adjustments
+ALTERNATIVE  extract_genome_from_url   ← Reference site analysis
+EXPORT       generate_formats          ← External tool export
+ITERATE      update_design_genome      ← Chromosome adjustments
 ```
 
 **Enforcement Notes:**
-- `generate_design_brief` is now **mandatory** — the AI cannot write code before calling it
+- `generate_component_tokens` is **mandatory before implementing any UI component**
+- `generate_design_brief` is **mandatory** — the AI cannot write code before calling it
 - `validate_design` is a **shipping gate** — it blocks completion until all checks pass
 - Chromosome utilization must be ≥ 80% for validation to pass
+
+---
+
+### `generate_component_tokens` — L0.8 Layer
+
+The parametric component decision engine. Derives per-component CSS tokens entirely from the genome's continuous latent coordinates — no preset lookup tables, no hardcoded values.
+
+#### Parameters
+
+| Parameter | Required | Description |
+|---|---|---|
+| `genome` | ✅ | L1 DesignGenome from Step 1 |
+| `creator_genome` | Optional | L0 CreatorGenome — auto-derived from `genome.dnaHash` if omitted |
+| `component_specs` | Optional | Array of `{ name, description }` objects describing your components |
+| `output_format` | Optional | `"tokens"`, `"css_variables"`, or `"both"` (default: `"both"`) |
+
+#### How to describe components
+
+Describe what the component **does**, not what it **is**. The engine reads signal terms from the description to infer continuous semantic properties:
+
+```json
+{
+  "component_specs": [
+    {
+      "name": "vehicle-listing-card",
+      "description": "card showing vehicle thumbnail, make/model, price, mileage — appears in a searchable grid of many results"
+    },
+    {
+      "name": "inquiry-cta",
+      "description": "primary call-to-action button to request a test drive — main conversion action on the listing page"
+    },
+    {
+      "name": "spec-table",
+      "description": "dense data table listing vehicle specs: engine, torque, dimensions — mostly text, high information density"
+    },
+    {
+      "name": "gallery-hero",
+      "description": "full-width photo carousel, above fold, contains high-resolution vehicle imagery"
+    },
+    {
+      "name": "filter-chip",
+      "description": "compact toggleable pill for filtering by make, price range, body type — appears in groups of many"
+    }
+  ]
+}
+```
+
+Terms that influence inference:
+
+| Signal words in description | Effect |
+|---|---|
+| `button`, `cta`, `submit`, `buy`, `checkout`, `book` | High interactivity, initiates action → generous horizontal padding, stronger shadow |
+| `card`, `tile`, `listing`, `result`, `article`, `post` | Container + possibly media → softer radius, lifted shadow |
+| `modal`, `dialog`, `overlay`, `floating` | Ephemeral + elevated → sharper radius, higher elevation shadow |
+| `table`, `data`, `dense`, `specs`, `dashboard` | High content density → compact padding, sharp radius |
+| `avatar`, `circular`, `round`, `profile picture` | Circular geometry → 50% border-radius |
+| `image`, `photo`, `thumbnail`, `video`, `media` | Contains media → image filter applied |
+| `nav`, `menu item`, `tab`, `breadcrumb`, `link` | Navigational → subtle lift, compact padding |
+| `badge`, `pill`, `indicator`, `status`, `count` | Feedback state → tight padding, muted shadow |
+| `hero`, `featured`, `prominent`, `full width` | High visual weight → stronger shadow, bolder fill |
+| `ghost`, `subtle`, `secondary`, `outline` | Low visual weight → flat shadow, transparent fill |
+
+#### What the response contains
+
+```json
+{
+  "component_tokens": {
+    "vehicle-listing-card": {
+      "filled": {
+        "default": {
+          "background": "linear-gradient(347deg, ...)",
+          "boxShadow": "0 4px 24px -2px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.11)",
+          "borderRadius": "10px",
+          "padding": "24px",
+          "gap": "12px",
+          "filter": null,
+          "mixBlendMode": "normal",
+          "transition": "background 113ms cubic-bezier(...), ...",
+          "letterSpacing": "0.027em"
+        },
+        "hover": { "transform": "translateY(-4px)", "boxShadow": "..." },
+        "active": { "transform": "translateY(0) scale(0.98)", ... },
+        "focus": { "outline": "0 0 0 3px #2d6bcf40", ... },
+        "disabled": { "opacity": 0.45, "cursor": "not-allowed", ... }
+      },
+      "ghost": { ... },
+      "flat": { ... },
+      "specs": {
+        "fill": {
+          "background": "linear-gradient(...)",
+          "noiseOverlay": { "intensity": 0.17, "blendMode": "soft-light" },
+          "textGradient": null
+        },
+        "blend": { "mixBlendMode": "normal", "elementOpacity": 1, "blendLabel": "neutral" },
+        "filter": { "elementFilter": null, "imageFilter": "brightness(0.97) contrast(1.16) saturate(1.26)", "backdropFilter": null },
+        "stroke": { "border": null, "focusOutline": "3px solid #2d6bcf", "borderWidth": 0 },
+        "spacing": { "padding": "24px", "gap": "12px", "paddingTop": 24, "paddingRight": 24, ... },
+        "innerShadow": { "css": "inset 0 3px 8px rgba(0,0,0,0.09)", "layers": 1 },
+        "textShadow": { "css": null }
+      },
+      "borderRadiusPx": 10,
+      "padding": "24px",
+      "gap": "12px",
+      "rationale": {
+        "borderRadius": "10px — radiusBase=8px × semanticModifier=1.20 (container+media)",
+        "shadow": "3-layer shadow; softness=0.42; scale=0.54 (elevation boost from level=1)",
+        "motion": "120ms spring (cubic-bezier(0.16, 1.4, 0.73, 1)); lift=translateY(-4px)",
+        "fill": "soft-linear gradient (3 stops, contrast=0.48)",
+        "spacing": "padding=24px; gap=12px; rhythmUnit=8px"
+      }
+    }
+  },
+  "css_variables": ":root {\n  --genome-easing: cubic-bezier(...);\n  --genome-duration-base: 120ms;\n  --genome-radius-base: 8px;\n  --genome-separator: \"·\";\n  ...}\n"
+}
+```
+
+#### Applying the tokens in code
+
+```tsx
+// React — apply directly from token object
+const tokens = componentTokens['vehicle-listing-card'];
+
+<div style={{
+  background: tokens.filled.default.background,
+  boxShadow: tokens.filled.default.boxShadow,
+  borderRadius: tokens.filled.default.borderRadius,
+  padding: tokens.padding,
+  gap: tokens.gap,
+  transition: tokens.filled.default.transition,
+  mixBlendMode: tokens.filled.default.mixBlendMode,
+}}>
+  <img style={{
+    filter: tokens.specs.filter.imageFilter ?? undefined,
+    objectFit: tokens.specs.fill.objectFit,
+  }} />
+</div>
+
+// Noise overlay (grain) — implement as ::after pseudo-element
+// if (tokens.specs.fill.noiseOverlay) → add a CSS class that renders SVG noise at the given intensity + blendMode
+```
+
+---
 
 ### Iterate: Update Genome
 

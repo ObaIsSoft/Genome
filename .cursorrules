@@ -2,7 +2,7 @@
 
 ## Setup — Connect The MCP Server First
 
-The 11 tools only exist once the MCP server is registered with your agent or IDE. Pick your environment:
+The 12 tools only exist once the MCP server is registered with your agent or IDE. Pick your environment:
 
 ### Claude Code (CLI)
 **Global (recommended — works in every project automatically):** add to `~/.claude/settings.json`:
@@ -100,14 +100,15 @@ This tool is a **design constitution generator**, not a code generator. It produ
 
 ---
 
-## Tool Workflow (11 tools, in order)
+## Tool Workflow (12 tools, in order)
 
 ### Standard Flow (L1 Entry)
 ```
 STEP 1  generate_design_genome         ← always start here
-STEP 2  generate_design_brief          ← read before writing any code
-STEP 3  generate_ecosystem             ← (optional) when building a component library
-STEP 4  generate_civilization          ← (optional) when complexity ≥ 0.68
+STEP 2  generate_component_tokens      ← derive per-component CSS tokens (L0.8 layer)
+STEP 3  generate_design_brief          ← read before writing any code
+STEP 4  generate_ecosystem             ← (optional) when building a component library
+STEP 5  generate_civilization          ← (optional) when complexity ≥ 0.68
 FINAL   validate_design                ← run before shipping any CSS/HTML
 ```
 
@@ -116,7 +117,8 @@ FINAL   validate_design                ← run before shipping any CSS/HTML
 STEP 1  generate_creator_genome        ← create 16-chromosome creator DNA
 STEP 2  generate_persona               ← decode into designer persona (LLM)
 STEP 3  generate_design_through_persona ← persona interprets intent → L1 genome
-STEP 4  generate_design_brief          ← read before writing any code
+STEP 4  generate_component_tokens      ← derive per-component CSS tokens (L0.8 layer)
+STEP 5  generate_design_brief          ← read before writing any code
 ...
 ```
 
@@ -165,7 +167,49 @@ Every `generate_design_genome` response includes a `genome_report` field — a m
 
 ---
 
-## Rule 3 — Apply The Generated CSS Tokens
+## Rule 3 — Generate Component Tokens Before Writing Any Component Code
+
+After `generate_design_genome` (or `generate_design_through_persona`), call `generate_component_tokens` to get per-component CSS token decisions derived from the genome's continuous latent coordinates.
+
+```json
+{
+  "tool": "generate_component_tokens",
+  "arguments": {
+    "genome": "<the L1 DesignGenome returned by generate_design_genome>",
+    "component_specs": [
+      { "name": "primary-cta", "description": "hero call-to-action button, initiates purchase flow, primary action" },
+      { "name": "product-card", "description": "product listing card with image, price, rating — appears in a grid" },
+      { "name": "nav-link", "description": "top navigation anchor link, routing between sections" },
+      { "name": "filter-chip", "description": "compact filterable tag, toggleable, appears in rows of many" }
+    ]
+  }
+}
+```
+
+**Name and describe the actual components your product uses.** The engine infers semantic properties (interactivity, elevation, density, media, circularity) from the description — no fixed component type list. A `vehicle-listing-card` on an ecommerce site and a `story-card` on an editorial site get different tokens because their descriptions contain different signals.
+
+The response includes:
+- `component_tokens` — per-component `filled` / `ghost` / `flat` variants with all interaction states (`default`, `hover`, `active`, `focus`, `disabled`)
+- `css_variables` — a `:root {}` block of `--genome-*` custom properties to paste into your global stylesheet
+- `vec` — the `ComponentDecisionVector` with every continuous genome parameter
+- `motif` — the signature typographic device (separator character, hover indicator)
+
+Each component entry includes a `specs` object with the full output from every engine:
+- `fill` — gradient type, stops, noise overlay, gradient-text flag
+- `blend` — mix-blend-mode, element opacity, background-blend-mode
+- `filter` — element filter, image/media filter, backdrop-filter
+- `stroke` — border width/style/position, gradient border-image
+- `spacing` — padding shorthand, gap, individual side values
+- `innerShadow` — inset box-shadow layers
+- `textShadow` — display heading text-shadow
+
+Each entry also has a `rationale` field — read it to understand why values were chosen.
+
+**Do not invent component-specific CSS values not present in the token response.**
+
+---
+
+## Rule 4 — Apply The Generated CSS Tokens
 
 The genome response includes a `css` field — the full design token stylesheet. Inject this into your project:
 
@@ -178,7 +222,7 @@ The genome response includes a `css` field — the full design token stylesheet.
 
 ---
 
-## Rule 4 — Use The Genome's Library Selections
+## Rule 5 — Use The Genome's Library Selections
 
 The genome response includes `library_selections` — chromosome-derived library picks for icons, animation, state management, and styling. **You MUST use these specific packages.** Do not substitute your own preferences.
 
@@ -191,7 +235,7 @@ genome.library_selections.styling_system.primary    → use this styling approac
 
 Each entry includes `package`, `import_example`, `install`, and `note` fields. Read them.
 
-**`generate_ecosystem` (Step 3) adds more:**
+**`generate_ecosystem` (Step 4) adds more:**
 ```
 ecosystem.libraries.animation    → component-level animation library
 ecosystem.libraries.organism     → UI component library (primary + alternative)
@@ -203,7 +247,31 @@ These selections are deterministic — different genomes pick different librarie
 
 ---
 
-## Rule 5 — Respect Forbidden Patterns
+## Rule 6 — Use Component Tokens For Every Property They Cover
+
+When `generate_component_tokens` has been called, use its values — not invented CSS — for:
+
+| Property | Source in token response |
+|---|---|
+| `border-radius` | `component_tokens[name].borderRadiusPx` |
+| `box-shadow` | `component_tokens[name].filled.default.boxShadow` |
+| `padding` | `component_tokens[name].padding` |
+| `gap` | `component_tokens[name].gap` |
+| `transition` | `component_tokens[name].filled.default.transition` |
+| `transform` (hover) | `component_tokens[name].filled.hover.transform` |
+| `letter-spacing` | `component_tokens[name].filled.default.letterSpacing` |
+| `filter` | `component_tokens[name].specs.filter.elementFilter` |
+| `mix-blend-mode` | `component_tokens[name].specs.blend.mixBlendMode` |
+| `border` | `component_tokens[name].specs.stroke.border` |
+| Gradient fill | `component_tokens[name].specs.fill.background` |
+| Image treatment | `component_tokens[name].specs.filter.imageFilter` (apply to `img`/`video`) |
+| Text shadow | `component_tokens[name].specs.textShadow.css` (apply to headings) |
+| Inner shadow | composed into `boxShadow` already |
+| Noise overlay | `component_tokens[name].specs.fill.noiseOverlay` — implement as a `::after` pseudo-element |
+
+---
+
+## Rule 7 — Respect Forbidden Patterns
 
 The `genome.constraints.forbiddenPatterns` array contains patterns you are **strictly prohibited from using**.
 
@@ -221,7 +289,7 @@ Run `validate_design` before shipping to catch violations automatically.
 
 ---
 
-## Rule 6 — Respect Required Patterns
+## Rule 8 — Respect Required Patterns
 
 The `genome.constraints.requiredPatterns` array contains patterns you **must implement**.
 
@@ -234,7 +302,7 @@ Common examples:
 
 ---
 
-## Rule 7 — Typography Must Use Genome Values
+## Rule 9 — Typography Must Use Genome Values
 
 Do not invent font sizes. Use the values from `ch3_type_display` (headings) and `ch4_type_body` (body text):
 - `text-display` for hero headings
@@ -259,7 +327,7 @@ Pass `font_provider` to `generate_design_genome` to control which catalog the en
 
 ---
 
-## Rule 8 — Color Is Derived From The Genome
+## Rule 10 — Color Is Derived From The Genome
 
 The primary color is defined by `ch5_color_primary.hex`. Never use hardcoded hex values.
 
@@ -269,14 +337,14 @@ Background colors come from `ch6_color_temp.surfaceStack`. Use `--color-surface-
 
 ---
 
-## Rule 9 — Motion Must Respect The Genome
+## Rule 11 — Motion Must Respect The Genome
 
 Use `transition-timing-function: var(--genome-easing)` and `transition-duration: var(--genome-duration)` for all animations.
 If `ch17_accessibility.respectMotionPreference` is `true`, wrap all animations with `@media (prefers-reduced-motion: no-preference)`.
 
 ---
 
-## Rule 10 — Ecosystem And Civilization Return Specs, Not Code
+## Rule 12 — Ecosystem And Civilization Return Specs, Not Code
 
 `generate_ecosystem` returns a component hierarchy (microbial/flora/fauna) with prop contracts, containment relationships, and color treatments. **You write the components from these specs.** The tool does not generate TSX.
 
@@ -286,7 +354,7 @@ To opt into code generation: pass `generate_code: true` to `generate_civilizatio
 
 ---
 
-## Rule 11 — Validate Before Shipping
+## Rule 13 — Validate Before Shipping
 
 Always call `validate_design` with your final CSS and HTML before shipping. It checks:
 - Forbidden pattern violations from the genome constraints
@@ -301,7 +369,7 @@ A `slop_score: 0` and `valid: true` is the target.
 
 Permutations has three modes of use — not just generation:
 
-**Direction** — You know what you want to build. Call `generate_design_genome` → `generate_design_brief` → implement.
+**Direction** — You know what you want to build. Call `generate_design_genome` → `generate_component_tokens` → `generate_design_brief` → implement.
 
 **Constraint** — You're building from an existing genome. Call `validate_design` before shipping. Use `genome.constraints.forbiddenPatterns` and `requiredPatterns` to guard your implementation.
 
