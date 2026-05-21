@@ -6,28 +6,54 @@
  * all per-component CSS token decisions.
  *
  * ALL values are continuous derivations from genome coordinates.
- * Labels (materialLabel, easingLabel) are documentation only — never CSS switches.
+ * Labels (materialLabel, easingLabel, blendLabel, gradientLabel) are documentation
+ * only — they never drive CSS switch statements.
+ *
+ * Components are described by ComponentSpec (name + free-form description).
+ * Semantics are inferred from the description, not looked up by name.
+ * No hardcoded component type lists. No lookup tables keyed by component name.
  */
 
-import type { CreatorGenome, ComponentDecisionVector } from '../creator/types.js';
+import type { CreatorGenome, ComponentDecisionVector, ComponentSpec, ComponentSemantics } from '../creator/types.js';
 import type { DesignGenome } from '../genome/types.js';
+
 import { computeSurface, computeHoverSurface, deriveMaterialLabel } from './material-engine.js';
-import { buildShadowSet, buildFocusOnlyShadow } from './shadow-engine.js';
+import { buildShadowSet, buildFocusOnlyShadow, buildInnerShadow, buildTextShadow } from './shadow-engine.js';
+import type { InnerShadowSpec, TextShadowSpec } from './shadow-engine.js';
 import { getComponentMotion, buildBaseTransition } from './motion-engine.js';
-import { getComponentTypography, getFontFeatureSettings } from './typography-engine.js';
+import { getComponentTypography } from './typography-engine.js';
+import { computeFill } from './fill-engine.js';
+import type { FillSpec } from './fill-engine.js';
+import { deriveBlend } from './blend-engine.js';
+import type { BlendSpec } from './blend-engine.js';
+import { deriveFilters } from './filter-engine.js';
+import type { FilterSpec } from './filter-engine.js';
+import { deriveStroke, deriveHoverStroke } from './stroke-engine.js';
+import type { StrokeSpec } from './stroke-engine.js';
+import { deriveSpacing } from './spacing-engine.js';
+import type { SpacingSpec } from './spacing-engine.js';
+import { resolveSemantics, semanticRadiusModifier, semanticShadowScale } from './semantic-inference.js';
 
-// ── Component list ────────────────────────────────────────────────────────────
+// ── Default specs (used when no specs are provided) ────────────────────────────
+// Described via semantic signals — not a fixed type enum.
+// The inferSemantics() function reads these descriptions to derive continuous properties.
 
-export const ALL_COMPONENTS = [
-  'button', 'card', 'nav', 'input', 'select', 'textarea',
-  'badge', 'chip', 'modal', 'tooltip', 'avatar', 'checkbox',
-  'radio', 'toggle', 'table', 'progress', 'skeleton', 'spinner',
-  'alert', 'tabs',
-] as const;
+export const DEFAULT_COMPONENT_SPECS: ComponentSpec[] = [
+  { name: 'primary-action',    description: 'cta primary button submit confirm trigger action interactive press' },
+  { name: 'content-card',      description: 'card container raised tile product listing article post media image' },
+  { name: 'navigation-item',   description: 'nav menu item tab link anchor route sidebar' },
+  { name: 'text-field',        description: 'input field form control interactive select text entry' },
+  { name: 'status-indicator',  description: 'badge pill indicator feedback status notification count small compact' },
+  { name: 'media-hero',        description: 'hero banner full width prominent featured large background image' },
+  { name: 'floating-panel',    description: 'modal dialog overlay floating ephemeral above foreground' },
+  { name: 'data-row',          description: 'table row data list repeated dense information compact' },
+  { name: 'profile-circle',    description: 'avatar circular round user profile picture portrait' },
+  { name: 'system-message',    description: 'toast alert notification ephemeral appears feedback message' },
+  { name: 'secondary-action',  description: 'ghost outline secondary subtle button link text action' },
+  { name: 'editorial-heading', description: 'heading title display text primary article typography reading' },
+];
 
-export type ComponentName = typeof ALL_COMPONENTS[number];
-
-// ── Output types ─────────────────────────────────────────────────────────────
+// ── Output types ──────────────────────────────────────────────────────────────
 
 export interface ComponentTokenState {
   background: string;
@@ -46,10 +72,17 @@ export interface ComponentTokenState {
   opacity: number;
   cursor: string;
   outline: string | null;
+  /** CSS filter() on the element; null = none */
+  filter: string | null;
+  /** CSS mix-blend-mode */
+  mixBlendMode: string;
+  /** CSS padding shorthand */
+  padding: string;
+  /** CSS gap value */
+  gap: string;
 }
 
 export interface ComponentTokenVariant {
-  /** default / resting state */
   default: ComponentTokenState;
   hover: ComponentTokenState;
   active: ComponentTokenState;
@@ -58,14 +91,28 @@ export interface ComponentTokenVariant {
 }
 
 export interface ComponentTokenEntry {
-  /** Base (filled) variant */
+  /** Base (filled/solid) variant */
   filled: ComponentTokenVariant;
   /** Ghost / outline variant */
   ghost: ComponentTokenVariant;
-  /** Flat / text variant */
+  /** Flat / text-only variant */
   flat: ComponentTokenVariant;
-  /** Continuous border-radius value in px (for use in rationale) */
+  /** Full per-engine specs for this component */
+  specs: {
+    fill: FillSpec;
+    blend: BlendSpec;
+    filter: FilterSpec;
+    stroke: StrokeSpec;
+    spacing: SpacingSpec;
+    innerShadow: InnerShadowSpec;
+    textShadow: TextShadowSpec;
+  };
+  /** px radius used in this component (9999 = 50% circle) */
   borderRadiusPx: number;
+  /** CSS padding shorthand (derived from spacing engine) */
+  padding: string;
+  /** CSS gap value */
+  gap: string;
   /** Human-readable rationale for major decisions */
   rationale: Record<string, string>;
 }
@@ -73,8 +120,8 @@ export interface ComponentTokenEntry {
 export interface ComponentTokenMap {
   /** The decision vector used for all derivations */
   vec: ComponentDecisionVector;
-  /** Per-component token entries */
-  components: Partial<Record<ComponentName, ComponentTokenEntry>>;
+  /** Per-component token entries — keyed by ComponentSpec.name */
+  components: Record<string, ComponentTokenEntry>;
   /** CSS custom properties block — paste into :root */
   cssVariables: string;
   /** Signature motif data */
@@ -85,12 +132,8 @@ export interface ComponentTokenMap {
   };
 }
 
-// ── Sensory weight extraction ─────────────────────────────────────────────────
+// ── Sensory weight extraction ──────────────────────────────────────────────────
 
-/**
- * Extract named sensory weight from c14's DistributionCurve.
- * Senses are stored as: [visual, tactile, auditory, spatial, kinesthetic]
- */
 function getSensoryWeight(creator: CreatorGenome, senseIndex: number): number {
   const pts = creator.c14_sensory_weights.points;
   return pts[senseIndex]?.weight ?? 0.2;
@@ -98,40 +141,30 @@ function getSensoryWeight(creator: CreatorGenome, senseIndex: number): number {
 
 // ── Easing derivation ─────────────────────────────────────────────────────────
 
-/**
- * Derive a unique cubic-bezier string from continuous creator latent coordinates.
- * Never outputs a keyword like "ease-out" — always a computed 4-point curve.
- *
- * c11_chaos_tolerance → overshoot (spring vs smooth)
- * c15_coherence_style → how much the curve converges to 1
- * c7_cognitive_pattern[0] → systematic (predictable) vs intuitive (elastic)
- */
 function deriveEasingCurve(creator: CreatorGenome): { curve: string; label: string } {
-  const chaos    = creator.c11_chaos_tolerance;         // 0.1–0.9
-  const coherence = creator.c15_coherence_style;        // 0–1
-  const systematic = (creator.c7_cognitive_pattern[0] + 1) / 2; // -1..1 → 0..1
+  const chaos      = creator.c11_chaos_tolerance;
+  const coherence  = creator.c15_coherence_style;
+  const systematic = (creator.c7_cognitive_pattern[0] + 1) / 2;
 
-  // x1: how early the curve accelerates (lower = delayed burst)
   const x1 = parseFloat((0.08 + systematic * 0.35).toFixed(3));
-  // y1: overshoot — high chaos = spring/bounce, low chaos = smooth
   const y1 = parseFloat((0.80 + chaos * 0.90).toFixed(3));
-  // x2: how late the deceleration lands (higher = more ease-out feel)
   const x2 = parseFloat((0.40 + coherence * 0.50).toFixed(3));
-  // y2: almost always 1, slight undershoot for very coherent genomes
   const y2 = parseFloat((1.0 - (coherence > 0.7 ? (coherence - 0.7) * 0.1 : 0)).toFixed(3));
 
   const curve = `cubic-bezier(${x1}, ${y1}, ${x2}, ${y2})`;
-
-  // Label for documentation
-  const label = chaos > 0.65 ? 'spring' : systematic > 0.6 ? 'ease-out' : coherence > 0.6 ? 'smooth' : 'balanced';
+  const label = chaos > 0.65 ? 'spring'
+    : systematic > 0.6 ? 'ease-out'
+    : coherence > 0.6 ? 'smooth'
+    : 'balanced';
 
   return { curve, label };
 }
 
-// ── Main vector builder ───────────────────────────────────────────────────────
+// ── Main vector builder ────────────────────────────────────────────────────────
 
 /**
  * Build a ComponentDecisionVector from creator genome + design genome.
+ * Every field is computed from continuous latent coordinates.
  * This is the sole source of truth — all sub-engines read from this vector.
  */
 export function buildDecisionVector(
@@ -144,142 +177,226 @@ export function buildDecisionVector(
   const c7 = creator.c7_cognitive_pattern;
   const ch = genome.chromosomes;
 
-  // ── Surface quality ──────────────────────────────────────────────────────
-  // c9[0]: digital(-1) ↔ analog(+1). Strongly digital → backdrop blur / glassmorphism
+  // ── Surface / backdrop ──────────────────────────────────────────────────────
   const isGlass    = c9[0] < -0.15;
   const glassDepth = Math.abs(Math.min(c9[0], 0)); // 0–1
-  const backdropBlur = isGlass
-    ? Math.round(12 + glassDepth * 28)   // 12–40px, unique per genome
-    : 0;
-  const backdropSaturate = isGlass
-    ? Math.round(120 + c9[1] * 100)       // 20–220%
-    : 100;
-  const surfaceOpacity = isGlass
-    ? parseFloat((0.04 + glassDepth * 0.82).toFixed(3))  // 0.04–0.86
+
+  const backdropBlur = isGlass ? Math.round(12 + glassDepth * 28) : 0;
+  const backdropSaturate = isGlass ? Math.round(120 + c9[1] * 100) : 100;
+  const backdropBrightness = isGlass
+    ? parseFloat((1.0 + glassDepth * 0.15).toFixed(3))  // glass slightly brightens
+    : 1.0;
+  const backdropContrast = isGlass
+    ? parseFloat((1.0 + (c9[1] + 1) / 2 * 0.10).toFixed(3))  // polished glass more contrast
     : 1.0;
 
-  // Surface grain from ch11 texture chromosome
-  const surfaceGrain = parseFloat(ch.ch11_texture.noiseLevel.toFixed(3)); // 0–0.5
-
-  // Specular highlight: polished surfaces (c9[1] > 0.6)
+  const surfaceOpacity = isGlass
+    ? parseFloat((0.04 + glassDepth * 0.82).toFixed(3))
+    : 1.0;
+  const surfaceGrain = parseFloat(ch.ch11_texture.noiseLevel.toFixed(3));
   const specularHighlight = c9[1] > 0.60;
-
-  // Surface warmth: natural (c9[2] > 0) → warm
   const surfaceWarmth = parseFloat(((c9[2] + 1) / 2).toFixed(3)); // -1..1 → 0..1
 
-  // ── Shape ────────────────────────────────────────────────────────────────
-  const radiusBase = ch.ch7_edge.componentRadius;
-  // c6[1] aesthetic tension: -1=strict/geometric, +1=fluid/organic
-  const radiusVariance = parseFloat(((c6[1] + 1) / 2 * 0.4).toFixed(3)); // 0–0.4
+  // ── Fill system ─────────────────────────────────────────────────────────────
+  // Expressivity × chaos → whether gradients appear; polished surfaces stay flat
+  const expressivity = (c6[0] + 1) / 2; // 0–1
+  const usesGradient = (expressivity * 0.65 + creator.c11_chaos_tolerance * 0.35) > 0.42
+    && !(c9[1] > 0.72); // very polished = flat
 
-  // ── Shadow ───────────────────────────────────────────────────────────────
+  // Gradient type: chaos + analog-score drive toward conic/radial
+  const gradTypeScore = creator.c11_chaos_tolerance * 0.5 + Math.abs(c9[0]) * 0.5;
+  const gradientType = gradTypeScore > 0.70 ? 'conic'
+    : c9[0] > 0.30 ? 'radial'
+    : 'linear';
+
+  // Angle: aesthetics + cognitive pattern, spread 0–360
+  const gradientAngle = Math.round(((c6[0] + 1) * 90 + (c7[0] + 1) * 90) % 360);
+
+  // Stop count: 2–5, more chaos → more stops
+  const gradientStopCount = Math.max(2, Math.min(5,
+    2 + Math.floor(creator.c11_chaos_tolerance * 2 + expressivity)
+  ));
+
+  // Contrast of gradient transitions: high expressivity = dramatic
+  const gradientContrast = parseFloat((0.15 + Math.abs(c6[0]) * 0.65).toFixed(3));
+
+  // Noise blend mode: derived from material balance
+  const NOISE_BLEND_MODES = ['overlay', 'multiply', 'screen', 'soft-light', 'normal'] as const;
+  const noiseBlendIdx = Math.floor(((c9[0] + 1) / 2 + (c9[1] + 1) / 2) / 2 * NOISE_BLEND_MODES.length)
+    % NOISE_BLEND_MODES.length;
+  const noiseBlendMode = NOISE_BLEND_MODES[noiseBlendIdx];
+
+  // Gradient text: very expressive + non-polished + strong authorial voice
+  const gradientText = c6[0] > 0.55 && c4[0] > 0.30 && !(c9[1] > 0.65);
+
+  // Gradient label (documentation)
+  const gradientLabel = !usesGradient ? 'flat'
+    : gradientType === 'conic' ? 'conic-expressive'
+    : gradientType === 'radial' ? 'radial-depth'
+    : gradientContrast > 0.50 ? 'high-contrast-linear'
+    : 'soft-linear';
+
+  // ── Blend modes (global genome baseline) ───────────────────────────────────
+  // The blend-engine will refine per-component based on semantics.
+  // These globals are the genome's default — 'normal' for most genomes.
+  const expressiveScore = usesGradient ? gradientContrast : 0;
+  const mixBlendMode = expressiveScore > 0.55 || creator.c11_chaos_tolerance > 0.70
+    ? (['screen', 'overlay', 'soft-light', 'multiply'] as const)[
+        Math.floor((creator.c11_chaos_tolerance + expressiveScore) * 2) % 4
+      ]
+    : 'normal';
+
+  const elementOpacity = 1.0; // refined per-component by blend-engine
+  const backgroundBlendMode = usesGradient && surfaceGrain > 0.08 ? noiseBlendMode : 'normal';
+  const blendLabel = mixBlendMode === 'normal' ? 'neutral'
+    : ['screen', 'color-dodge'].includes(mixBlendMode) ? 'additive'
+    : ['multiply', 'darken'].includes(mixBlendMode) ? 'subtractive'
+    : 'atmospheric';
+
+  // ── Shape ──────────────────────────────────────────────────────────────────
+  const radiusBase = ch.ch7_edge.componentRadius;
+  // c6[1]: -1=strict/geometric, +1=fluid/organic → variance in radius across components
+  const radiusVariance = parseFloat(((c6[1] + 1) / 2 * 0.40).toFixed(3)); // 0–0.40
+
+  // Corner smoothing: polished + expressive → squircle-like
+  const cornerSmoothing = parseFloat(
+    ((c9[1] + 1) / 2 * 0.55 + Math.abs(c6[2] ?? 0) * 0.35).toFixed(3)
+  );
+
+  // Asymmetric corners: intuitive cognitive style + fluid aesthetic
+  const asymmetricCorners = c7[0] < -0.40 && c6[1] > 0.30;
+
+  // ── Shadow ─────────────────────────────────────────────────────────────────
   const tactileWeight = getSensoryWeight(creator, 1); // tactile = index 1
-  const visualWeight  = getSensoryWeight(creator, 0); // visual  = index 0
+  const visualWeight  = getSensoryWeight(creator, 0);
   const shadowLayers  = Math.max(1, Math.min(4, Math.ceil(tactileWeight * 4))) as 1 | 2 | 3 | 4;
-  const shadowColorTinted = visualWeight > 0.28; // above ~28% visual weighting
-  // Softness: polished (c9[1] = +1) → sharp; rough (c9[1] = -1) → diffuse
-  const shadowSoftness = parseFloat(((1 - c9[1]) / 2).toFixed(3)); // 0–1
+  const shadowColorTinted = visualWeight > 0.28;
+  const shadowSoftness = parseFloat(((1 - c9[1]) / 2).toFixed(3)); // polished→sharp, rough→diffuse
   const shadowScale    = ch.ch10_hierarchy.shadowScale;
 
-  // ── Motion ───────────────────────────────────────────────────────────────
+  // ── Inner shadow ───────────────────────────────────────────────────────────
+  // Analog/physical materials → more inner shadow depth. Polished glass → less.
+  const innerShadowLikelihood = Math.max(0, c9[0]) * 0.55 + ((c9[1] + 1) / 2) * 0.35;
+  const innerShadowCount = innerShadowLikelihood > 0.55 ? 2
+    : innerShadowLikelihood > 0.30 ? 1
+    : 0;
+  const innerShadowSoftness = parseFloat(((c9[1] + 1) / 2).toFixed(3));
+  const innerShadowOpacity  = parseFloat((0.04 + innerShadowLikelihood * 0.16).toFixed(3));
+
+  // ── Text shadow ────────────────────────────────────────────────────────────
+  // Editorial + expressive genomes → text shadows on display headings
+  const useTextShadow = c4[0] > 0.40 && creator.c11_chaos_tolerance > 0.30 && expressivity > 0.45;
+  const textShadowBlur    = Math.round(2 + creator.c11_chaos_tolerance * 8); // 2–10px
+  const textShadowOpacity = parseFloat((0.07 + c4[0] * 0.18).toFixed(3));
+
+  // ── Element filters ─────────────────────────────────────────────────────────
+  // Chaotic or strongly material-toned genomes apply element filters
+  const useElementFilter = creator.c11_chaos_tolerance > 0.55 || Math.abs(c9[2]) > 0.60;
+  const filterBrightness = parseFloat((1.0 + c9[2] * 0.15).toFixed(3));    // natural → brighter
+  const filterContrast   = parseFloat((1.0 + Math.abs(c9[1]) * 0.22 - 0.11).toFixed(3));
+  const filterSaturate   = parseFloat((1.0 + c6[0] * 0.55).toFixed(3));    // expressive → saturated
+  const filterHueRotate  = Math.round(Math.abs(c6[2] ?? 0) * 22);           // 0–22deg subtle shift
+  // Very digital + polished → slight desaturation filter
+  const filterGrayscale  = c9[1] > 0.70 && c9[0] < -0.50
+    ? parseFloat((c9[1] * 0.25).toFixed(3))
+    : 0;
+  // Natural/warm surfaces → hint of sepia warmth
+  const filterSepia = c9[2] > 0.50
+    ? parseFloat(((c9[2] - 0.50) * 0.70).toFixed(3))
+    : 0;
+
+  // ── Image / media treatment ─────────────────────────────────────────────────
+  const imageFilterBrightness = parseFloat((0.88 + surfaceWarmth * 0.18).toFixed(3));
+  const imageFilterContrast   = parseFloat((1.0 + (c9[1] + 1) / 2 * 0.22).toFixed(3));
+  const imageFilterSaturate   = parseFloat((0.82 + expressivity * 0.46).toFixed(3));
+  const imageFilterHueRotate  = Math.round((surfaceWarmth - 0.5) * 14); // -7 to +7deg
+  const imageTreatmentLabel   = c9[2] > 0.40 ? 'warm-organic'
+    : c9[0] < -0.40 ? 'cool-digital'
+    : c9[1] > 0.50  ? 'polished-cinematic'
+    : 'natural';
+
+  // ── Stroke / border ─────────────────────────────────────────────────────────
+  // Analog/physical materials → defined strokes. Digital glass → no strokes.
+  const strokeLikelihood = Math.max(0, c9[0]) * 0.55 + ((c9[1] + 1) / 2) * 0.35;
+  const strokeWidth = strokeLikelihood > 0.45
+    ? parseFloat((0.5 + strokeLikelihood * 3.5).toFixed(1)) // 0.5–4px
+    : 0;
+  const strokeStyle    = 'solid'; // stroke-engine refines this per component
+  const strokePosition = c9[1] > 0.40 ? 'inside' : 'center';
+  const strokeUsesGradient = usesGradient && creator.c11_chaos_tolerance > 0.55 && strokeWidth > 1.0;
+
+  // ── Motion ──────────────────────────────────────────────────────────────────
   const { curve: easingCurve, label: easingLabel } = deriveEasingCurve(creator);
-  const durationBase = Math.round(ch.ch8_motion.durationScale * 200); // ms
+  const durationBase = Math.round(ch.ch8_motion.durationScale * 200);
   const kinesthetic  = getSensoryWeight(creator, 4); // kinesthetic = index 4
   const hoverDistance = parseFloat((kinesthetic * 16).toFixed(1)); // 0–16px
-  // Hover opacity for opacity-style hovers (non-lift)
   const hoverOpacity  = parseFloat((0.55 + creator.c15_coherence_style * 0.30).toFixed(3));
 
-  // Idle animation: only for expressive/chaotic genomes
-  const isExpressive = creator.c11_chaos_tolerance > 0.60 && creator.c12_cross_pollination > 0.55;
+  const isExpressive  = creator.c11_chaos_tolerance > 0.60 && creator.c12_cross_pollination > 0.55;
   const idleAnimation = isExpressive
     ? (['genome-breathe', 'genome-float', 'genome-shimmer'] as const)[
         Math.floor(creator.c11_chaos_tolerance * 3) % 3
       ]
     : null;
 
-  // ── Typography ───────────────────────────────────────────────────────────
-  // c4[0] expressivity: maps -1..1 → -0.02..0.08em letter-spacing base
-  const letterSpacingBase = parseFloat(((c4[0] + 1) / 2 * 0.10 - 0.02).toFixed(4)); // -0.02–0.08
-  // c4[3] precision > 0.5 → tabular numerics
-  const tabulaNumeric   = c4[3] > 0.50;
-  // c7[0] systematic > 0.5 → text-wrap balance for headings
-  const textWrapBalance = c7[0] > 0.50;
+  // ── Typography ──────────────────────────────────────────────────────────────
+  const letterSpacingBase = parseFloat(((c4[0] + 1) / 2 * 0.10 - 0.02).toFixed(4)); // -0.02–0.08em
+  const tabulaNumeric     = c4[3] > 0.50;
+  const textWrapBalance   = c7[0] > 0.50;
 
-  // ── Motif ─────────────────────────────────────────────────────────────────
-  const separator      = ch.ch35_signature_motif.separator;
-  const hoverIndicator = ch.ch35_signature_motif.hoverIndicator;
+  // Text stroke: high expressivity + non-subtle genomes → display stroke
+  const textStrokeWidth = c4[0] > 0.65 && creator.c11_chaos_tolerance > 0.55
+    ? parseFloat((0.5 + c4[0] * 1.5).toFixed(1)) // 0.5–2.5px
+    : 0;
 
-  // ── Material label (documentation only) ──────────────────────────────────
+  // Font variation settings: variable fonts when technical score is high
+  const techScore = creator.c5_technical_spectrum?.[0] ?? 0.5;
+  const fontVariationSettings = techScore > 0.55
+    ? `"wght" ${Math.round(300 + c6[0] * 400)}`  // weight axis 300–700
+    : null;
+
+  // ── Spacing ─────────────────────────────────────────────────────────────────
+  const rhythmUnit  = ch.ch2_rhythm.verticalRhythm; // 4 | 8 | 12 px
+  // Padding scale: expressive + high chaos = generous; systematic/tight = compact
+  const paddingScale = parseFloat((0.70 + expressivity * 0.70 + creator.c11_chaos_tolerance * 0.20).toFixed(3));
+  // Gap scale: systematic (ordered) = tighter gaps; intuitive = looser
+  const gapScale = parseFloat((0.45 + ((c7[0] + 1) / 2) * 0.80).toFixed(3));
+
+  // ── Motif ──────────────────────────────────────────────────────────────────
+  const separator      = ch.ch35_signature_motif?.separator      ?? '_';
+  const hoverIndicator = ch.ch35_signature_motif?.hoverIndicator ?? '→';
+
+  // ── Material label (documentation only) ────────────────────────────────────
   const materialLabel = deriveMaterialLabel(
     [c9[0], c9[1], c9[2]] as [number, number, number],
-    (c6[2] + 1) / 2  // c6[2] -1..1 → 0..1 for deriveMaterialLabel
+    (c6[2] !== undefined ? (c6[2] + 1) / 2 : 0.5)
   );
 
   return {
-    backdropBlur,
-    backdropSaturate,
-    surfaceOpacity,
-    surfaceGrain,
-    specularHighlight,
-    surfaceWarmth,
-    radiusBase,
-    radiusVariance,
-    shadowLayers,
-    shadowColorTinted,
-    shadowSoftness,
-    shadowScale,
-    easingCurve,
-    durationBase,
-    hoverDistance,
-    hoverOpacity,
-    idleAnimation,
-    letterSpacingBase,
-    tabulaNumeric,
-    textWrapBalance,
-    separator,
-    hoverIndicator,
-    materialLabel,
-    easingLabel,
+    backdropBlur, backdropSaturate, backdropBrightness, backdropContrast,
+    surfaceOpacity, surfaceGrain, specularHighlight, surfaceWarmth,
+    usesGradient, gradientType, gradientAngle, gradientStopCount, gradientContrast,
+    noiseBlendMode, gradientText,
+    mixBlendMode, elementOpacity, backgroundBlendMode,
+    radiusBase, radiusVariance, cornerSmoothing, asymmetricCorners,
+    shadowLayers, shadowColorTinted, shadowSoftness, shadowScale,
+    innerShadowCount, innerShadowSoftness, innerShadowOpacity,
+    useTextShadow, textShadowBlur, textShadowOpacity,
+    useElementFilter, filterBrightness, filterContrast, filterSaturate,
+    filterHueRotate, filterGrayscale, filterSepia,
+    imageFilterBrightness, imageFilterContrast, imageFilterSaturate,
+    imageFilterHueRotate, imageTreatmentLabel,
+    strokeWidth, strokeStyle, strokePosition, strokeUsesGradient,
+    easingCurve, durationBase, hoverDistance, hoverOpacity, idleAnimation,
+    letterSpacingBase, tabulaNumeric, textWrapBalance, textStrokeWidth,
+    fontVariationSettings,
+    paddingScale, gapScale, rhythmUnit,
+    separator, hoverIndicator,
+    materialLabel, easingLabel, blendLabel, gradientLabel,
   };
 }
 
-// ── Component radius derivation ───────────────────────────────────────────────
-
-/**
- * Per-component radius modifiers relative to base.
- * Cards have slightly more rounding; badges less; inputs match base.
- */
-const RADIUS_MODIFIER: Record<ComponentName, number> = {
-  button:   1.0,
-  card:     1.2,
-  nav:      0.8,
-  input:    0.9,
-  select:   0.9,
-  textarea: 0.9,
-  badge:    0.6,
-  chip:     0.7,
-  modal:    1.3,
-  tooltip:  0.5,
-  avatar:   999, // always full circle (enforced by min)
-  checkbox: 0.3,
-  radio:    999,
-  toggle:   999,
-  table:    0.4,
-  progress: 999,
-  skeleton: 0.5,
-  spinner:  999,
-  alert:    0.9,
-  tabs:     0.6,
-};
-
-function getComponentRadius(vec: ComponentDecisionVector, component: ComponentName): number {
-  const modifier = RADIUS_MODIFIER[component];
-  if (modifier === 999) return 9999; // full pill/circle → clip via CSS
-  const base = vec.radiusBase * (1 + vec.radiusVariance * (modifier - 1));
-  return Math.max(0, Math.round(base * modifier));
-}
-
-// ── State builder helpers ─────────────────────────────────────────────────────
+// ── State builder ─────────────────────────────────────────────────────────────
 
 function buildState(
   background: string,
@@ -292,7 +409,11 @@ function buildState(
   typography: ReturnType<typeof getComponentTypography>,
   opacity: number,
   cursor: string,
-  outline: string | null
+  outline: string | null,
+  filter: string | null,
+  mixBlendMode: string,
+  padding: string,
+  gap: string
 ): ComponentTokenState {
   return {
     background,
@@ -311,134 +432,206 @@ function buildState(
     opacity,
     cursor,
     outline,
+    filter,
+    mixBlendMode,
+    padding,
+    gap,
   };
 }
 
-// ── Per-component token generation ───────────────────────────────────────────
+// ── Typography context from semantics ─────────────────────────────────────────
+
+function typographyContext(sem: ComponentSemantics): 'button' | 'badge' | 'nav' | 'input' | 'caption' {
+  if (sem.initiatesAction) return 'button';
+  if (sem.isFeedback && sem.contentDensity < 0.40) return 'badge';
+  if (sem.isNavigational) return 'nav';
+  if (sem.interactivity > 0.35 && !sem.isContainer) return 'input';
+  if (sem.contentDensity < 0.20 && !sem.isContainer) return 'caption';
+  return 'button';
+}
+
+// ── Per-component token generation ────────────────────────────────────────────
 
 function buildComponentTokens(
   vec: ComponentDecisionVector,
-  component: ComponentName,
+  spec: ComponentSpec,
+  sem: ComponentSemantics,
   primaryHex: string,
+  accentHex: string,
   surfaceHex: string,
   elevatedHex: string
 ): ComponentTokenEntry {
-  const radius = getComponentRadius(vec, component);
-  const motion = getComponentMotion(vec, component);
-  const shadows = buildShadowSet(vec, primaryHex);
-  const flatShadows = buildFocusOnlyShadow(vec, primaryHex);
-  const baseTransition = buildBaseTransition(vec);
+  // ── Radius: semantic modifier on genome base, no lookup table ───────────────
+  const radiusMod = semanticRadiusModifier(sem);
+  const radiusPx  = radiusMod >= 999 ? 9999 : Math.max(0, Math.round(vec.radiusBase * radiusMod));
 
-  // Typography context mapping
-  const typCtx = (() => {
-    if (component === 'badge' || component === 'chip') return 'badge' as const;
-    if (component === 'nav') return 'nav' as const;
-    if (component === 'input' || component === 'select' || component === 'textarea') return 'input' as const;
-    if (component === 'tooltip') return 'caption' as const;
-    return 'button' as const;
-  })();
-  const typography = getComponentTypography(vec, typCtx);
+  // ── All engine specs ────────────────────────────────────────────────────────
+  const fillSpec    = computeFill(vec, sem, surfaceHex, accentHex, primaryHex);
+  const blendSpec   = deriveBlend(vec, sem);
+  const filterSpec  = deriveFilters(vec, sem);
+  const strokeSpec  = deriveStroke(vec, sem, primaryHex, accentHex, surfaceHex);
+  const spacingSpec = deriveSpacing(vec, sem);
+  const innerShadow = buildInnerShadow(vec);
+  const textShadow  = buildTextShadow(vec, primaryHex);
 
-  // Surface computations
+  // ── Shadow with semantic scale ──────────────────────────────────────────────
+  const semScale    = semanticShadowScale(sem, vec.shadowScale);
+  const scaledVec   = { ...vec, shadowScale: semScale };
+  const shadowSet   = buildShadowSet(scaledVec, primaryHex);
+  const flatShadows = buildFocusOnlyShadow(scaledVec, primaryHex);
+
+  // ── Motion ──────────────────────────────────────────────────────────────────
+  const motion          = getComponentMotion(vec, sem);
+  const baseTransition  = buildBaseTransition(vec);
+  const hoverTransition = `${motion.hoverTransition}, ${baseTransition}`;
+
+  // ── Typography ──────────────────────────────────────────────────────────────
+  const typography = getComponentTypography(vec, typographyContext(sem));
+
+  // ── Surface backgrounds ─────────────────────────────────────────────────────
   const defaultSurface = computeSurface(vec, surfaceHex, primaryHex, 1.0);
   const hoverSurface   = computeHoverSurface(vec, elevatedHex, primaryHex);
   const activeSurface  = computeSurface(vec, surfaceHex, primaryHex, 0.85);
 
-  const hoverTransition = `${motion.hoverTransition}, ${baseTransition}`;
+  // ── Composed CSS values ─────────────────────────────────────────────────────
+  const borderStr      = strokeSpec.border ?? 'none';
+  const hoverBorderStr = deriveHoverStroke(strokeSpec, primaryHex).border ?? 'none';
+  const blendMode      = blendSpec.mixBlendMode;
+  const elemFilter     = filterSpec.elementFilter;
+  const padding        = spacingSpec.padding;
+  const gap            = spacingSpec.gap;
 
-  // ── FILLED variant ──────────────────────────────────────────────────────
+  // Compose inner shadow with outer shadow
+  const composeBoxShadow = (outer: string): string => {
+    if (!innerShadow.css) return outer;
+    return outer === 'none' ? innerShadow.css : `${outer}, ${innerShadow.css}`;
+  };
+
+  // ── FILLED variant ──────────────────────────────────────────────────────────
   const filled: ComponentTokenVariant = {
     default: buildState(
-      defaultSurface.background, defaultSurface.backdropFilter, defaultSurface.border,
-      shadows.default, radius, baseTransition, 'none', typography, 1.0, 'pointer', null
+      defaultSurface.background, defaultSurface.backdropFilter, borderStr,
+      composeBoxShadow(shadowSet.default), radiusPx,
+      baseTransition, 'none', typography, blendSpec.elementOpacity, 'pointer', null,
+      elemFilter, blendMode, padding, gap
     ),
     hover: buildState(
-      hoverSurface.background, hoverSurface.backdropFilter, hoverSurface.border,
-      shadows.hover, radius, hoverTransition, motion.hoverTransform, typography, 1.0, 'pointer', null
+      hoverSurface.background, hoverSurface.backdropFilter, hoverBorderStr,
+      composeBoxShadow(shadowSet.hover), radiusPx,
+      hoverTransition, motion.hoverTransform, typography, blendSpec.elementOpacity, 'pointer', null,
+      elemFilter, blendMode, padding, gap
     ),
     active: buildState(
-      activeSurface.background, activeSurface.backdropFilter, activeSurface.border,
-      shadows.active, radius,
+      activeSurface.background, activeSurface.backdropFilter, borderStr,
+      composeBoxShadow(shadowSet.active), radiusPx,
       `transform ${motion.activeDurationMs}ms ${vec.easingCurve}, box-shadow ${motion.activeDurationMs}ms ${vec.easingCurve}`,
-      motion.activeTransform, typography, 1.0, 'pointer', null
+      motion.activeTransform, typography, blendSpec.elementOpacity, 'pointer', null,
+      elemFilter, blendMode, padding, gap
     ),
     focus: buildState(
-      defaultSurface.background, defaultSurface.backdropFilter, defaultSurface.border,
-      shadows.focus, radius, baseTransition, 'none', typography, 1.0, 'pointer',
-      `0 0 0 2px ${primaryHex}40`
+      defaultSurface.background, defaultSurface.backdropFilter, borderStr,
+      composeBoxShadow(shadowSet.focus), radiusPx,
+      baseTransition, 'none', typography, blendSpec.elementOpacity, 'pointer',
+      `0 0 0 2px ${primaryHex}40`,
+      elemFilter, blendMode, padding, gap
     ),
     disabled: buildState(
-      defaultSurface.background, defaultSurface.backdropFilter, defaultSurface.border,
-      'none', radius, 'none', 'none', typography, 0.45, 'not-allowed', null
+      defaultSurface.background, defaultSurface.backdropFilter, borderStr,
+      'none', radiusPx, 'none', 'none', typography, 0.45, 'not-allowed', null,
+      null, 'normal', padding, gap
     ),
   };
 
-  // ── GHOST variant ───────────────────────────────────────────────────────
-  const ghostBorder = `1px solid ${primaryHex}80`;
+  // ── GHOST variant ───────────────────────────────────────────────────────────
+  const ghostBorder      = `1px solid ${primaryHex}80`;
+  const ghostHoverBorder = `1px solid ${primaryHex}`;
   const ghost: ComponentTokenVariant = {
     default: buildState(
       'transparent', 'none', ghostBorder,
-      flatShadows.default, radius, baseTransition, 'none', typography, 1.0, 'pointer', null
+      flatShadows.default, radiusPx, baseTransition, 'none', typography, 1.0, 'pointer', null,
+      null, blendMode, padding, gap
     ),
     hover: buildState(
-      `${primaryHex}12`, 'none', `1px solid ${primaryHex}`,
-      flatShadows.hover, radius, hoverTransition, motion.hoverTransform, typography, 1.0, 'pointer', null
+      `${primaryHex}12`, 'none', ghostHoverBorder,
+      flatShadows.hover, radiusPx, hoverTransition, motion.hoverTransform, typography, 1.0, 'pointer', null,
+      null, blendMode, padding, gap
     ),
     active: buildState(
-      `${primaryHex}20`, 'none', `1px solid ${primaryHex}`,
-      flatShadows.active, radius,
+      `${primaryHex}20`, 'none', ghostHoverBorder,
+      flatShadows.active, radiusPx,
       `transform ${motion.activeDurationMs}ms ${vec.easingCurve}`,
-      motion.activeTransform, typography, 1.0, 'pointer', null
+      motion.activeTransform, typography, 1.0, 'pointer', null,
+      null, blendMode, padding, gap
     ),
     focus: buildState(
-      'transparent', 'none', `1px solid ${primaryHex}`,
-      flatShadows.focus, radius, baseTransition, 'none', typography, 1.0, 'pointer',
-      `0 0 0 2px ${primaryHex}40`
+      'transparent', 'none', ghostHoverBorder,
+      flatShadows.focus, radiusPx, baseTransition, 'none', typography, 1.0, 'pointer',
+      `0 0 0 2px ${primaryHex}40`,
+      null, blendMode, padding, gap
     ),
     disabled: buildState(
       'transparent', 'none', `1px solid ${primaryHex}40`,
-      'none', radius, 'none', 'none', typography, 0.45, 'not-allowed', null
+      'none', radiusPx, 'none', 'none', typography, 0.45, 'not-allowed', null,
+      null, 'normal', padding, gap
     ),
   };
 
-  // ── FLAT variant ────────────────────────────────────────────────────────
+  // ── FLAT variant ────────────────────────────────────────────────────────────
   const flat: ComponentTokenVariant = {
     default: buildState(
       'transparent', 'none', 'none',
-      'none', radius, baseTransition, 'none', typography, 1.0, 'pointer', null
+      'none', radiusPx, baseTransition, 'none', typography, 1.0, 'pointer', null,
+      null, blendMode, padding, gap
     ),
     hover: buildState(
       `${primaryHex}10`, 'none', 'none',
-      'none', radius, hoverTransition, 'none', typography,
-      vec.hoverOpacity, 'pointer', null
+      'none', radiusPx, hoverTransition, 'none', typography,
+      blendSpec.elementOpacity, 'pointer', null,
+      null, blendMode, padding, gap
     ),
     active: buildState(
       `${primaryHex}18`, 'none', 'none',
-      'none', radius,
+      'none', radiusPx,
       `opacity ${motion.activeDurationMs}ms ${vec.easingCurve}`,
-      'none', typography, 1.0, 'pointer', null
+      'none', typography, 1.0, 'pointer', null,
+      null, blendMode, padding, gap
     ),
     focus: buildState(
       'transparent', 'none', 'none',
-      flatShadows.focus, radius, baseTransition, 'none', typography, 1.0, 'pointer',
-      `0 0 0 2px ${primaryHex}40`
+      flatShadows.focus, radiusPx, baseTransition, 'none', typography, 1.0, 'pointer',
+      `0 0 0 2px ${primaryHex}40`,
+      null, blendMode, padding, gap
     ),
     disabled: buildState(
       'transparent', 'none', 'none',
-      'none', radius, 'none', 'none', typography, 0.40, 'not-allowed', null
+      'none', radiusPx, 'none', 'none', typography, 0.40, 'not-allowed', null,
+      null, 'normal', padding, gap
     ),
   };
 
-  // ── Rationale ───────────────────────────────────────────────────────────
+  // ── Rationale ───────────────────────────────────────────────────────────────
   const rationale: Record<string, string> = {
-    borderRadius: `${radius}px — derived from componentRadius(${vec.radiusBase}px) × component modifier(${RADIUS_MODIFIER[component]}) + aesthetic variance(${(vec.radiusVariance * 100).toFixed(0)}%)`,
-    shadow: `${vec.shadowLayers}-layer shadow — tactile weight drives depth; softness=${vec.shadowSoftness.toFixed(2)} (c9 polished↔rough); scale=${vec.shadowScale.toFixed(2)}`,
-    motion: `${vec.durationBase}ms ${vec.easingLabel} (${vec.easingCurve}); lift=${motion.hoverTransform}`,
+    component: `"${spec.name}"${spec.description ? ` — ${spec.description}` : ''}`,
+    borderRadius: `${radiusPx >= 9999 ? '50%' : radiusPx + 'px'} — radiusBase=${vec.radiusBase}px × semanticModifier=${semanticRadiusModifier(sem).toFixed(2)}`,
+    shadow: `${vec.shadowLayers}-layer shadow; softness=${vec.shadowSoftness.toFixed(2)}; scale=${semScale.toFixed(2)} (semantic boost from elevation=${sem.elevationLevel})`,
+    motion: `${vec.durationBase}ms ${vec.easingLabel} (${vec.easingCurve}); lift=${motion.hoverTransform}; interactivity=${sem.interactivity.toFixed(2)}`,
     surface: `material="${vec.materialLabel}"; ${vec.backdropBlur > 0 ? `glassmorphism blur=${vec.backdropBlur}px saturate=${vec.backdropSaturate}%` : 'solid surface'}; grain=${vec.surfaceGrain.toFixed(2)}`,
+    fill: `${vec.usesGradient ? `${vec.gradientLabel} gradient (${vec.gradientStopCount} stops, contrast=${vec.gradientContrast.toFixed(2)})` : 'flat solid'}`,
+    blend: `blend="${blendSpec.blendLabel}" (${blendSpec.mixBlendMode})`,
+    stroke: strokeSpec.border ? `${vec.strokeWidth}px ${strokeSpec.borderStyle} stroke` : 'no stroke',
+    spacing: `padding=${spacingSpec.padding}; gap=${spacingSpec.gap}; rhythmUnit=${vec.rhythmUnit}px`,
     typography: `letter-spacing=${typography.letterSpacing}; ${vec.tabulaNumeric ? 'tabular-nums; ' : ''}${typography.textTransform ?? 'inherit case'}`,
+    semantics: `interactivity=${sem.interactivity.toFixed(2)}; density=${sem.contentDensity.toFixed(2)}; elevation=${sem.elevationLevel}; media=${sem.containsMedia}; circular=${sem.isCircular}`,
   };
 
-  return { filled, ghost, flat, borderRadiusPx: radius, rationale };
+  return {
+    filled, ghost, flat,
+    specs: { fill: fillSpec, blend: blendSpec, filter: filterSpec, stroke: strokeSpec, spacing: spacingSpec, innerShadow, textShadow },
+    borderRadiusPx: radiusPx,
+    padding,
+    gap,
+    rationale,
+  };
 }
 
 // ── CSS variables generator ───────────────────────────────────────────────────
@@ -457,30 +650,55 @@ function buildCSSVariables(vec: ComponentDecisionVector, primaryHex: string): st
     `  --genome-shadow-scale: ${vec.shadowScale};`,
     `  --genome-backdrop-blur: ${vec.backdropBlur}px;`,
     `  --genome-backdrop-saturate: ${vec.backdropSaturate}%;`,
+    `  --genome-backdrop-brightness: ${vec.backdropBrightness};`,
     `  --genome-surface-opacity: ${vec.surfaceOpacity};`,
     `  --genome-surface-grain: ${vec.surfaceGrain};`,
     `  --genome-hover-distance: ${vec.hoverDistance}px;`,
     `  --genome-hover-opacity: ${vec.hoverOpacity};`,
     `  --genome-letter-spacing-base: ${vec.letterSpacingBase.toFixed(4)}em;`,
     `  --genome-surface-warmth: ${vec.surfaceWarmth};`,
+    `  --genome-rhythm-unit: ${vec.rhythmUnit}px;`,
+    `  --genome-padding-scale: ${vec.paddingScale};`,
+    `  --genome-gap-scale: ${vec.gapScale};`,
+    `  --genome-gradient-angle: ${vec.gradientAngle}deg;`,
+    `  --genome-gradient-contrast: ${vec.gradientContrast};`,
+    `  --genome-stroke-width: ${vec.strokeWidth}px;`,
+    `  --genome-corner-smoothing: ${vec.cornerSmoothing};`,
     vec.idleAnimation ? `  --genome-idle-animation: ${vec.idleAnimation};` : '',
     `  --genome-separator: "${vec.separator}";`,
     `  --genome-hover-indicator: "${vec.hoverIndicator}";`,
+    vec.fontVariationSettings ? `  --genome-font-variation: ${vec.fontVariationSettings};` : '',
+    `  --genome-mix-blend-mode: ${vec.mixBlendMode};`,
+    `  --genome-text-stroke-width: ${vec.textStrokeWidth}px;`,
     '}',
   ].filter(Boolean);
 
   return lines.join('\n');
 }
 
-// ── Public API ────────────────────────────────────────────────────────────────
+// ── Public API ─────────────────────────────────────────────────────────────────
 
 export interface GenerateTokensOptions {
-  components?: ComponentName[];
+  /**
+   * Component specs to generate. Each spec has a free-form name and description.
+   * Semantics are inferred from the description — no fixed type list.
+   * If omitted, generates DEFAULT_COMPONENT_SPECS (12 archetypal semantic contexts).
+   */
+  specs?: ComponentSpec[];
+  /**
+   * @deprecated Pass `specs` instead. String names are resolved against
+   * DEFAULT_COMPONENT_SPECS by partial match and then inferred semantically.
+   */
+  components?: string[];
 }
 
 /**
  * Generate the full ComponentTokenMap from creator + design genome.
  * This is the main entry point for the generate_component_tokens MCP tool.
+ *
+ * Components are driven by ComponentSpec[] — free-form name + description.
+ * If no specs are provided, DEFAULT_COMPONENT_SPECS are used.
+ * All CSS decisions are continuous derivations from genome latent coordinates.
  */
 export function generateComponentTokens(
   creator: CreatorGenome,
@@ -490,14 +708,30 @@ export function generateComponentTokens(
   const vec = buildDecisionVector(creator, genome);
 
   const primaryHex  = genome.chromosomes.ch5_color_primary.hex;
+  const accentHex   = genome.chromosomes.ch6_color_temp.elevatedSurface ?? primaryHex;
   const surfaceHex  = genome.chromosomes.ch6_color_temp.surfaceColor;
   const elevatedHex = genome.chromosomes.ch6_color_temp.elevatedSurface;
 
-  const targetComponents = options.components ?? [...ALL_COMPONENTS];
-  const components: Partial<Record<ComponentName, ComponentTokenEntry>> = {};
+  // Resolve spec list
+  let specs: ComponentSpec[] = options.specs ?? [];
 
-  for (const component of targetComponents) {
-    components[component] = buildComponentTokens(vec, component, primaryHex, surfaceHex, elevatedHex);
+  // Legacy support: if string names passed via components[], convert to specs
+  if (specs.length === 0 && options.components && options.components.length > 0) {
+    specs = options.components.map(name => {
+      // Find in defaults by partial name match first
+      const match = DEFAULT_COMPONENT_SPECS.find(s => s.name.includes(name) || name.includes(s.name.split('-')[0]));
+      return match ?? { name, description: name.replace(/-/g, ' ') };
+    });
+  }
+
+  // Fall back to defaults
+  if (specs.length === 0) specs = DEFAULT_COMPONENT_SPECS;
+
+  const components: Record<string, ComponentTokenEntry> = {};
+
+  for (const spec of specs) {
+    const sem = resolveSemantics(spec);
+    components[spec.name] = buildComponentTokens(vec, spec, sem, primaryHex, accentHex, surfaceHex, elevatedHex);
   }
 
   return {
@@ -505,9 +739,9 @@ export function generateComponentTokens(
     components,
     cssVariables: buildCSSVariables(vec, primaryHex),
     motif: {
-      separator:      genome.chromosomes.ch35_signature_motif.separator,
-      hoverIndicator: genome.chromosomes.ch35_signature_motif.hoverIndicator,
-      deployment:     genome.chromosomes.ch35_signature_motif.deployment,
+      separator:      genome.chromosomes.ch35_signature_motif?.separator      ?? '_',
+      hoverIndicator: genome.chromosomes.ch35_signature_motif?.hoverIndicator ?? '→',
+      deployment:     genome.chromosomes.ch35_signature_motif?.deployment      ?? 0.5,
     },
   };
 }

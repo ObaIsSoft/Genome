@@ -91,9 +91,10 @@ export function buildShadowSet(
   const rgb = hexToRgbTriple(primaryHex);
   const focusOpacity = parseFloat(focusRingOpacity.toFixed(3));
   const focusWidth   = Math.round(2 + vec.shadowScale * 2);
+  const fallbackOpacity = parseFloat((0.10 + vec.shadowScale * 0.10).toFixed(3));
   const focusRing    = rgb
     ? `0 0 0 ${focusWidth}px rgba(${rgb.r},${rgb.g},${rgb.b},${focusOpacity})`
-    : `0 0 0 ${focusWidth}px rgba(0,0,0,0.15)`;
+    : `0 0 0 ${focusWidth}px rgba(0,0,0,${fallbackOpacity})`;
 
   return {
     default: buildShadow(vec, primaryHex, 1.0),
@@ -114,9 +115,77 @@ export function buildFocusOnlyShadow(
   const rgb = hexToRgbTriple(primaryHex);
   const focusOpacity = parseFloat((0.20 + vec.shadowScale * 0.15).toFixed(3));
   const focusWidth   = Math.round(2 + vec.shadowScale * 2);
+  const fallbackOpacity = parseFloat((0.12 + vec.shadowScale * 0.12).toFixed(3));
   const focusRing    = rgb
     ? `0 0 0 ${focusWidth}px rgba(${rgb.r},${rgb.g},${rgb.b},${focusOpacity})`
-    : 'none';
+    : `0 0 0 ${focusWidth}px rgba(0,0,0,${fallbackOpacity})`;
 
   return { default: 'none', hover: 'none', active: 'none', focus: focusRing };
+}
+
+// ── Inner Shadow ───────────────────────────────────────────────────────────────
+
+export interface InnerShadowSpec {
+  /** Full CSS box-shadow value with inset keyword(s); null = no inner shadow */
+  css: string | null;
+  /** 0–2 inner shadow layers */
+  layers: number;
+}
+
+/**
+ * Build inset box-shadow from continuous genome parameters.
+ * Inner shadows create material depth — pressed buttons, recessed inputs,
+ * sunken containers on analog/physical-feeling surfaces.
+ */
+export function buildInnerShadow(vec: ComponentDecisionVector): InnerShadowSpec {
+  if (vec.innerShadowCount === 0) return { css: null, layers: 0 };
+
+  const { innerShadowSoftness, innerShadowOpacity } = vec;
+  const layers: string[] = [];
+
+  // Layer 1: top inset edge — main recessed shadow
+  const blur1   = Math.round(2 + innerShadowSoftness * 10);   // 2–12px
+  const yOffset = Math.round(1 + innerShadowSoftness * 4);    // 1–5px
+  const spread1 = innerShadowSoftness > 0.5 ? 0 : -1;
+  layers.push(`inset 0 ${yOffset}px ${blur1}px ${spread1}px rgba(0,0,0,${innerShadowOpacity.toFixed(3)})`);
+
+  // Layer 2: bottom highlight — paired inset on opposite edge creates pressed-in depth
+  if (vec.innerShadowCount >= 2) {
+    const highlightOpacity = parseFloat((innerShadowOpacity * 0.5).toFixed(3));
+    const blur2 = Math.round(blur1 * 0.6);
+    layers.push(`inset 0 -${Math.round(yOffset * 0.6)}px ${blur2}px rgba(255,255,255,${highlightOpacity})`);
+  }
+
+  return { css: layers.join(', '), layers: vec.innerShadowCount };
+}
+
+// ── Text Shadow ────────────────────────────────────────────────────────────────
+
+export interface TextShadowSpec {
+  /** CSS text-shadow value; null = no text shadow */
+  css: string | null;
+}
+
+/**
+ * Build CSS text-shadow for display text from continuous genome parameters.
+ * Editorial/expressive genomes use text shadows on headings; digital/minimal don't.
+ * Warm analog genomes → color-tinted shadow; cool digital → neutral dark shadow.
+ */
+export function buildTextShadow(
+  vec: ComponentDecisionVector,
+  primaryHex: string
+): TextShadowSpec {
+  if (!vec.useTextShadow) return { css: null };
+
+  const rgb     = hexToRgbTriple(primaryHex);
+  const opacity = vec.textShadowOpacity;
+  const blur    = vec.textShadowBlur;
+  const yOffset = Math.round(blur * 0.3);
+
+  if (rgb && vec.surfaceWarmth > 0.55) {
+    // Warm analog: subtle primary-tinted glow for editorial depth
+    return { css: `0 ${yOffset}px ${blur}px rgba(${rgb.r},${rgb.g},${rgb.b},${opacity.toFixed(3)})` };
+  }
+
+  return { css: `0 ${yOffset}px ${blur}px rgba(0,0,0,${opacity.toFixed(3)})` };
 }

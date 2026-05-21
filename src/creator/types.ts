@@ -216,71 +216,189 @@ export interface CreativeBrief {
 }
 
 /**
- * ComponentDecisionVector — intermediate representation between genome chromosomes
- * and per-component CSS token decisions.
- *
- * All fields are continuous numeric values derived from creator latent coordinates
- * + L1 chromosome values. No named presets — the values drive CSS directly.
- * Labels (materialLabel, easingLabel) are documentation only.
+ * ComponentSemantics — continuous property description of what a component IS.
+ * Derived from intent + page composition. Never a named category lookup.
+ * These properties, combined with the genome vector, drive all CSS decisions.
+ */
+export interface ComponentSemantics {
+  /** 0=decorative/static, 1=highly interactive (click, drag, select) */
+  interactivity: number;
+  /** initiates a primary action — CTA, submit, navigate, confirm */
+  initiatesAction: boolean;
+  /** appears and disappears — tooltip, modal, toast, dropdown */
+  isEphemeral: boolean;
+  /** contains image, video, canvas, or other media */
+  containsMedia: boolean;
+  /** 0=single icon/label, 1=dense data table or form */
+  contentDensity: number;
+  /** wraps or contains other components */
+  isContainer: boolean;
+  /** text is the primary content (article body, heading, label) */
+  isTextPrimary: boolean;
+  /** 0=inline/flat, 1=raised card, 2=floating panel, 3=overlay/modal */
+  elevationLevel: number;
+  /** 0=ghost/minimal weight, 1=primary/dominant visual weight */
+  visualWeight: number;
+  /** geometry is circular — avatar, radio button, spinner, progress ring */
+  isCircular: boolean;
+  /** animates in on mount */
+  hasEntrance: boolean;
+  /** can hold an idle/ambient animation state */
+  hasIdleState: boolean;
+  /** 0=motion irrelevant, 1=motion is core to this component's function */
+  motionPriority: number;
+  /** appears multiple times in a list, grid, or repeating pattern */
+  isRepeated: boolean;
+  /** navigational role — nav item, tab, breadcrumb, pagination */
+  isNavigational: boolean;
+  /** communicates system state — alert, progress, skeleton, badge */
+  isFeedback: boolean;
+}
+
+/**
+ * ComponentSpec — what the implementer passes in to describe a component.
+ * Name and description are free-form. Semantics can be provided or inferred.
+ */
+export interface ComponentSpec {
+  /** Free-form name. "vehicle-listing-card", "hero-banner", "author-byline" */
+  name: string;
+  /** Optional: human description used to infer semantics if not provided */
+  description?: string;
+  /** Optional: explicit semantics. If omitted, inferred from name + description */
+  semantics?: Partial<ComponentSemantics>;
+}
+
+/**
+ * ComponentDecisionVector — the full design expression of a genome.
+ * Built once from creator + design genome. All sub-engines read from this.
+ * All fields are continuous numeric values — no named presets drive CSS.
+ * Labels (materialLabel, easingLabel, blendLabel, gradientLabel) are documentation only.
  */
 export interface ComponentDecisionVector {
-  // ── Surface quality (from c9_material_affinity 3D vector) ──────────────────
-  /** px — 0 means no backdrop blur; 12–40 when c9[0] is strongly negative */
-  backdropBlur: number;
-  /** % — saturate() in backdrop-filter; 120–220 */
-  backdropSaturate: number;
-  /** 0.04–1.0 — surface bg opacity; lower = more translucent */
-  surfaceOpacity: number;
-  /** 0–0.5 — grain/noise overlay intensity from ch11_texture.noiseLevel */
-  surfaceGrain: number;
-  /** inset top border glow — true when c9[1] (polished) > 0.6 */
+  // ── Surface / backdrop ─────────────────────────────────────────────────────
+  backdropBlur: number;         // 0 or 12–40px from c9[0]
+  backdropSaturate: number;     // 20–220%
+  backdropBrightness: number;   // 0.7–1.15 for backdrop-filter
+  backdropContrast: number;     // 0.85–1.15 for backdrop-filter
+  surfaceOpacity: number;       // 0.04–1.0
+  surfaceGrain: number;         // 0–0.5
   specularHighlight: boolean;
-  /** 0–1 — color temperature bias; 0=cool, 1=warm; from c9[2] */
-  surfaceWarmth: number;
+  surfaceWarmth: number;        // 0–1
 
-  // ── Shape (from c6_aesthetic_sensibility + ch7_edge) ───────────────────────
-  /** px — ch7_edge.componentRadius (already genome-derived) */
+  // ── Fill system ────────────────────────────────────────────────────────────
+  /** Does this genome use gradient fills on surfaces? */
+  usesGradient: boolean;
+  /** 'linear' | 'radial' | 'conic' — derived from c9 + c11 */
+  gradientType: string;
+  /** 0–360 degrees */
+  gradientAngle: number;
+  /** 2–5 stops */
+  gradientStopCount: number;
+  /** 0–1: how dramatic the gradient transitions are */
+  gradientContrast: number;
+  /** Does the grain layer use a blend mode beyond normal? */
+  noiseBlendMode: string;
+  /** Display headings get gradient text fill — from c4 expressivity + c6 */
+  gradientText: boolean;
+
+  // ── Blend modes ────────────────────────────────────────────────────────────
+  /** CSS mix-blend-mode for the component element */
+  mixBlendMode: string;
+  /** 0–1 opacity as a design tool (not just disabled state) */
+  elementOpacity: number;
+  /** CSS background-blend-mode when fill layers are stacked */
+  backgroundBlendMode: string;
+
+  // ── Shape ──────────────────────────────────────────────────────────────────
   radiusBase: number;
-  /** ±factor — how much components deviate from radiusBase; from c6[1] */
   radiusVariance: number;
+  /** 0=standard CSS, 1=full squircle smoothing */
+  cornerSmoothing: number;
+  /** Whether corners vary individually (organic) */
+  asymmetricCorners: boolean;
 
-  // ── Shadow (from c14_sensory_weights.tactile + ch10_hierarchy.shadowScale) ─
-  /** 1–4 stacked box-shadow layers */
+  // ── Outer shadow ───────────────────────────────────────────────────────────
   shadowLayers: 1 | 2 | 3 | 4;
-  /** primary-color tinted shadow when c14.visual > 0.6 */
   shadowColorTinted: boolean;
-  /** blur multiplier; 0=polished/sharp, 1=rough/diffuse; from c9[1] inverted */
   shadowSoftness: number;
-  /** raw shadowScale from ch10_hierarchy */
   shadowScale: number;
 
-  // ── Motion (from c11 + c14.kinesthetic + ch8_motion) ──────────────────────
-  /** computed cubic-bezier string — never a keyword like "ease-out" */
+  // ── Inner shadow ───────────────────────────────────────────────────────────
+  /** 0–2 inner shadow layers; 0=none */
+  innerShadowCount: number;
+  /** blur softness for inner shadow; 0=crisp inset, 1=diffuse */
+  innerShadowSoftness: number;
+  /** 0–0.25 opacity of inner shadow */
+  innerShadowOpacity: number;
+
+  // ── Text shadow ────────────────────────────────────────────────────────────
+  useTextShadow: boolean;
+  /** px blur radius for text shadow */
+  textShadowBlur: number;
+  /** 0–0.4 opacity */
+  textShadowOpacity: number;
+
+  // ── Element filters ────────────────────────────────────────────────────────
+  /** True when genome applies a non-trivial filter to elements */
+  useElementFilter: boolean;
+  filterBrightness: number;     // 0.7–1.3
+  filterContrast: number;       // 0.8–1.4
+  filterSaturate: number;       // 0–2
+  filterHueRotate: number;      // 0–30 degrees (subtle shift)
+  filterGrayscale: number;      // 0–1
+  filterSepia: number;          // 0–0.4
+
+  // ── Image / media treatment ────────────────────────────────────────────────
+  imageFilterBrightness: number;  // applied to img/video elements
+  imageFilterContrast: number;
+  imageFilterSaturate: number;
+  imageFilterHueRotate: number;
+  /** Documentation only — describes the visual treatment */
+  imageTreatmentLabel: string;
+
+  // ── Stroke / outline ───────────────────────────────────────────────────────
+  /** 0=no stroke, 0.5–4px continuous */
+  strokeWidth: number;
+  /** 'solid' | 'dashed' | 'dotted' | 'double' */
+  strokeStyle: string;
+  /** 'inside' | 'center' | 'outside' */
+  strokePosition: string;
+  /** True when stroke uses a gradient rather than flat color */
+  strokeUsesGradient: boolean;
+
+  // ── Motion ─────────────────────────────────────────────────────────────────
   easingCurve: string;
-  /** ms base — ch8_motion.durationScale × 200 */
   durationBase: number;
-  /** px — translateY on hover; c14.kinesthetic × 16 */
   hoverDistance: number;
-  /** 0.55–0.85 — opacity target for opacity-style hovers */
   hoverOpacity: number;
-  /** null | CSS animation name — idle animation for expressive genomes */
   idleAnimation: string | null;
 
-  // ── Typography (from c4_authorial_embedding) ────────────────────────────────
-  /** em — c4[0] mapped to [-0.02, 0.08] */
+  // ── Typography ─────────────────────────────────────────────────────────────
   letterSpacingBase: number;
-  /** font-variant-numeric: tabular-nums — from c4[3] > 0.5 */
   tabulaNumeric: boolean;
-  /** text-wrap: balance for headings — from c7_cognitive_pattern[0] > 0.5 */
   textWrapBalance: boolean;
+  /** px width for -webkit-text-stroke on display headings; 0=none */
+  textStrokeWidth: number;
+  /** CSS font-variation-settings string; null if not variable font */
+  fontVariationSettings: string | null;
 
-  // ── Motif (from ch35_signature_motif) ───────────────────────────────────────
+  // ── Spacing ────────────────────────────────────────────────────────────────
+  /** Multiplier on ch2_rhythm.verticalRhythm base unit for padding */
+  paddingScale: number;
+  /** Multiplier on base unit for gap between internal elements */
+  gapScale: number;
+  /** px — the base grid unit from ch2 */
+  rhythmUnit: number;
+
+  // ── Motif ──────────────────────────────────────────────────────────────────
   separator: string;
   hoverIndicator: string;
 
-  // ── Meta (documentation only — never used as CSS switch) ─────────────────
+  // ── Meta (documentation only) ──────────────────────────────────────────────
   materialLabel: string;
   easingLabel: string;
+  blendLabel: string;
+  gradientLabel: string;
 }
 
 /**

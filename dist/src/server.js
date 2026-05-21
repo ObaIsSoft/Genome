@@ -707,16 +707,28 @@ class DesignGenomeServer {
                 },
                 {
                     name: "generate_component_tokens",
-                    description: "L0.8 LAYER — Parametric Component Decision Engine. Translates L0 Creator Genome latent coordinates + L1 Design Genome into exact CSS token decisions for every component. ALL values are continuous derivations — unique cubic-bezier curves, precise px border-radius values, multi-layer shadows, computed backdrop-filter. No presets, no hardcoded defaults. Every genome produces a distinct visual system. Returns ComponentTokenMap with per-component filled/ghost/flat variants across all interaction states, plus CSS custom properties block. AI INSTRUCTION: Call after generate_design_genome or generate_design_through_persona to get per-component CSS tokens before implementing UI.",
+                    description: "L0.8 LAYER — Parametric Component Decision Engine. Translates L0 Creator Genome latent coordinates + L1 Design Genome into exact CSS token decisions for any component. ALL values are continuous derivations — unique cubic-bezier curves, precise px border-radius, multi-layer shadows, computed backdrop-filter, gradient fills, blend modes, element filters, stroke styles, inner shadows, spacing. Components are described by free-form name + description — no fixed component type list. Semantics are inferred from description signals. Every genome produces a distinct visual system. Returns ComponentTokenMap with per-component filled/ghost/flat variants across all interaction states, plus CSS custom properties block. AI INSTRUCTION: Call after generate_design_genome or generate_design_through_persona. Pass component_specs describing the actual components your product uses.",
                     inputSchema: {
                         type: "object",
                         properties: {
                             genome: { type: "object", description: "L1 Design Genome from generate_design_genome or generate_design_through_persona (required — must include chromosomes)" },
-                            creator_genome: { type: "object", description: "L0 Creator Genome (optional — if omitted, a creator genome is auto-derived from genome.dnaHash)" },
+                            creator_genome: { type: "object", description: "L0 Creator Genome (optional — if omitted, auto-derived from genome.dnaHash)" },
+                            component_specs: {
+                                type: "array",
+                                items: {
+                                    type: "object",
+                                    properties: {
+                                        name: { type: "string", description: "Component identifier, e.g. 'vehicle-listing-card', 'hero-banner', 'author-byline'" },
+                                        description: { type: "string", description: "Free-form description used to infer semantic properties — include intent, media, density, interactivity cues" }
+                                    },
+                                    required: ["name"]
+                                },
+                                description: "Components to generate tokens for. Each has a free-form name and description — semantics (interactivity, elevation, density, etc.) are inferred from the description. If omitted, generates 12 archetypal semantic contexts."
+                            },
                             components: {
                                 type: "array",
                                 items: { type: "string" },
-                                description: "Subset of components to generate tokens for. Omit to generate all 20+. Options: button, card, nav, input, select, textarea, badge, chip, modal, tooltip, avatar, checkbox, radio, toggle, table, progress, skeleton, spinner, alert, tabs"
+                                description: "DEPRECATED: use component_specs instead. String names are converted to minimal specs with semantics inferred from the name."
                             },
                             output_format: {
                                 type: "string",
@@ -2494,14 +2506,23 @@ class DesignGenomeServer {
                             const seed = designGenome.dnaHash ?? designGenome.traits?.seed ?? "genome-default";
                             creatorGenome = generateCreatorGenome(seed);
                         }
-                        const { generateComponentTokens, ALL_COMPONENTS } = await import("./component-tokens/engine.js");
-                        // Parse component subset
-                        let targetComponents;
-                        if (args.components && Array.isArray(args.components) && args.components.length > 0) {
-                            targetComponents = args.components.filter((c) => ALL_COMPONENTS.includes(c));
+                        const { generateComponentTokens } = await import("./component-tokens/engine.js");
+                        const { ComponentSpec } = {}; // type import only
+                        // Build component specs from args
+                        let specs;
+                        if (args.component_specs && Array.isArray(args.component_specs) && args.component_specs.length > 0) {
+                            // New API: full ComponentSpec objects with name + description
+                            specs = args.component_specs;
+                        }
+                        else if (args.components && Array.isArray(args.components) && args.components.length > 0) {
+                            // Legacy API: string names → minimal specs (semantics inferred from name)
+                            specs = args.components.map((name) => ({
+                                name,
+                                description: name.replace(/-/g, ' '),
+                            }));
                         }
                         const tokenMap = generateComponentTokens(creatorGenome, designGenome, {
-                            components: targetComponents,
+                            specs: specs,
                         });
                         const fmt = args.output_format ?? "both";
                         const output = {

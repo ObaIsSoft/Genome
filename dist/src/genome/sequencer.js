@@ -563,15 +563,16 @@ export class GenomeSequencer {
             const HOVER_CHARS = ['→', '+', '↗', '•', '—', '›', '↪', '⟶', '▸', '⇢',
                 '∟', '↱', '»', '→', '+', '⬆', '↑', '⤴', '✦', '⟩'];
             // Continuous position in character-space (not a switch)
-            const charIdx = b(240) * (CHARS.length - 1);
-            const hoverIdx = b(241) * (HOVER_CHARS.length - 1);
+            // Indices 260-268: clear of generateSectionTypes which uses 240-248
+            const charIdx = b(260) * (CHARS.length - 1);
+            const hoverIdx = b(261) * (HOVER_CHARS.length - 1);
             const floorChar = Math.floor(charIdx);
             const floorHover = Math.floor(hoverIdx);
             const sep = CHARS[floorChar];
             const hover = HOVER_CHARS[floorHover];
             // Case style: continuous float → threshold
-            const caseStyle = b(242) < 0.33 ? 'upper' : b(242) < 0.66 ? 'title' : 'lower';
-            const prefix = b(243) < 0.5; // separator before or after
+            const caseStyle = b(262) < 0.33 ? 'upper' : b(262) < 0.66 ? 'title' : 'lower';
+            const prefix = b(263) < 0.5; // separator before or after
             const fmt = (label, n) => {
                 const l = caseStyle === 'upper' ? label.toUpperCase()
                     : caseStyle === 'lower' ? label.toLowerCase()
@@ -580,6 +581,13 @@ export class GenomeSequencer {
             };
             // Date separator: same character but may add spacing
             const dateSep = sep.trim().length === 1 ? sep : sep.trim()[0] ?? '_';
+            // Location format: separate city and country with the motif character.
+            // Build directly to avoid double-separator in suffix mode.
+            const city = caseStyle === 'upper' ? 'CITY' : 'City';
+            const country = caseStyle === 'upper' ? 'COUNTRY' : 'Country';
+            const locationFormat = prefix
+                ? `${sep}${city}${sep}${country}`
+                : `${city}${sep}${country}`;
             // Character family label for documentation only
             const families = {
                 '_': 'underscore', '/': 'slash', '—': 'em_dash', '·': 'mid_dot',
@@ -590,12 +598,12 @@ export class GenomeSequencer {
             };
             return {
                 separator: sep,
-                numberFormat: fmt('', Math.round(b(244) * 99 + 1)), // sample: "_25" or "25_"
-                dateFormat: `${String(Math.round(b(245) * 27 + 1)).padStart(2, '0')}${dateSep}${String(Math.round(b(246) * 11 + 1)).padStart(2, '0')}${dateSep}${String(Math.round(b(247) * 98 + 25)).padStart(2, '0')}`,
-                locationFormat: fmt('CITY', undefined).replace('CITY', caseStyle === 'upper' ? 'CITY' : 'City') + sep + (caseStyle === 'upper' ? 'COUNTRY' : 'Country'),
+                numberFormat: fmt('', Math.round(b(264) * 99 + 1)),
+                dateFormat: `${String(Math.round(b(265) * 27 + 1)).padStart(2, '0')}${dateSep}${String(Math.round(b(266) * 11 + 1)).padStart(2, '0')}${dateSep}${String(Math.round(b(267) * 98 + 25)).padStart(2, '0')}`,
+                locationFormat,
                 labelFormat: fmt('Section'),
                 hoverIndicator: hover,
-                deployment: b(248),
+                deployment: b(268),
                 characterFamily: families[sep] ?? 'custom',
             };
         })());
@@ -604,7 +612,7 @@ export class GenomeSequencer {
         // Primary = base surface from ch6; secondary = derived from primary hue.
         const ch36_tension_rhythm = getForced('ch36_tension_rhythm', (() => {
             const base = ch6_color_temp.surfaceStack?.[0] ?? '#ffffff';
-            const contrast = b(249) * 0.6 + (ch12_signature.entropy * 0.4);
+            const contrast = b(269) * 0.6 + (ch12_signature.entropy * 0.4);
             // Compute secondary surface as a hue-tinted gray.
             // Use primary hue at low saturation + contrast-driven lightness shift.
             const hue = ch5_color_primary.hue ?? 210;
@@ -618,7 +626,7 @@ export class GenomeSequencer {
                 secondarySurface,
                 surfaceContrast: contrast,
                 sharedConstants: ['typeface', 'signature_motif', 'nav_style', 'text_color'],
-                alternationWeight: b(250) * 0.7,
+                alternationWeight: b(270) * 0.7,
             };
         })());
         return {
