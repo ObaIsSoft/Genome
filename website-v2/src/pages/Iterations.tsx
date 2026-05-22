@@ -12,6 +12,7 @@ interface IterationSite {
   tags: string[];
   description: string;
   layer: string;
+  image?: string;
 }
 
 const sites: IterationSite[] = [
@@ -26,6 +27,7 @@ const sites: IterationSite[] = [
     layer: 'L1 Standard Flow',
     tags: ['Dark Mode', 'Spring Physics', 'Dense Data'],
     description: 'The original cold-obsidian documentation portal. Generated from a single SHA-256 seed with Cybernetic Typographer persona. Establishes the baseline aesthetic: tight monospace grids, cyan glows, and spring-physics micro-interactions.',
+    image: '/v1.png',
   },
   {
     id: 2,
@@ -38,6 +40,7 @@ const sites: IterationSite[] = [
     layer: 'L1 + L2 Ecosystem',
     tags: ['Multi-Route', '3D Canvas', 'Semantic Navigation'],
     description: 'Second iteration pushing the architecture further. A full React SPA with 4-layer pipeline, 3D WebGL wireframe, and a complete multi-page documentation system. Demonstrates Genome operating across L1 token derivation and L2 ecosystem hierarchy simultaneously.',
+    image: '/v2.png',
   },
   {
     id: 3,
@@ -50,6 +53,7 @@ const sites: IterationSite[] = [
     layer: 'L1 Creator Persona Flow',
     tags: ['E-Commerce', 'Brutalist', 'High Contrast'],
     description: 'A live production use-case. An aggressive, high-contrast automotive catalog. Genome generated a stark 0%–100% grayscale scaling system with dominant typographic weights — the antithesis of generic e-commerce templates.',
+    image: '/faceoff.png',
   },
   {
     id: 4,
@@ -62,6 +66,7 @@ const sites: IterationSite[] = [
     layer: 'L0 + Multi L2 Sub-Genomes',
     tags: ['Portfolio', 'Multi-Theme', 'Per-Page Genomes'],
     description: 'The most architecturally complex use-case. Demonstrates Genome\'s sub-system capabilities: separate L2 Component Genomes per subpage, each deriving independent fonts, color scales, and motion curves from the same L0 creator persona. One seed, infinite derivations.',
+    image: '/portfolio.png',
   },
 ];
 
@@ -162,6 +167,16 @@ export const Iterations: React.FC = () => {
               >
                 {/* Accent strip */}
                 <div style={{ height: '3px', background: site.accentColor, opacity: 0.85 }} />
+
+                {site.image && (
+                  <div style={{ width: '100%', height: '240px', overflow: 'hidden', borderBottom: '1px solid color-mix(in oklch, var(--color-text) 5%, transparent)' }}>
+                    <img 
+                      src={site.image} 
+                      alt={`Screenshot of ${site.name}`}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                    />
+                  </div>
+                )}
 
                 <div style={{ padding: '1.75rem 2rem', display: 'flex', gap: '2rem', flexWrap: 'wrap' as const, alignItems: 'flex-start' }}>
                   <div style={{ flex: '1 1 340px' }}>
