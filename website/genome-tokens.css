@@ -1,0 +1,85 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,400&f[]=satoshi@900,700,500,400&display=swap');
+
+:root {
+  /* ========================================== */
+  /* GENOME ENGINE GENERATED DESIGN SYSTEM      */
+  /* Seed: genome-website-official-2026         */
+  /* DNA Hash: 7b31e9c20a4b8df283ef9955fa24b5dc */
+  /* ========================================== */
+
+  /* --- Typography --- */
+  --font-display: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Fira Code', 'Inconsolata', monospace;
+
+  /* --- Spacing --- */
+  --genome-unit: 8px;
+  --spacing-xs: calc(var(--genome-unit) * 1);    /* 8px */
+  --spacing-sm: calc(var(--genome-unit) * 2);    /* 16px */
+  --spacing-md: calc(var(--genome-unit) * 3);    /* 24px */
+  --spacing-lg: calc(var(--genome-unit) * 5);    /* 40px */
+  --spacing-xl: calc(var(--genome-unit) * 8);    /* 64px */
+
+  /* --- Color System (Dark Mode Enforced) --- */
+  --color-primary: #0e9ba4;
+  --color-primary-interactive: #1be4eb;
+  --color-primary-rgb: 27, 228, 235;
+
+  /* Surface Stack (Cold Saturation Obsidian) */
+  --color-surface-0: #080c0d; /* Primary Background */
+  --color-surface-1: #0f1517; /* Card/Panel Background */
+  --color-surface-2: #162022; /* Elevate/Hover Background */
+  --color-surface-3: #1f2d30; /* Active Border Background */
+
+  /* Text Stack */
+  --color-text-display: #ffffff;      /* High contrast headings */
+  --color-text-body: #a5b5b8;         /* High legibility body text */
+  --color-text-muted: #6b7f82;        /* Secondary/Metadata text */
+  --color-text-disabled: #435154;     /* Disabled items */
+
+  /* --- Visual Treatments --- */
+  --genome-border-radius: 8px;        /* ch7_edge */
+  --genome-border-color: rgba(27, 228, 235, 0.08);
+  --genome-border-color-glow: rgba(27, 228, 235, 0.25);
+  
+  /* --- Motion Physics (ch8_motion) --- */
+  --genome-easing: cubic-bezier(0.175, 0.885, 0.32, 1.1); /* Spring physics overshoot */
+  --genome-duration: 250ms;           /* Spring duration scale */
+
+  /* ========================================== */
+  /* PARAMETRIC COMPONENT TOKENS (L0.8 Layer)  */
+  /* ========================================== */
+
+  /* 1. Sidebar Doc Navigation */
+  --doc-nav-sidebar-radius: var(--genome-border-radius);
+  --doc-nav-sidebar-bg: var(--color-surface-1);
+  --doc-nav-sidebar-border: 1px solid var(--genome-border-color);
+  
+  /* 2. Interactive DNA Visualizer Card */
+  --dna-card-radius: 12px;
+  --dna-card-bg: linear-gradient(135deg, rgba(27, 228, 235, 0.02) 0%, rgba(8, 12, 13, 0.8) 100%);
+  --dna-card-border: 1px solid rgba(27, 228, 235, 0.15);
+  --dna-card-shadow: inset 0 1px 2px rgba(27, 228, 235, 0.08), 0 8px 32px rgba(0, 0, 0, 0.6);
+  --dna-card-blur: 12px;
+
+  /* 3. Terminal/Code Snippet Box */
+  --code-box-radius: 6px;
+  --code-box-bg: #050809;
+  --code-box-border: 1px solid var(--color-surface-3);
+
+  /* 4. Glowing Primary CTA Button */
+  --btn-primary-radius: 6px;
+  --btn-primary-bg: var(--color-primary-interactive);
+  --btn-primary-text: #050809;
+  --btn-primary-hover-bg: #e0fbfd;
+  --btn-primary-shadow: 0 0 16px rgba(27, 228, 235, 0.35);
+  --btn-primary-transform-hover: translateY(-1px);
+  --btn-primary-transform-active: translateY(1px);
+
+  /* 5. Sleek Feature Grid Item */
+  --grid-item-radius: var(--genome-border-radius);
+  --grid-item-bg: var(--color-surface-1);
+  --grid-item-border: 1px solid var(--genome-border-color);
+  --grid-item-hover-bg: var(--color-surface-2);
+  --grid-item-hover-border: 1px solid rgba(27, 228, 235, 0.2);
+}

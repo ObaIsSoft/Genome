@@ -1,0 +1,150 @@
+{
+  "seed": "genome-website-official-2026",
+  "intent": "A hyper-modern, high-fidelity developer landing page and documentation portal for the mathematical design system engine named Genome MCP. Dark-mode, cybernetic grid lines, deep obsidian surface stacks, glowing primary accents, tabular numerals, precise typography.",
+  "dnaHash": "7b31e9c20a4b8df283ef9955fa24b5dca65839070a2569ef81bc7e1a3bc8fde6",
+  "sectorContext": {
+    "primary": "technology",
+    "detectedTraits": {
+      "informationDensity": 0.85,
+      "temporalUrgency": 0.4,
+      "emotionalTemperature": 0.3,
+      "playfulness": 0.5,
+      "spatialDependency": 0.7,
+      "trustRequirement": 0.8,
+      "visualEmphasis": 0.9,
+      "conversionFocus": 0.6
+    }
+  },
+  "chromosomes": {
+    "ch1_structure": {
+      "maxNesting": 3,
+      "sectionCount": 6
+    },
+    "ch2_spacing_unit": {
+      "baseUnitPx": 8,
+      "ratio": 1.5
+    },
+    "ch3_type_display": {
+      "family": "Cabinet Grotesk",
+      "charge": "geometric",
+      "importUrl": "@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,400&display=swap');"
+    },
+    "ch4_type_body": {
+      "family": "Satoshi",
+      "charge": "geometric",
+      "importUrl": "@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap');"
+    },
+    "ch5_color_primary": {
+      "hue": 176,
+      "hex": "#0e9ba4",
+      "darkModeHex": "#1be4eb",
+      "darkModeLightness": 0.68
+    },
+    "ch6_color_temp": {
+      "temperature": "cold",
+      "saturationBias": 0.15,
+      "surfaceStack": [
+        "#080c0d",
+        "#0f1517",
+        "#162022",
+        "#1f2d30"
+      ]
+    },
+    "ch7_edge": {
+      "borderRadiusPx": 8,
+      "style": "semi-sharp"
+    },
+    "ch8_motion": {
+      "physics": "spring",
+      "durationScale": 0.25,
+      "easing": "cubic-bezier(0.175, 0.885, 0.32, 1.1)",
+      "durationMs": 250
+    },
+    "ch9_grid": {
+      "logic": "asymmetric",
+      "asymmetry": 0.3,
+      "cols": 12
+    },
+    "ch17_accessibility": {
+      "minContrastRatio": 4.5,
+      "respectMotionPreference": true
+    },
+    "ch19_hero_type": {
+      "type": "stats_counter",
+      "rationale": "High structural data complexity combined with visual emphasis suggests showing the math directly."
+    },
+    "ch19_hero_variant_detail": {
+      "layout": "split_right",
+      "alignment": "left"
+    },
+    "ch20_visual_treatment": {
+      "type": "cybernetic_mesh",
+      "opacity": 0.12
+    },
+    "ch21_trust_signals": {
+      "type": "developer_centric",
+      "elements": ["github_stats", "npm_downloads", "mcp_registry"]
+    },
+    "ch22_social_proof": {
+      "density": "minimal",
+      "alignment": "footer"
+    },
+    "ch23_content_depth": {
+      "levels": 3,
+      "collapsible": true
+    },
+    "ch24_personalization": {
+      "themePreference": "dark_only",
+      "saveState": "local_storage"
+    }
+  },
+  "constraints": {
+    "forbiddenPatterns": [
+      "large_hero_images",
+      "scroll_animations",
+      "bounce_animations",
+      "rounded_cards"
+    ],
+    "requiredPatterns": [
+      "high_contrast_text",
+      "tabular_numerals",
+      "compact_base_spacing"
+    ],
+    "bondingRules": [
+      "ch5_color_primary.darkModeLightness bonds to ch17_accessibility.minContrastRatio",
+      "ch8_motion.physics of spring bonds to ch17_accessibility.respectMotionPreference"
+    ]
+  },
+  "library_selections": {
+    "icon_library": {
+      "package": "@tabler/icons",
+      "import_example": "import { IconDna, IconTerminal } from '@tabler/icons';",
+      "install": "npm install @tabler/icons",
+      "note": "Mathematical, technical geometric styles match the Cabinet Grotesk Display theme perfectly."
+    },
+    "animation_library": {
+      "package": "motion (Vanilla JS)",
+      "import_example": "import { animate, spring } from 'motion';",
+      "install": "npm install motion",
+      "note": "Vanilla ES module library for spring physics animations without framework overhead."
+    },
+    "state_management": {
+      "primary": "Vanilla state object with local storage sync"
+    },
+    "styling_system": {
+      "primary": "Pure CSS Custom Properties"
+    }
+  },
+  "suggested_next": [
+    {
+      "tool": "generate_design_brief",
+      "reason": "Synthesize visual constitution guidelines before implementation.",
+      "always": true
+    },
+    {
+      "tool": "generate_component_tokens",
+      "reason": "Derive continuous styling properties for doc-sidebar, action-button, dna-card.",
+      "always": true
+    }
+  ]
+}

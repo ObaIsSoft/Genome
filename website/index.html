@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genome MCP — Deterministic Design DNA & Zero AI Slop</title>
+  <meta name="description" content="A Model Context Protocol (MCP) server that sequences unique, mathematically constrained design systems from a 4-layer SHA-256 hash chain. No templates. No slop. Only math.">
+  
+  <!-- SEO & OpenGraph Meta -->
+  <meta property="og:title" content="Genome MCP — Deterministic Design DNA">
+  <meta property="og:description" content="Generate unique, reproducible design systems and component tokens from latent-space mathematics.">
+  <meta property="og:type" content="website">
+  
+  <!-- Custom CSS Imports -->
+  <link rel="stylesheet" href="genome-tokens.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-obsidian">
+  
+  <!-- Glowing Ambient Grids -->
+  <div class="ambient-glow bg-primary"></div>
+  <div class="ambient-glow bg-secondary"></div>
+  <div class="grid-overlay-lines"></div>
+
+  <!-- Header Nav -->
+  <header id="main-header" class="glass-header">
+    <div class="header-container">
+      <a href="#" class="logo-link" id="logo-brand">
+        <span class="logo-icon">🧬</span>
+        <span class="logo-text">GENOME<span class="logo-badge">MCP</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Main Navigation">
+        <a href="#philosophy" class="nav-item active" id="nav-link-philosophy">Philosophy</a>
+        <a href="#docs" class="nav-item" id="nav-link-docs">Docs & Installation</a>
+        <a href="#pipeline" class="nav-item" id="nav-link-pipeline">12-Tool Pipeline</a>
+        <a href="#sandbox" class="nav-item sandbox-highlight" id="nav-link-sandbox">Interactive Sandbox</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://github.com/ObaIsSoft/genome" class="btn btn-github" id="btn-header-github" target="_blank">
+          <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.67-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <button class="btn-hamburger" id="btn-hamburger" aria-label="Open navigation menu" aria-expanded="false">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation">
+    <div class="mobile-nav-drawer-header">
+      <span class="logo-text">🧬 GENOME<span class="logo-badge">MCP</span></span>
+      <button class="btn-close-drawer" id="btn-close-drawer" aria-label="Close navigation menu">&times;</button>
+    </div>
+    <a href="#philosophy" class="mobile-nav-link" id="m-nav-philosophy">🧬 Philosophy</a>
+    <a href="#docs" class="mobile-nav-link" id="m-nav-docs">⚙️ Docs & Installation</a>
+    <a href="#pipeline" class="mobile-nav-link" id="m-nav-pipeline">📐 12-Tool Pipeline</a>
+    <a href="#sandbox" class="mobile-nav-link sandbox-highlight" id="m-nav-sandbox">⚡ Interactive Sandbox</a>
+    <a href="https://github.com/ObaIsSoft/genome" class="btn btn-github" target="_blank" style="margin-top: 16px;">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.67-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="badge-container">
+          <span class="pulse-dot"></span>
+          <span class="badge-text">Deterministic L1-L3 Latent-Space Sequencer</span>
+        </div>
+        <h1 class="hero-title">No Templates. No Slop.<br><span class="gradient-text">Only Pure Math.</span></h1>
+        <p class="hero-subtitle">
+          An MCP server that generates structured, highly unique design systems and parametric component CSS tokens from a four-layer SHA-256 genome chain. Break out of the generic blue-purple gradient prison.
+        </p>
+        <div class="hero-actions">
+          <a href="#docs" class="btn btn-primary" id="btn-hero-start">Quick Start Guide</a>
+          <a href="#sandbox" class="btn btn-secondary" id="btn-hero-sandbox">Launch DNA Sandbox</a>
+        </div>
+        
+        <!-- Hero Stats counter layout (ch19_hero_type: stats_counter) -->
+        <div class="hero-stats-grid">
+          <div class="stat-card">
+            <span class="stat-num" data-val="32">32</span>
+            <span class="stat-label">L1 Chromosomes</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-val="12">12</span>
+            <span class="stat-label">MCP Tools</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-val="100">100%</span>
+            <span class="stat-label">Deterministic Seeds</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" data-val="0">0.0</span>
+            <span class="stat-label">AI Slop Score</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Asymmetric Right Column: Floating DNA hash visualization -->
+      <div class="hero-visual">
+        <div id="dna-card" class="dna-card glass-panel">
+          <div class="card-header-math">
+            <span class="math-coord">LATENT COORD: [ch5: 176° | ch8: spring]</span>
+            <span class="sha256-label">SHA-256</span>
+          </div>
+          <div class="dna-visualizer-container">
+            <svg class="dna-svg" viewBox="0 0 100 240" fill="none">
+              <!-- Animated strands will be managed via CSS and JS -->
+              <path class="dna-strand strand-a" d="M20,10 Q50,40 80,10 T20,70 T80,130 T20,190 T80,240" stroke="url(#cyan-gradient)" stroke-width="2" />
+              <path class="dna-strand strand-b" d="M80,10 Q50,40 20,10 T80,70 T20,130 T80,190 T20,240" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="4 4" />
+              <g class="dna-bonds" id="dna-bond-nodes">
+                <!-- Bond connectors dynamically loaded -->
+              </g>
+              <defs>
+                <linearGradient id="cyan-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1be4eb" />
+                  <stop offset="100%" stop-color="#0e9ba4" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="dna-node-info">
+              <div class="info-block" id="block-seed">
+                <span class="block-title">SEED</span>
+                <span class="block-val">genome-website-official-2026</span>
+              </div>
+              <div class="info-block" id="block-l0">
+                <span class="block-title">L0 Creator</span>
+                <span class="block-val">Cybernetic Typographer</span>
+              </div>
+              <div class="info-block" id="block-l1">
+                <span class="block-title">L1 Design</span>
+                <span class="block-val">Obsidian Surface + Spring Easing</span>
+              </div>
+              <div class="info-block" id="block-l2">
+                <span class="block-title">L2 Ecosystem</span>
+                <span class="block-val">Stratified Rainforest Biome</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer-hash">
+            <span class="hash-text" id="hash-string">7b31e9c20a4b8df283ef9955fa24b5dca65839070a2569ef81bc7e1a3bc8fde6</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Split Screen Content Layout (Grid Asymmetric) -->
+  <section id="docs" class="docs-section">
+    <div class="container grid-container">
+      
+      <!-- Left Column: Dense Sidebar Sticky Navigation -->
+      <aside class="doc-sidebar" id="doc-sidebar-menu">
+        <div class="sidebar-header">
+          <span class="sidebar-title">NAVIGATION</span>
+        </div>
+        <nav class="sidebar-links" aria-label="Documentation Categories">
+          <button class="sidebar-btn active" data-target="tab-philosophy" id="sidebar-btn-philosophy">🧬 The Philosophy</button>
+          <button class="sidebar-btn" data-target="tab-installation" id="sidebar-btn-install">⚙️ Quick Installation</button>
+          <button class="sidebar-btn" data-target="tab-ide-config" id="sidebar-btn-ide">💻 IDE Integrations</button>
+          <button class="sidebar-btn" data-target="tab-pipeline" id="sidebar-btn-workflow">📐 12-Tool Pipeline</button>
+          <button class="sidebar-btn" data-target="tab-reference" id="sidebar-btn-ref">📖 Tool Reference</button>
+          <button class="sidebar-btn" data-target="tab-when-to-use" id="sidebar-btn-whentouse">❓ When to Use</button>
+        </nav>
+        <div class="sidebar-footer-stat">
+          <div class="stat-mini">
+            <span class="sm-label">Aesthetic Constraint Gravity</span>
+            <span class="sm-value">75% Coherence / 25% Diversity</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Column: Rich Interactive Documentation Content -->
+      <main class="doc-content" id="doc-main-content">
+        
+        <!-- Philosophy Tab -->
+        <article id="tab-philosophy" class="tab-pane active">
+          <div class="pane-header">
+            <h2>The Problem with LLM Designs</h2>
+            <span class="subtitle-badge">Layer 1 Concept</span>
+          </div>
+          <p class="paragraph">
+            Every AI-generated website looks identical: an Inter font family paired with generic blue-purple gradients, generic <code>rounded-xl</code> card classes arranged in a boring 3-column grid, and a parallax scroll that makes you dizzy. 
+          </p>
+          <p class="paragraph">
+            This isn't a design choice — it's a <strong>failure of constraints</strong>. Large Language Models (LLMs) default to "safe" average patterns because they lack structured guardrails forcing aesthetic consistency and visual courage.
+          </p>
+
+          <h3 class="section-title">The Genome Solution</h3>
+          <p class="paragraph">
+            Genome introduces a **Four-Layer SHA-256 Hash Chain** that deterministically guides both AI coding agents and human designers:
+          </p>
+          
+          <div class="four-layer-box-grid">
+            <div class="layer-item">
+              <div class="layer-num">L0</div>
+              <div class="layer-info">
+                <h4>CreatorGenome</h4>
+                <p>16-chromosome latent DNA encoding a simulated designer persona (cultural vector, chaos tolerance, temporal era, authorial voice).</p>
+              </div>
+            </div>
+            <div class="layer-item">
+              <div class="layer-num">L0.8</div>
+              <div class="layer-info">
+                <h4>ComponentTokenMap</h4>
+                <p>Derived CSS tokens for custom elements. Computes multi-shadow stacks, exact curve coordinates, stroke widths entirely from math.</p>
+              </div>
+            </div>
+            <div class="layer-item">
+              <div class="layer-num">L1</div>
+              <div class="layer-info">
+                <h4>DesignGenome</h4>
+                <p>32 chromosomes defining global design logic: edge styles, color system boundaries, typography, motion curves, grids, and header strategy.</p>
+              </div>
+            </div>
+            <div class="layer-item">
+              <div class="layer-num">L2-L3</div>
+              <div class="layer-info">
+                <h4>Ecosystem & Civilization</h4>
+                <p>Architectural layout guidelines (microbial/flora/fauna composition contracts) and software architecture patterns (state management, routing).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert-box alert-note">
+            <span class="alert-icon">💡</span>
+            <div class="alert-content">
+              <strong>Determinism Guarantee:</strong> The entire downstream genome chain is fully deterministic. Given the same seed and design intent, it will produce the exact same hashes, tokens, and CSS properties forever.
+            </div>
+          </div>
+        </article>
+
+        <!-- Installation Tab -->
+        <article id="tab-installation" class="tab-pane">
+          <div class="pane-header">
+            <h2>Quick Installation</h2>
+            <span class="subtitle-badge">Terminal CLI</span>
+          </div>
+          <p class="paragraph">
+            The Genome MCP engine can be installed globally via npm or cloned and built directly from the source repository.
+          </p>
+
+          <h3 class="section-title">1. Standard Global Install</h3>
+          <div class="terminal-box" id="term-global-install">
+            <div class="term-header">
+              <span class="term-dot dot-red"></span>
+              <span class="term-dot dot-yellow"></span>
+              <span class="term-dot dot-green"></span>
+              <span class="term-title">zsh — global install</span>
+              <button class="btn-copy" data-copy="npm install -g genome-mcp" id="btn-copy-install-1">Copy</button>
+            </div>
+            <pre class="term-body"><code>npm install -g genome-mcp</code></pre>
+          </div>
+
+          <h3 class="section-title">2. Clone and Build from Source</h3>
+          <p class="paragraph">
+            If you want to contribute, test offline scripts, or run local benchmarks, clone the repository and build:
+          </p>
+          <div class="terminal-box" id="term-source-install">
+            <div class="term-header">
+              <span class="term-dot dot-red"></span>
+              <span class="term-dot dot-yellow"></span>
+              <span class="term-dot dot-green"></span>
+              <span class="term-title">zsh — build local</span>
+              <button class="btn-copy" data-copy="git clone https://github.com/ObaIsSoft/genome.git&#10;cd genome&#10;npm install&#10;npm run build" id="btn-copy-install-2">Copy</button>
+            </div>
+            <pre class="term-body"><code>git clone https://github.com/ObaIsSoft/genome.git
+cd genome
+npm install
+npm run build</code></pre>
+          </div>
+
+          <h3 class="section-title">3. Configure Environment Keys</h3>
+          <p class="paragraph">
+            Configure **any one** of the supported API providers inside a <code>.env</code> file in your project or exports. The engine auto-detects whichever is active:
+          </p>
+          
+          <div class="mcp-table-wrap">
+            <table class="mcp-table">
+              <thead>
+                <tr>
+                  <th>Provider</th>
+                  <th>Environment Variable</th>
+                  <th>Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Groq</strong> (Llama-3.3-70b)</td>
+                  <td><code>GROQ_API_KEY</code></td>
+                  <td>1 (Default, ultra-fast)</td>
+                </tr>
+                <tr>
+                  <td><strong>OpenAI</strong> (GPT-4o)</td>
+                  <td><code>OPENAI_API_KEY</code></td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td><strong>Anthropic</strong> (Claude-3.7-Sonnet)</td>
+                  <td><code>ANTHROPIC_API_KEY</code></td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td><strong>Google Gemini</strong> (2.0 Flash/Pro)</td>
+                  <td><code>GEMINI_API_KEY</code></td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td><strong>OpenRouter</strong></td>
+                  <td><code>OPENROUTER_API_KEY</code></td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td><strong>HuggingFace</strong></td>
+                  <td><code>HUGGINGFACE_API_KEY</code></td>
+                  <td>6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- IDE Configurations Tab -->
+        <article id="tab-ide-config" class="tab-pane">
+          <div class="pane-header">
+            <h2>IDE Integration & mcp.json Configuration</h2>
+            <span class="subtitle-badge">Setup Configuration</span>
+          </div>
+          <p class="paragraph">
+            To enable coding assistants (like Cursor, Claude Code, Windsurf, or Claude Desktop) to invoke the 12 design tools automatically, add the server setup config block.
+          </p>
+
+          <h3 class="section-title">Cursor Configuration</h3>
+          <p class="paragraph">
+            Create a file at <code>.cursor/mcp.json</code> in your project root to activate the server locally:
+          </p>
+          <div class="terminal-box" id="term-cursor-config">
+            <div class="term-header">
+              <span class="term-dot dot-red"></span>
+              <span class="term-dot dot-yellow"></span>
+              <span class="term-dot dot-green"></span>
+              <span class="term-title">mcp.json</span>
+              <button class="btn-copy" data-copy='{&#10;  "mcpServers": {&#10;    "genome": {&#10;      "command": "node",&#10;      "args": ["/absolute/path/to/genome/dist/src/server.js"],&#10;      "env": {&#10;        "GROQ_API_KEY": "gsk_your_key_here"&#10;      }&#10;    }&#10;  }&#10;}' id="btn-copy-config-1">Copy</button>
+            </div>
+            <pre class="term-body"><code>{
+  "mcpServers": {
+    "genome": {
+      "command": "node",
+      "args": ["/absolute/path/to/genome/dist/src/server.js"],
+      "env": {
+        "GROQ_API_KEY": "gsk_your_key_here"
+      }
+    }
+  }
+}</code></pre>
+          </div>
+
+          <h3 class="section-title">Claude Desktop Configuration</h3>
+          <p class="paragraph">
+            Edit your global <code>claude_desktop_config.json</code> under:
+            <br>
+            <code>~/Library/Application Support/Claude/claude_desktop_config.json</code> (MacOS)
+          </p>
+          <div class="terminal-box" id="term-claude-config">
+            <div class="term-header">
+              <span class="term-dot dot-red"></span>
+              <span class="term-dot dot-yellow"></span>
+              <span class="term-dot dot-green"></span>
+              <span class="term-title">claude_desktop_config.json</span>
+              <button class="btn-copy" data-copy='{&#10;  "mcpServers": {&#10;    "genome": {&#10;      "command": "node",&#10;      "args": ["/absolute/path/to/genome/dist/src/server.js"],&#10;      "env": {&#10;        "GEMINI_API_KEY": "AIzaSy_your_key"&#10;      }&#10;    }&#10;  }&#10;}' id="btn-copy-config-2">Copy</button>
+            </div>
+            <pre class="term-body"><code>{
+  "mcpServers": {
+    "genome": {
+      "command": "node",
+      "args": ["/absolute/path/to/genome/dist/src/server.js"],
+      "env": {
+        "GEMINI_API_KEY": "AIzaSy_your_key"
+      }
+    }
+  }
+}</code></pre>
+          </div>
+        </article>
+
+        <!-- 12-Tool Pipeline Tab -->
+        <article id="tab-pipeline" class="tab-pane">
+          <div class="pane-header">
+            <h2>The 12-Tool Workflow Pipelines</h2>
+            <span class="subtitle-badge">Workflow Pipelines</span>
+          </div>
+          <p class="paragraph">
+            The Genome MCP engine enforces a highly structured, checkpoint-guarded build pipeline to prevent "design drift".
+          </p>
+
+          <!-- Graph representation of standard vs creator flow -->
+          <div class="workflow-visualizer-box">
+            <div class="flow-switch">
+              <button class="btn-flow active" id="flow-btn-std" onclick="switchFlow('std')">Standard Flow</button>
+              <button class="btn-flow" id="flow-btn-creator" onclick="switchFlow('creator')">Simulated Creator Flow</button>
+            </div>
+            
+            <!-- Standard Flow Diagram -->
+            <div class="flow-diagram active" id="diag-flow-std">
+              <div class="diagram-step">
+                <span class="step-num">STEP 1</span>
+                <div class="step-card">
+                  <h5>generate_design_genome</h5>
+                  <p>Sequences L1 chromosomes from natural language intent.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">STEP 2</span>
+                <div class="step-card">
+                  <h5>generate_component_tokens</h5>
+                  <p>Extracts exact CSS custom properties and math tokens for elements.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">STEP 3</span>
+                <div class="step-card">
+                  <h5>generate_design_brief</h5>
+                  <p>Produces a <code>DESIGN_SYSTEM.md</code> constitution document.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">STEP 4</span>
+                <div class="step-card">
+                  <h5>generate_ecosystem</h5>
+                  <p>Specifies microbial/flora/fauna component hierarchy contract.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">SHIPPING</span>
+                <div class="step-card gate-card">
+                  <h5>validate_design</h5>
+                  <p>Scans implemented code, scoring anti-slop, drift, and utilization rates.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Creator Flow Diagram -->
+            <div class="flow-diagram" id="diag-flow-creator">
+              <div class="diagram-step">
+                <span class="step-num">STEP 1</span>
+                <div class="step-card">
+                  <h5>generate_creator_genome</h5>
+                  <p>Sequences 16-chromosome latent DNA representing a designer persona.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">STEP 2</span>
+                <div class="step-card">
+                  <h5>generate_persona</h5>
+                  <p>LLM translates Creator DNA into a rich artistic biography and aesthetic voice.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">STEP 3</span>
+                <div class="step-card">
+                  <h5>generate_design_through_persona</h5>
+                  <p>The simulated designer persona interprets your project intent directly.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">STEP 4</span>
+                <div class="step-card">
+                  <h5>generate_component_tokens</h5>
+                  <p>Derives custom component variables influenced by the persona's bias.</p>
+                </div>
+              </div>
+              <div class="diagram-arrow">⇩</div>
+              <div class="diagram-step">
+                <span class="step-num">SHIPPING</span>
+                <div class="step-card gate-card">
+                  <h5>validate_design</h5>
+                  <p>Ensures final compliance before publishing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Reference Tab -->
+        <article id="tab-reference" class="tab-pane">
+          <div class="pane-header">
+            <h2>Detailed Tool Reference</h2>
+            <span class="subtitle-badge">API Reference</span>
+          </div>
+          
+          <h3 class="section-title"><code>generate_design_genome</code></h3>
+          <p class="paragraph">
+            Sequences the 32 L1 chromosomes representing structural spacing,Display typeface, Body typeface, Color Primary (hue/hex/dark mode), Surface Temperature stack, edges, and motion.
+          </p>
+          <div class="param-box">
+            <strong>Key Arguments:</strong>
+            <ul>
+              <li><code>intent</code> (string, required): Natural language description of product features and visual goal.</li>
+              <li><code>seed</code> (string, required): Determines hashing seed.</li>
+              <li><code>font_provider</code> (string, optional): One of <code>"google"</code>, <code>"bunny"</code>, <code>"fontshare"</code>, or <code>"none"</code>.</li>
+            </ul>
+          </div>
+
+          <h3 class="section-title"><code>generate_component_tokens</code></h3>
+          <p class="paragraph">
+            Outputs exact, continuous CSS tokens derived for individual component names and descriptions based on latent-space coordinate calculations.
+          </p>
+          <div class="param-box">
+            <strong>Key Arguments:</strong>
+            <ul>
+              <li><code>genome</code> (object, required): The complete L1 Design Genome.</li>
+              <li><code>component_specs</code> (array of objects, optional): Specific element descriptions (e.g. <code>{"name": "nav-sidebar", "description": "dense panel"}</code>).</li>
+            </ul>
+          </div>
+
+          <h3 class="section-title"><code>validate_design</code></h3>
+          <p class="paragraph">
+            Evaluates your code against active genome constraints. Calculates a <strong>slop score</strong> (aiming for 0.0) based on detected slop patterns and verifies chromosome utilization.
+          </p>
+          <div class="param-box">
+            <strong>Key Arguments:</strong>
+            <ul>
+              <li><code>genome</code> (object, required): The core design genome structure.</li>
+              <li><code>css</code> (string, required): Raw implemented style strings.</li>
+              <li><code>html</code> (string, optional): Raw markup.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- When to Use Tab -->
+        <article id="tab-when-to-use" class="tab-pane">
+          <div class="pane-header">
+            <h2>When to Use Genome MCP</h2>
+            <span class="subtitle-badge">Usage Guideline</span>
+          </div>
+          
+          <div class="usecase-grid">
+            <div class="usecase-card">
+              <h5>✅ Ideal For</h5>
+              <ul>
+                <li><strong>Greenfield Projects:</strong> Creating new web applications, tools, and dashboards completely from scratch without default bootstrap slop.</li>
+                <li><strong>High Aesthetic Integrity:</strong> Portals, developer documentation, artistic showcases, or interfaces needing unique identity.</li>
+                <li><strong>AI Agent Orchestration:</strong> Guarding AI coding assistants from writing generic, repetitive layouts.</li>
+              </ul>
+            </div>
+            
+            <div class="usecase-card">
+              <h5>❌ Not Suited For</h5>
+              <ul>
+                <li><strong>Legacy Systems:</strong> Adding components into heavily pre-styled Bootstrap or corporate legacy stylesheets.</li>
+                <li><strong>Fixed Brand Strictness:</strong> Projects where a strict brand book already mandates exact colors, margins, and typographies down to the pixel.</li>
+                <li><strong>Zero-JS Static:</strong> Sites unable to handle CSS custom properties (IE11/legacy environments).</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- Interactive Genome Sandbox Section (Extremely Rich Interaction) -->
+  <section id="sandbox" class="sandbox-section">
+    <div class="container">
+      <div class="section-header-center">
+        <h2 class="sandbox-sec-title"><span class="glow-symbol">⚡</span> Genome DNA Sandbox</h2>
+        <p class="sandbox-sec-subtitle">Simulate real-time genome sequencing and token derivation. Choose a design profile preset to see deterministic L1-L3 genome outcomes.</p>
+      </div>
+
+      <div class="sandbox-grid">
+        <!-- Sidebar controls -->
+        <div class="sandbox-controls glass-panel">
+          <h3>Sequence Controls</h3>
+          
+          <div class="form-group">
+            <label for="sb-preset">Aesthetic Preset</label>
+            <select id="sb-preset" class="form-control" onchange="loadPreset()">
+              <option value="cyber-obsidian">Cyber Obsidian (Technology)</option>
+              <option value="y2k-football">Japanese Y2K Stats (Gaming)</option>
+              <option value="biotech-forest">Bio-Synthetic Green (Healthcare)</option>
+              <option value="editorial-neon">Retro Editorial (Publishing)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sb-intent">Design Intent</label>
+            <textarea id="sb-intent" class="form-control" rows="3">A hyper-modern developer landing page and documentation portal for the mathematical design system engine named Genome MCP. Dark-mode, cybernetic grid lines.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="sb-seed">Deterministic Seed</label>
+            <input type="text" id="sb-seed" class="form-control" value="genome-website-official-2026">
+          </div>
+
+          <button class="btn btn-primary btn-block" id="btn-simulate-sequence">🧬 Run Sequencer Simulation</button>
+        </div>
+
+        <!-- Real-time outputs -->
+        <div class="sandbox-outputs glass-panel">
+          <div class="outputs-header">
+            <button class="output-tab active" data-tab="tab-out-report" id="out-btn-report">Genome Report</button>
+            <button class="output-tab" data-tab="tab-out-chromosomes" id="out-btn-chrom">Chromosomes</button>
+            <button class="output-tab" data-tab="tab-out-tokens" id="out-btn-css">CSS Tokens</button>
+          </div>
+
+          <div class="outputs-body">
+            <!-- Output: Genome Report -->
+            <div id="tab-out-report" class="out-pane active">
+              <div class="report-header">
+                <h4>GENOME DECODING BRIEF REPORT</h4>
+                <div class="report-meta">
+                  <span>HASH: <strong id="out-hash">7b31e9c20a4b8df283ef9955fa24b5dca65839070a2569ef81bc7e1a3bc8fde6</strong></span>
+                  <span>SECTOR: <strong id="out-sector">technology</strong></span>
+                </div>
+              </div>
+              <div class="report-content" id="report-prose-body">
+                <p><strong>Design Thesis:</strong> The design system sequences into a <strong>Cold Obsidian</strong> visual state. The primary interaction vector uses a narrow-focused glowing cyan core at <code>176° hue</code>. To enforce pure mathematical boundaries, spacing units are strictly derived in factors of 8px (base spacing logic).</p>
+                
+                <h5>Aesthetic Mandates</h5>
+                <ul class="bullet-list-custom">
+                  <li>Use Cabinet Grotesk for Display Headings only; map size scales strictly.</li>
+                  <li>Incorporate 1px border frames with 8px radius corners to express semi-sharp tech logic.</li>
+                  <li>Animations MUST utilize spring physics cubic-bezier transition easing.</li>
+                </ul>
+
+                <h5>Forbidden Slop Patterns</h5>
+                <ul class="bullet-list-custom slop-list">
+                  <li>NO full-bleed raster hero backgrounds (violates <code>large_hero_images</code>).</li>
+                  <li>NO standard rounded-xl or rounded-2xl Tailwind classes on content cards.</li>
+                  <li>NO generic blue-to-purple diagonal background gradients.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Output: Chromosomes -->
+            <div id="tab-out-chromosomes" class="out-pane">
+              <div class="chromosome-list-grid" id="chrom-nodes-grid">
+                <!-- Loaded dynamically by Javascript -->
+              </div>
+            </div>
+
+            <!-- Output: CSS Variables -->
+            <div id="tab-out-tokens" class="out-pane">
+              <div class="css-snippet-box">
+                <div class="snippet-header">
+                  <span>genome-design.css (Live Generated Variables)</span>
+                  <button class="btn-copy-mini" data-copy-target="live-css-code" id="btn-copy-live-css">Copy Code</button>
+                </div>
+                <pre class="snippet-body"><code id="live-css-code">/* Loaded dynamically */</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">🧬 GENOME MCP</span>
+        <p class="footer-desc">Model Context Protocol Parametric Design Engine. Sequenced entirely from latent continuous coordinates.</p>
+      </div>
+      <div class="footer-meta">
+        <span>© 2026 Genome Developer Community</span>
+        <span>Licensed under MIT</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App logic scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

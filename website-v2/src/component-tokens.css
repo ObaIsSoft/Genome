@@ -1,0 +1,31 @@
+/* Genome Component Tokens — generated, do not edit */
+:root {
+  --genome-easing: cubic-bezier(0.303, 1.542, 0.752, 1);
+  --genome-duration-base: 347ms;
+  --genome-duration-fast: 156ms;
+  --genome-duration-slow: 486ms;
+  --genome-radius-base: 4px;
+  --genome-radius-variance: 0.191;
+  --genome-shadow-softness: 0.367;
+  --genome-shadow-scale: 0.09843750000000001;
+  --genome-backdrop-blur: 37px;
+  --genome-backdrop-saturate: 147%;
+  --genome-backdrop-brightness: 1.135;
+  --genome-surface-opacity: 0.777;
+  --genome-surface-grain: 0.484;
+  --genome-hover-distance: 3.1px;
+  --genome-hover-opacity: 0.761;
+  --genome-letter-spacing-base: 0.0558em;
+  --genome-surface-warmth: 0.43;
+  --genome-rhythm-unit: 4px;
+  --genome-padding-scale: 1.259;
+  --genome-gap-scale: 0.959;
+  --genome-gradient-angle: 216deg;
+  --genome-gradient-contrast: 0.231;
+  --genome-stroke-width: 0px;
+  --genome-corner-smoothing: 0.463;
+  --genome-separator: "·";
+  --genome-hover-indicator: "•";
+  --genome-mix-blend-mode: soft-light;
+  --genome-text-stroke-width: 0px;
+}

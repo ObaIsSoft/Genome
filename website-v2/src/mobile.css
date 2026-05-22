@@ -1,0 +1,148 @@
+/* ────────────────────────────────────────────────────────────────
+   mobile.css  — Global responsive overrides
+   Breakpoints:
+     sm  ≤ 480px   (small phones)
+     md  ≤ 768px   (phones / large phones)
+     lg  ≤ 1024px  (tablets / small laptops)
+──────────────────────────────────────────────────────────────── */
+
+/* ── Hero section ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Reduce padding so content isn't buried under the navbar */
+  .hero-section,
+  section[style*="minHeight: '90vh'"],
+  section[style*="min-height: 90vh"] {
+    padding-top: 6rem !important;
+    padding-bottom: 4rem !important;
+    min-height: auto !important;
+  }
+
+  /* Hero buttons: stack full-width */
+  .hero-buttons-row {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .hero-buttons-row a,
+  .hero-buttons-row button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── Feature grid ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .feature-grid-section {
+    padding: 3rem 1rem !important;
+  }
+}
+
+/* ── HowItWorks code block ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .how-it-works-terminal {
+    font-size: 0.78rem !important;
+  }
+  .how-it-works-terminal pre {
+    font-size: 0.78rem !important;
+  }
+}
+
+/* ── Use Cases image height ────────────────────────────────── */
+@media (max-width: 768px) {
+  .usecase-img-wrap {
+    height: 220px !important;
+  }
+}
+
+/* ── Docs page ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .docs-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid color-mix(in oklch, var(--color-text) 10%, transparent);
+    border-radius: var(--radius-md);
+  }
+  .docs-table-wrapper table {
+    min-width: 480px;
+  }
+
+  /* Code blocks inside docs */
+  .docs-code-block {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .docs-code-block pre {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ── Footer ────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 640px) {
+  .footer-container {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* ── Pricing page ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .pricing-card {
+    padding: 2rem 1.25rem !important;
+  }
+  .pricing-buttons-row {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .pricing-buttons-row a,
+  .pricing-buttons-row button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── Trust Signals ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .trust-stats-row {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}
+
+/* ── Section padding reduction for mobile ──────────────────── */
+@media (max-width: 768px) {
+  /* Reduce all large paddings globally */
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* ── Typography scaling ────────────────────────────────────── */
+@media (max-width: 480px) {
+  h1 { font-size: clamp(2rem, 10vw, 3rem) !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.25rem) !important; }
+  h3 { font-size: clamp(1.125rem, 5vw, 1.5rem) !important; }
+  p  { font-size: 1rem !important; }
+}
+
+/* ── Code snippets global overflow ────────────────────────── */
+pre, code {
+  white-space: pre;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── 3D canvas — disable pointer events on very small screens */
+@media (max-width: 480px) {
+  canvas {
+    opacity: 0.4;
+  }
+}

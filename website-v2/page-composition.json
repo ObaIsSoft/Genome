@@ -1,0 +1,1029 @@
+{
+  "type": "composition_spec",
+  "layout": {
+    "type": "profile_page",
+    "pattern": {
+      "id": "layout_docs",
+      "name": "Documentation Layout",
+      "category": "layout",
+      "subcategory": "docs",
+      "description": "TOC sidebar with scrollable content",
+      "complexity": 0.4,
+      "contexts": [
+        "documentation",
+        "api_docs",
+        "knowledge_base",
+        "wiki",
+        "saas"
+      ],
+      "forbiddenContexts": [
+        "ecommerce",
+        "landing",
+        "portfolio"
+      ],
+      "forbiddenFor": {},
+      "tags": [
+        "docs",
+        "toc",
+        "sidebar"
+      ],
+      "popularity": 0.7,
+      "lastModified": "2024-01-01",
+      "adaptiveProps": [],
+      "composition": {
+        "canContain": [
+          "content",
+          "navigation"
+        ],
+        "canBeContainedBy": [],
+        "maxChildren": 2
+      },
+      "blueprint": {
+        "type": "html",
+        "template": "<div class=\"docs-layout\"><aside class=\"docs-toc\">{{toc}}</aside><main class=\"docs-content\">{{children}}</main></div>",
+        "styles": ".docs-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; } .docs-toc { position: sticky; top: 0; overflow-y: auto; }",
+        "dependencies": []
+      },
+      "source": "mobbin"
+    },
+    "grid": {
+      "logic": "broken",
+      "columns": 4,
+      "gap": 31,
+      "asymmetry": 0.61953125
+    },
+    "flow": "top_down",
+    "responsive": "stack",
+    "density": "content_dense"
+  },
+  "navigation": {
+    "type": "bottom_tab",
+    "pattern": {
+      "id": "nav_sidebar_persistent",
+      "name": "Persistent Sidebar Nav",
+      "category": "navigation",
+      "subcategory": "sidebar",
+      "description": "Fixed left sidebar navigation",
+      "complexity": 0.4,
+      "contexts": [
+        "dashboard",
+        "documentation",
+        "application",
+        "admin",
+        "saas",
+        "enterprise",
+        "settings",
+        "file_manager",
+        "email",
+        "chat",
+        "kanban",
+        "calendar",
+        "analytics",
+        "monitoring",
+        "user_dashboard",
+        "account_settings"
+      ],
+      "forbiddenContexts": [
+        "landing",
+        "blog",
+        "portfolio",
+        "ecommerce"
+      ],
+      "forbiddenFor": {},
+      "tags": [
+        "sidebar",
+        "persistent",
+        "fixed"
+      ],
+      "popularity": 0.8,
+      "lastModified": "2024-01-01",
+      "adaptiveProps": [
+        {
+          "name": "width",
+          "type": "layout",
+          "genomeRef": "ch9_grid.columns",
+          "defaultValue": "280px"
+        }
+      ],
+      "composition": {
+        "canContain": [
+          "nav-link",
+          "nav-section",
+          "nav-group"
+        ],
+        "canBeContainedBy": [
+          "layout"
+        ],
+        "maxChildren": 20
+      },
+      "blueprint": {
+        "type": "html",
+        "template": "<nav class=\"nav nav-sidebar-persistent\" role=\"navigation\" aria-label=\"Sidebar navigation\">\n  <div class=\"nav-sidebar-header\">\n    <a href=\"/\" class=\"nav-logo\">{{logo}}</a>\n  </div>\n  <div class=\"nav-sidebar-links\">{{links}}</div>\n  <div class=\"nav-sidebar-footer\">{{footer}}</div>\n</nav>",
+        "styles": ".nav-sidebar-persistent { position: fixed; left: 0; top: 0; bottom: 0; width: var(--width, 280px); background: var(--color-surface); border-right: 1px solid var(--color-border); overflow-y: auto; z-index: 50; }\n.nav-sidebar-header { padding: 1.5rem; border-bottom: 1px solid var(--color-border); }\n.nav-sidebar-links { padding: 1rem 0; }\n.nav-sidebar-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--color-border); }",
+        "dependencies": []
+      },
+      "source": "hyperui"
+    },
+    "style": "sidebar",
+    "items": [
+      {
+        "label": "Features",
+        "href": "/features"
+      },
+      {
+        "label": "Pricing",
+        "href": "/pricing"
+      },
+      {
+        "label": "About",
+        "href": "/about"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "behavior": {
+      "sticky": "true",
+      "backdrop": "var(--nav-backdrop, none)",
+      "animation": "var(--nav-animation, none)"
+    }
+  },
+  "hero": {
+    "type": "product_ui",
+    "pattern": {
+      "id": "hero_carousel",
+      "name": "Carousel Hero",
+      "category": "hero",
+      "subcategory": "carousel",
+      "description": "Rotating hero with multiple slides and auto-advance",
+      "complexity": 0.6,
+      "contexts": [
+        "landing",
+        "ecommerce",
+        "agency",
+        "creative",
+        "portfolio",
+        "product"
+      ],
+      "forbiddenContexts": [
+        "dashboard",
+        "documentation"
+      ],
+      "forbiddenFor": {},
+      "tags": [
+        "carousel",
+        "rotating",
+        "slides"
+      ],
+      "popularity": 0.4,
+      "lastModified": "2024-01-01",
+      "adaptiveProps": [],
+      "composition": {
+        "canContain": [
+          "heading",
+          "paragraph",
+          "button-group",
+          "image"
+        ],
+        "canBeContainedBy": [
+          "layout"
+        ],
+        "maxChildren": 15
+      },
+      "blueprint": {
+        "type": "html",
+        "template": "<section class=\"hero hero-carousel\" aria-label=\"Hero\">\n  <div class=\"carousel-container\">\n    <div class=\"carousel-slides\">{{slides}}</div>\n    <button class=\"carousel-prev\" aria-label=\"Previous slide\">&lsaquo;</button>\n    <button class=\"carousel-next\" aria-label=\"Next slide\">&rsaquo;</button>\n    <div class=\"carousel-dots\">{{dots}}</div>\n  </div>\n</section>",
+        "styles": ".hero-carousel { position: relative; overflow: hidden; }\n.carousel-container { position: relative; }\n.carousel-slides { display: flex; transition: transform 0.5s ease; }\n.carousel-prev, .carousel-next { position: absolute; top: 50%; transform: translateY(-50%); background: var(--color-overlay); color: var(--color-on-primary); border: none; padding: 1rem; cursor: pointer; font-size: 1.5rem; }\n.carousel-prev { left: 1rem; } .carousel-next { right: 1rem; }\n.carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }",
+        "dependencies": []
+      },
+      "source": "navnav"
+    },
+    "layout": "centered",
+    "height": "compact",
+    "background": "#b02440",
+    "animation": {
+      "type": "none",
+      "entrySequence": "cascade_up",
+      "staggerInterval": 35
+    },
+    "content": {
+      "headline": "Genome: Mathematical Design DNA",
+      "subheadline": "Generate unique, deterministic design systems from SHA-256 hashes and content intent",
+      "cta": "Explore Genome",
+      "ctaSecondary": "Learn More"
+    }
+  },
+  "sections": [
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Team Members Section",
+        "source": "tailwind_ui",
+        "description": "Team member cards with photos, names, and roles"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        }
+      },
+      "childrenCount": 37
+    },
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Gallery/Media Grid Section",
+        "source": "lapa_ninja",
+        "description": "Image gallery grid with lightbox support"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        }
+      },
+      "childrenCount": 37
+    },
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Newsletter Signup Section",
+        "source": "preline",
+        "description": "Email signup form with headline and description"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        }
+      },
+      "childrenCount": 37
+    },
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Process/Steps Section",
+        "source": "magic_ui",
+        "description": "Step-by-step process visualization with numbered steps"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        }
+      },
+      "childrenCount": 37
+    },
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Comparison Table Section",
+        "source": "relume",
+        "description": "Side-by-side comparison with feature rows"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        }
+      },
+      "childrenCount": 37
+    },
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Feature Grid Section",
+        "source": "one_page_love",
+        "description": "Grid of feature cards with icons, titles, and descriptions"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        },
+        "columns": "3"
+      },
+      "childrenCount": 37
+    },
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Testimonial Cards Section",
+        "source": "preline",
+        "description": "Grid of testimonial cards with quotes, photos, and attribution"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        }
+      },
+      "childrenCount": 37
+    },
+    {
+      "type": "content",
+      "pattern": {
+        "name": "Pricing Table Section",
+        "source": "magic_ui",
+        "description": "Pricing cards with features list and CTA buttons"
+      },
+      "props": {
+        "colors": {
+          "primary": "#b02440",
+          "secondary": "#cbdd40",
+          "accent": "#4746a2"
+        },
+        "typography": {
+          "display": "Asta Sans, system-ui, -apple-system, sans-serif",
+          "body": "Noto Sans Soyombo, Arial, sans-serif"
+        },
+        "edge": {
+          "radius": 6,
+          "style": "organic"
+        },
+        "motion": {
+          "physics": "none",
+          "duration": 1.7328125
+        },
+        "rhythm": {
+          "spacing": 12,
+          "sectionGap": 48
+        }
+      },
+      "childrenCount": 37
+    }
+  ],
+  "footer": {
+    "type": "full",
+    "pattern": {
+      "id": "footer_multi_column",
+      "name": "Multi-Column Footer",
+      "category": "footer",
+      "subcategory": "multi-column",
+      "description": "Standard multi-column footer with links, social, and newsletter",
+      "complexity": 0.4,
+      "contexts": [
+        "landing",
+        "saas",
+        "ecommerce",
+        "agency",
+        "blog",
+        "portfolio",
+        "creative",
+        "startup",
+        "product",
+        "company",
+        "service",
+        "consulting",
+        "freelance",
+        "media",
+        "documentation",
+        "knowledge_base",
+        "help_center",
+        "wiki",
+        "api_docs",
+        "education",
+        "healthcare",
+        "fintech",
+        "real_estate",
+        "travel",
+        "food",
+        "sports",
+        "gaming",
+        "crypto_web3",
+        "government",
+        "legal",
+        "manufacturing",
+        "automotive",
+        "hospitality",
+        "beauty_fashion",
+        "insurance",
+        "energy",
+        "marketplace",
+        "social_network",
+        "community",
+        "news",
+        "magazine",
+        "podcast",
+        "event",
+        "conference",
+        "webinar",
+        "course",
+        "membership",
+        "subscription",
+        "booking",
+        "reservation",
+        "appointment",
+        "directory",
+        "review",
+        "comparison",
+        "forum",
+        "qa",
+        "chat",
+        "messaging",
+        "email",
+        "crm",
+        "erp",
+        "hr",
+        "finance",
+        "accounting",
+        "inventory",
+        "project_management",
+        "task_management",
+        "time_tracking",
+        "analytics",
+        "monitoring",
+        "reporting",
+        "admin",
+        "settings",
+        "profile",
+        "account",
+        "auth",
+        "onboarding",
+        "checkout",
+        "payment",
+        "subscription_management",
+        "billing",
+        "invoice",
+        "receipt",
+        "order",
+        "shipping",
+        "tracking",
+        "return",
+        "refund",
+        "support",
+        "help",
+        "faq_page",
+        "contact_page",
+        "about",
+        "team",
+        "careers",
+        "press",
+        "legal_page",
+        "privacy",
+        "terms_page",
+        "cookie_policy",
+        "accessibility_page",
+        "sitemap",
+        "search_page",
+        "404",
+        "500",
+        "maintenance_page",
+        "coming_soon_page",
+        "launch",
+        "waitlist",
+        "beta",
+        "early_access",
+        "feature",
+        "pricing_page",
+        "demo",
+        "trial",
+        "download_page",
+        "install",
+        "setup",
+        "integration",
+        "sdk",
+        "changelog_page",
+        "roadmap_page",
+        "status_page",
+        "incident",
+        "outage",
+        "upgrade_page",
+        "migration_page",
+        "deprecation",
+        "sunsetting",
+        "archive_page",
+        "legacy_page",
+        "historical",
+        "retrospective",
+        "case_study",
+        "testimonial_page",
+        "review_page",
+        "rating",
+        "feedback",
+        "survey",
+        "poll",
+        "quiz",
+        "assessment_page",
+        "test",
+        "exam",
+        "certification_page",
+        "badge",
+        "achievement",
+        "leaderboard_page",
+        "ranking",
+        "competition",
+        "tournament",
+        "challenge",
+        "hackathon",
+        "workshop",
+        "training",
+        "webinar_page",
+        "seminar",
+        "lecture",
+        "classroom",
+        "lab",
+        "research",
+        "study",
+        "experiment",
+        "simulation",
+        "model",
+        "prototype_page",
+        "mockup_page",
+        "design_page",
+        "art",
+        "gallery_page",
+        "exhibition",
+        "museum",
+        "collection",
+        "catalog_page",
+        "library_page",
+        "archive_collection",
+        "repository",
+        "database_page",
+        "data_page",
+        "dataset",
+        "visualization",
+        "chart_page",
+        "graph_page",
+        "map_page",
+        "geospatial",
+        "location_page",
+        "venue",
+        "place",
+        "address",
+        "directions",
+        "route",
+        "journey",
+        "trip",
+        "itinerary_page",
+        "schedule_page",
+        "calendar_page",
+        "agenda_page",
+        "planner",
+        "organizer",
+        "manager_page",
+        "control_panel",
+        "command_center",
+        "operations",
+        "logistics",
+        "supply_chain",
+        "warehouse",
+        "fulfillment",
+        "distribution",
+        "delivery",
+        "transportation",
+        "fleet",
+        "vehicle",
+        "asset",
+        "resource",
+        "equipment",
+        "tool_page",
+        "utility",
+        "service_page",
+        "solution",
+        "platform_page",
+        "ecosystem_page",
+        "network_page",
+        "community_page",
+        "marketplace_page",
+        "exchange",
+        "trading",
+        "commerce_page",
+        "retail",
+        "wholesale",
+        "b2b",
+        "b2c",
+        "c2c",
+        "d2c",
+        "enterprise",
+        "smb",
+        "scaleup",
+        "growth",
+        "expansion",
+        "international",
+        "global_page",
+        "local",
+        "regional",
+        "national",
+        "continental",
+        "worldwide",
+        "universal_page"
+      ],
+      "forbiddenContexts": [],
+      "forbiddenFor": {},
+      "tags": [
+        "multi-column",
+        "links",
+        "newsletter"
+      ],
+      "popularity": 0.9,
+      "lastModified": "2024-01-01",
+      "adaptiveProps": [],
+      "composition": {
+        "canContain": [
+          "footer-column",
+          "footer-logo",
+          "footer-social",
+          "footer-newsletter"
+        ],
+        "canBeContainedBy": [
+          "layout"
+        ],
+        "maxChildren": 10
+      },
+      "blueprint": {
+        "type": "html",
+        "template": "<footer class=\"footer footer-multi-column\">\n  <div class=\"footer-container\">\n    <div class=\"footer-brand\">\n      <span class=\"footer-logo\">{{logo}}</span>\n      <p class=\"footer-tagline\">{{tagline}}</p>\n    </div>\n    {{columns}}\n  </div>\n  <div class=\"footer-bottom\">\n    <p>&copy; {{year}} {{company}}</p>\n  </div>\n</footer>",
+        "styles": ".footer-multi-column { background: var(--color-surface-elevated); border-top: 1px solid var(--color-border); padding: 4rem 2rem 2rem; }\n.footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 3rem; }\n.footer-brand { max-width: 280px; }\n.footer-logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; display: block; margin-bottom: 0.5rem; }\n.footer-tagline { color: var(--color-text-muted); font-size: 0.9375rem; line-height: 1.5; }\n.footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--color-border); text-align: center; color: var(--color-text-muted); font-size: 0.875rem; }\n@media (max-width: 1024px) { .footer-container { grid-template-columns: 1fr 1fr; } }\n@media (max-width: 768px) { .footer-container { grid-template-columns: 1fr; } }",
+        "dependencies": []
+      },
+      "source": "navnav"
+    },
+    "columns": 4,
+    "links": {
+      "Product": [
+        "Features",
+        "Pricing",
+        "Documentation"
+      ],
+      "Company": [
+        "About",
+        "Blog",
+        "Careers"
+      ],
+      "Resources": [
+        "Help",
+        "Community",
+        "Contact"
+      ],
+      "Legal": [
+        "Privacy",
+        "Terms",
+        "Cookies"
+      ]
+    }
+  },
+  "sidebar": {
+    "type": "sidebar",
+    "pattern": {
+      "id": "sidebar_right_collapsible",
+      "name": "Collapsible Right Sidebar",
+      "category": "sidebar",
+      "subcategory": "right-collapsible",
+      "description": "Collapsible right sidebar with toggle",
+      "complexity": 0.5,
+      "contexts": [
+        "dashboard",
+        "application",
+        "admin",
+        "saas",
+        "enterprise",
+        "settings",
+        "file_manager",
+        "email",
+        "monitoring",
+        "analytics",
+        "user_dashboard"
+      ],
+      "forbiddenContexts": [
+        "landing",
+        "blog",
+        "portfolio"
+      ],
+      "forbiddenFor": {},
+      "tags": [
+        "right",
+        "collapsible",
+        "toggle"
+      ],
+      "popularity": 0.6,
+      "lastModified": "2024-01-01",
+      "adaptiveProps": [],
+      "composition": {
+        "canContain": [
+          "content",
+          "data",
+          "form"
+        ],
+        "canBeContainedBy": [
+          "layout"
+        ],
+        "maxChildren": 10
+      },
+      "blueprint": {
+        "type": "html",
+        "template": "<aside class=\"sidebar sidebar-right-collapsible\">\n  <button class=\"sidebar-toggle\" aria-label=\"Toggle sidebar\"><span class=\"toggle-icon\"></span></button>\n  <div class=\"sidebar-content\">{{content}}</div>\n</aside>",
+        "styles": ".sidebar-right-collapsible { position: fixed; right: 0; top: 0; bottom: 0; width: 320px; background: var(--color-surface); border-left: 1px solid var(--color-border); overflow-y: auto; z-index: 50; transition: transform 0.3s ease; }\n.sidebar-right-collapsible.collapsed { transform: translateX(100%); }\n.sidebar-toggle { position: absolute; left: -40px; top: 1rem; width: 40px; height: 40px; background: var(--color-surface); border: 1px solid var(--color-border); border-right: none; border-radius: var(--radius-md) 0 0 var(--radius-md); cursor: pointer; }",
+        "dependencies": []
+      },
+      "source": "mobbin"
+    },
+    "position": "left",
+    "collapsible": true,
+    "width": "313px"
+  },
+  "cta": {
+    "type": "cta",
+    "pattern": {
+      "id": "cta_split",
+      "name": "Split CTA",
+      "category": "cta",
+      "subcategory": "split",
+      "description": "Two-column CTA with text left and form right",
+      "complexity": 0.4,
+      "contexts": [
+        "landing",
+        "saas",
+        "ecommerce",
+        "agency",
+        "startup",
+        "product",
+        "campaign",
+        "app",
+        "software",
+        "service",
+        "consulting"
+      ],
+      "forbiddenContexts": [],
+      "forbiddenFor": {},
+      "tags": [
+        "split",
+        "form",
+        "two-column"
+      ],
+      "popularity": 0.6,
+      "lastModified": "2024-01-01",
+      "adaptiveProps": [],
+      "composition": {
+        "canContain": [
+          "heading",
+          "paragraph",
+          "form",
+          "button"
+        ],
+        "canBeContainedBy": [
+          "layout"
+        ],
+        "maxChildren": 4
+      },
+      "blueprint": {
+        "type": "html",
+        "template": "<section class=\"cta cta-split\">\n  <div class=\"cta-container\">\n    <div class=\"cta-text\">\n      <h2 class=\"cta-title\">{{title}}</h2>\n      <p class=\"cta-description\">{{description}}</p>\n    </div>\n    <div class=\"cta-form\">{{form}}</div>\n  </div>\n</section>",
+        "styles": ".cta-split { padding: 4rem 2rem; }\n.cta-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }\n@media (max-width: 768px) { .cta-container { grid-template-columns: 1fr; } }",
+        "dependencies": []
+      },
+      "source": "land_book"
+    },
+    "position": "inline",
+    "style": "primary",
+    "text": "Explore Genome"
+  },
+  "selectedLibraries": {
+    "animation": {
+      "name": "AOS",
+      "package": "aos"
+    },
+    "icon": {
+      "name": "Remix Icon",
+      "package": "remixicon"
+    },
+    "state": {
+      "name": "Zustand",
+      "package": "zustand"
+    },
+    "components": {
+      "name": "Mantine",
+      "package": "@mantine/core"
+    },
+    "styling": {
+      "name": "shadcn/ui",
+      "package": "shadcn-ui"
+    },
+    "font": {
+      "name": "bunny",
+      "package": "@fontsource/variable"
+    }
+  },
+  "cssVariables": {
+    "--color-primary": "#b02440",
+    "--color-primary-dark": "#e991a2",
+    "--color-secondary": "#cbdd40",
+    "--color-accent": "#4746a2",
+    "--font-display": "Asta Sans, system-ui, -apple-system, sans-serif",
+    "--font-body": "Noto Sans Soyombo, Arial, sans-serif",
+    "--spacing-base": "12px",
+    "--spacing-section": "48px",
+    "--radius-container": "6px",
+    "--radius-component": "4px",
+    "--grid-gap": "31px"
+  },
+  "animationConfig": {
+    "physics": "none",
+    "durationScale": 1.7328125,
+    "entrySequence": "cascade_up",
+    "staggerInterval": 35,
+    "scrollTrigger": {
+      "triggerPoint": 0.375,
+      "scrubIntensity": 0.94921875
+    },
+    "hoverMicrointeraction": {
+      "type": "lift",
+      "intensity": 0.2834375,
+      "duration": 311
+    }
+  },
+  "compositionRationale": [
+    "[Design Philosophy]: This design organism is a sleek, modern, and professional technology infrastructure platform that values clarity, simplicity, and accessibility. The combination of a flat topology, airtight rhythm density, and a geometric display font like Asta Sans creates a sense of precision and attention to detail. The use of a warm, dark mode color scheme with a neutral temperature and organic edge style adds a touch of sophistication and approachability. The overall creative philosophy emerging from this chromosome combination is one of refined, high-tech minimalism.",
+    "Layout: Documentation Layout (mobbin)",
+    "Navigation: Persistent Sidebar Nav (hyperui)",
+    "Hero: Carousel Hero (navnav)",
+    "Section 1: Team Members Section (tailwind_ui)",
+    "Section 2: Gallery/Media Grid Section (lapa_ninja)",
+    "Section 3: Newsletter Signup Section (preline)",
+    "Section 4: Process/Steps Section (magic_ui)",
+    "Section 5: Comparison Table Section (relume)",
+    "Section 6: Feature Grid Section (one_page_love)",
+    "Section 7: Testimonial Cards Section (preline)",
+    "Section 8: Pricing Table Section (magic_ui)",
+    "Footer: Multi-Column Footer (navnav)",
+    "Sidebar: Collapsible Right Sidebar (mobbin)",
+    "CTA: Split CTA (land_book)",
+    "[Must implement]: Use a flat, 7-section topology to create a sense of breadth and simplicity | Employ airtight rhythm density to maintain a consistent and precise visual flow | Utilize the geometric, tight-tracking characteristics of Asta Sans to create a sense of modernity and sophistication | Balance the narrow line length of Noto Sans Soyombo with the 1.25 type scale ratio to create a clear visual hierarchy | Apply the warm, dark mode color scheme (HSL(348°, 66%, 42%)) with 74% lightness to create a sense of depth and contrast | Incorporate organic edge styles to add a touch of approachability and humanity | Ensure all interactive elements have a matte physics material with roughness of 0.13 and metalness of 0.10",
+    "[Must avoid]: Avoid using overly complex or ornate typography, as it would contradict the geometric, modern aesthetic of Asta Sans | Refrain from using bright, bold colors, as they would clash with the warm, dark mode color scheme | Do not use overly dramatic or attention-seeking motion effects, as they would disrupt the airtight rhythm density and refined atmosphere | Steer clear of using non-organic or overly sharp edge styles, as they would detract from the sophisticated, approachable feel"
+  ],
+  "context": {
+    "contentType": "portfolio",
+    "purpose": "exploration",
+    "audience": "creator",
+    "complexity": 0.24000000000000002,
+    "requiredSections": [
+      "hero",
+      "gallery",
+      "content",
+      "footer"
+    ],
+    "optionalSections": [
+      "testimonial",
+      "cta",
+      "about",
+      "team",
+      "contact",
+      "timeline",
+      "process",
+      "stats",
+      "blog"
+    ],
+    "forbiddenSections": [
+      "product",
+      "metrics",
+      "chart",
+      "pricing",
+      "table",
+      "activity_feed"
+    ]
+  },
+  "suggested_next": [
+    {
+      "tool": "generate_page_composition",
+      "args": {
+        "outputFormat": "react"
+      },
+      "reason": "Generate actual React JSX components from this composition spec.",
+      "when": "you need React code output"
+    },
+    {
+      "tool": "generate_page_composition",
+      "args": {
+        "outputFormat": "html"
+      },
+      "reason": "Generate vanilla HTML/CSS/JS files from this composition spec.",
+      "when": "you need static HTML output"
+    },
+    {
+      "action": "write_file",
+      "file": "COMPOSITION.md",
+      "instruction": "Write this composition spec to a file for reference during implementation."
+    }
+  ]
+}

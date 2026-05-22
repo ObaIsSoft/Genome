@@ -1,0 +1,1222 @@
+{
+  "civilization_report": "# Civilization Report\n\n## Intent → Architecture\n| Field | Value |\n|---|---|\n| Intent | Documentation and product showcase for Genome, a Model Context Protocol server that generates deterministic design systems from a four-layer SHA-256 hash chain. |\n| Seed | `7aab6631671779ad0b25f3d39f35dab4f8b8e12b4a4c3caea937f6507f7ed83f` |\n| Sector | **technology** |\n| Tier reached | **nation_state** (complexity: 0.920) |\n| Source | ecosystem-derived |\n| Code generated | No — architecture specs only |\n\n## Civilization Character\n**Tier:** nation_state · **Archetype:** agrarian\n\n### Design Philosophy\nSeasonal and cyclic. Growth metaphors — data grows, is harvested, is replanted. Components have natural variation, not mechanical uniformity. Organic edge style, spring physics, slight asymmetry. The UI breathes with the rhythm of seasons, not the tick of a clock.\n\n### Architecture Intent\nBatch-processing architecture. Data arrives in cycles, not streams. Reports, summaries, and harvest-views are primary UI patterns. Time-to-update is measured in hours, not milliseconds.\n\n### Chromosome Mutations Applied\n- `motion_physics`: \"spring\"\n- `grid_asymmetry`: 0.3\n- `edge_radius`: 16\n- `edge_componentRadius`: 12\n- `edge_style`: \"organic\"\n- `rhythm_density`: \"breathing\"\n\n## Architecture Direction\n- **pattern:** \"layered\"\n- **layers:** [\"presentation\",\"domain\",\"data\"]\n- **modules:** 8\n- **stateTopology:** \"reactive_store\"\n- **routingPattern:** \"platform\"\n- **tokenInheritance:** \"semantic\"\n\n## Design System Constraints\n- **count:** [45,65]\n- **themes:** [2,3]\n- **modes:** [\"light\",\"dark\",\"high-contrast\"]\n- **semanticTokens:** true\n\n## What This Means for Implementation\n- This is architecture direction, NOT code — implement from these specs\n- State topology, routing patterns, and token inheritance tell you HOW to structure your app\n- Component composition contracts tell you WHAT components to build and how they nest\n- Run validate_design on any CSS/HTML you produce from this direction",
+  "tier": "nation_state",
+  "complexity": 0.92,
+  "archetype": "agrarian",
+  "archetypeDescription": "seasonal and cyclical — components grow and harvest data in structured patterns",
+  "designPhilosophy": "Seasonal and cyclic. Growth metaphors — data grows, is harvested, is replanted. Components have natural variation, not mechanical uniformity. Organic edge style, spring physics, slight asymmetry. The UI breathes with the rhythm of seasons, not the tick of a clock.",
+  "architectureIntent": "Batch-processing architecture. Data arrives in cycles, not streams. Reports, summaries, and harvest-views are primary UI patterns. Time-to-update is measured in hours, not milliseconds.",
+  "architecture": {
+    "pattern": "layered",
+    "layers": [
+      "presentation",
+      "domain",
+      "data"
+    ],
+    "modules": 8,
+    "stateTopology": "reactive_store",
+    "routingPattern": "platform",
+    "tokenInheritance": "semantic"
+  },
+  "source": "ecosystem",
+  "components": {
+    "count": [
+      22,
+      35
+    ],
+    "list": [
+      {
+        "name": "HarvestHub",
+        "category": "input",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"primary\" | \"secondary\" | \"ghost\"",
+            "required": false,
+            "default": "\"primary\""
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\"",
+            "required": false,
+            "default": "\"md\""
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "required": false,
+            "default": false
+          },
+          {
+            "name": "onClick",
+            "type": "() => void",
+            "required": false
+          }
+        ],
+        "variants": [
+          "primary",
+          "secondary",
+          "ghost",
+          "danger"
+        ],
+        "accessibility": {
+          "role": "button",
+          "ariaProps": [
+            "aria-disabled",
+            "aria-pressed"
+          ],
+          "keyboard": [
+            "Enter",
+            "Space"
+          ]
+        },
+        "purpose": "Centralized data aggregation point for Genome's design systems"
+      },
+      {
+        "name": "SeedlingsDashboard",
+        "category": "layout",
+        "props": [
+          {
+            "name": "elevation",
+            "type": "number",
+            "required": false,
+            "default": 1
+          },
+          {
+            "name": "interactive",
+            "type": "boolean",
+            "required": false,
+            "default": false
+          }
+        ],
+        "variants": [
+          "default",
+          "elevated",
+          "outlined"
+        ],
+        "accessibility": {
+          "role": "article",
+          "ariaProps": [
+            "aria-label"
+          ],
+          "keyboard": []
+        },
+        "purpose": "Overview of emerging design patterns and trends"
+      },
+      {
+        "name": "CropYieldAnalyzer",
+        "category": "input",
+        "props": [
+          {
+            "name": "type",
+            "type": "\"text\" | \"email\" | \"password\"",
+            "required": false,
+            "default": "\"text\""
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "onChange",
+            "type": "(value: string) => void",
+            "required": true
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "variants": [
+          "default",
+          "error",
+          "disabled"
+        ],
+        "accessibility": {
+          "role": "textbox",
+          "ariaProps": [
+            "aria-invalid",
+            "aria-errormessage",
+            "aria-required"
+          ],
+          "keyboard": [
+            "Tab",
+            "Enter"
+          ]
+        },
+        "purpose": "In-depth analysis of design system performance and optimization"
+      },
+      {
+        "name": "FarmsteadConsole",
+        "category": "navigation",
+        "props": [
+          {
+            "name": "items",
+            "type": "NavItem[]",
+            "required": true
+          },
+          {
+            "name": "orientation",
+            "type": "\"horizontal\" | \"vertical\"",
+            "required": false,
+            "default": "\"horizontal\""
+          }
+        ],
+        "variants": [
+          "horizontal",
+          "vertical",
+          "mobile"
+        ],
+        "accessibility": {
+          "role": "navigation",
+          "ariaProps": [
+            "aria-label"
+          ],
+          "keyboard": [
+            "Tab",
+            "ArrowKeys",
+            "Enter"
+          ]
+        },
+        "purpose": "Primary interface for managing Genome's model context protocol"
+      },
+      {
+        "name": "SoilTester",
+        "category": "overlay",
+        "props": [
+          {
+            "name": "isOpen",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "name": "onClose",
+            "type": "() => void",
+            "required": true
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "size",
+            "type": "\"sm\" | \"md\" | \"lg\" | \"fullscreen\"",
+            "required": false,
+            "default": "\"md\""
+          }
+        ],
+        "variants": [
+          "default",
+          "fullscreen",
+          "side-panel"
+        ],
+        "accessibility": {
+          "role": "dialog",
+          "ariaProps": [
+            "aria-modal",
+            "aria-labelledby"
+          ],
+          "keyboard": [
+            "Escape",
+            "Tab"
+          ]
+        },
+        "purpose": "Diagnostic tool for assessing data quality and integrity"
+      },
+      {
+        "name": "IrrigationScheduler",
+        "category": "input",
+        "props": [
+          {
+            "name": "options",
+            "type": "Option[]",
+            "required": true
+          },
+          {
+            "name": "value",
+            "type": "string | string[]",
+            "required": true
+          },
+          {
+            "name": "onChange",
+            "type": "(value: string | string[]) => void",
+            "required": true
+          },
+          {
+            "name": "multi",
+            "type": "boolean",
+            "required": false,
+            "default": false
+          }
+        ],
+        "variants": [
+          "single",
+          "multi",
+          "searchable"
+        ],
+        "accessibility": {
+          "role": "combobox",
+          "ariaProps": [
+            "aria-expanded",
+            "aria-haspopup",
+            "aria-activedescendant"
+          ],
+          "keyboard": [
+            "Enter",
+            "Space",
+            "ArrowKeys",
+            "Escape"
+          ]
+        },
+        "purpose": "Automated task manager for data refresh and updates"
+      },
+      {
+        "name": "BarnyardNotifier",
+        "category": "navigation",
+        "props": [
+          {
+            "name": "tabs",
+            "type": "Tab[]",
+            "required": true
+          },
+          {
+            "name": "activeTab",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "onChange",
+            "type": "(tab: string) => void",
+            "required": true
+          }
+        ],
+        "variants": [
+          "default",
+          "pills",
+          "underlined"
+        ],
+        "composition": true,
+        "accessibility": {
+          "role": "tablist",
+          "ariaProps": [
+            "aria-selected",
+            "aria-controls"
+          ],
+          "keyboard": [
+            "Tab",
+            "ArrowKeys",
+            "Enter"
+          ]
+        },
+        "purpose": "Alert system for notifications and warnings"
+      },
+      {
+        "name": "FieldMapper",
+        "category": "navigation",
+        "props": [
+          {
+            "name": "items",
+            "type": "AccordionItem[]",
+            "required": true
+          },
+          {
+            "name": "multiple",
+            "type": "boolean",
+            "required": false,
+            "default": false
+          }
+        ],
+        "variants": [
+          "default",
+          "bordered",
+          "separated"
+        ],
+        "accessibility": {
+          "role": "region",
+          "ariaProps": [
+            "aria-expanded",
+            "aria-controls"
+          ],
+          "keyboard": [
+            "Tab",
+            "Enter",
+            "Space",
+            "ArrowKeys"
+          ]
+        },
+        "purpose": "Visual representation of design system relationships and hierarchies"
+      },
+      {
+        "name": "GreenhouseMonitor",
+        "category": "feedback",
+        "props": [
+          {
+            "name": "message",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "type",
+            "type": "\"info\" | \"success\" | \"warning\" | \"error\"",
+            "required": false,
+            "default": "\"info\""
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "required": false,
+            "default": 5000
+          }
+        ],
+        "variants": [
+          "info",
+          "success",
+          "warning",
+          "error"
+        ],
+        "accessibility": {
+          "role": "alert",
+          "ariaProps": [
+            "aria-live",
+            "aria-atomic"
+          ],
+          "keyboard": [
+            "Escape"
+          ]
+        },
+        "purpose": "Real-time monitoring of design system health and stability"
+      },
+      {
+        "name": "Thresher",
+        "category": "feedback",
+        "props": [
+          {
+            "name": "content",
+            "type": "ReactNode",
+            "required": true
+          },
+          {
+            "name": "placement",
+            "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+            "required": false,
+            "default": "\"top\""
+          },
+          {
+            "name": "delay",
+            "type": "number",
+            "required": false,
+            "default": 200
+          }
+        ],
+        "variants": [
+          "default",
+          "rich"
+        ],
+        "accessibility": {
+          "role": "tooltip",
+          "ariaProps": [
+            "aria-describedby"
+          ],
+          "keyboard": []
+        },
+        "purpose": "Data processing and filtering tool for refining design system outputs"
+      }
+    ],
+    "categories": [
+      "input",
+      "layout",
+      "navigation",
+      "overlay",
+      "feedback"
+    ]
+  },
+  "animations": {
+    "physics": "spring",
+    "types": [
+      "fade",
+      "slide",
+      "scale",
+      "spring",
+      "stagger"
+    ],
+    "choreography": "staggered",
+    "reducedMotion": "respect"
+  },
+  "designSystem": {
+    "count": [
+      45,
+      65
+    ],
+    "themes": [
+      2,
+      3
+    ],
+    "modes": [
+      "light",
+      "dark",
+      "high-contrast"
+    ],
+    "semanticTokens": true
+  },
+  "interactions": {
+    "gestures": [
+      "click",
+      "hover",
+      "swipe",
+      "focus"
+    ],
+    "keyboard": "full",
+    "focus": "managed"
+  },
+  "files": null,
+  "code": null,
+  "genome": {
+    "dnaHash": "209e31698991aff65f28bf13eeb3a5c248eb105f9ec6a203907aaaa3dfd4fe04",
+    "traits": {
+      "informationDensity": 0.6,
+      "temporalUrgency": 0.2,
+      "emotionalTemperature": 0.4,
+      "playfulness": 0.2,
+      "spatialDependency": 0.3,
+      "trustRequirement": 0.5,
+      "visualEmphasis": 0.4,
+      "conversionFocus": 0.3
+    },
+    "sectorContext": {
+      "primary": "technology",
+      "secondary": null,
+      "subSector": "technology_infrastructure"
+    },
+    "chromosomes": {
+      "ch0_sector_primary": {
+        "sector": "technology",
+        "influence": 0.5
+      },
+      "ch0_sector_secondary": {
+        "sector": null,
+        "influence": 0
+      },
+      "ch0_sub_sector": {
+        "classification": "technology_infrastructure",
+        "confidence": 0.7,
+        "keywords": [
+          "editorial",
+          "long-form",
+          "archival",
+          "evergreen",
+          "timeless",
+          "professional",
+          "corporate",
+          "neutral",
+          "clean",
+          "structured",
+          "restrained"
+        ]
+      },
+      "ch0_brand_weight": {
+        "brandVsSector": 0.7,
+        "appliedOverrides": []
+      },
+      "ch1_structure": {
+        "hasSections": true,
+        "sectionCount": 5,
+        "topology": "flat",
+        "maxNesting": 2,
+        "scrollBehavior": "paginated",
+        "breakpointStrategy": "mobile_first",
+        "contentFlow": "z_pattern"
+      },
+      "ch2_rhythm": {
+        "density": "breathing",
+        "baseSpacing": 14,
+        "sectionSpacing": 56,
+        "componentSpacing": 7,
+        "verticalRhythm": 8,
+        "negativeSpaceRatio": 0.4
+      },
+      "ch3_type_display": {
+        "family": "Azeret Mono, system-ui, -apple-system, sans-serif",
+        "displayName": "Azeret Mono",
+        "importUrl": "https://api.fontshare.com/v2/css?f[]=azeret-mono@400,700&display=swap",
+        "provider": "fontshare",
+        "charge": "geometric",
+        "weight": 700,
+        "fallback": "system-ui, -apple-system, sans-serif",
+        "tracking": "ultra_tight",
+        "casing": "uppercase"
+      },
+      "ch4_type_body": {
+        "family": "WDXL Lubrifont SC, system-ui, -apple-system, sans-serif",
+        "displayName": "WDXL Lubrifont SC",
+        "importUrl": "https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+SC:wght@400;700&display=swap",
+        "provider": "google",
+        "charge": "geometric",
+        "xHeightRatio": 0.57421875,
+        "contrast": 0.8625,
+        "fallback": "system-ui, -apple-system, sans-serif",
+        "optimalLineLength": "medium",
+        "paragraphSpacing": 1.6,
+        "hyphenation": false
+      },
+      "ch5_color_primary": {
+        "hue": 276,
+        "saturation": 0.29,
+        "lightness": 0.51,
+        "darkModeLightness": 0.74,
+        "temperature": "cool",
+        "hex": "#895ea5",
+        "darkModeHex": "#c0aad0",
+        "sectorAppropriate": true
+      },
+      "ch6_color_temp": {
+        "backgroundTemp": "cool",
+        "contrastRatio": 13.6796875,
+        "surfaceColor": "#292929",
+        "elevatedSurface": "#3e3e3e",
+        "isDark": true,
+        "accentColor": "#b157db",
+        "surfaceStack": [
+          "#151515",
+          "#292929",
+          "#3e3e3e",
+          "#484848"
+        ]
+      },
+      "ch7_edge": {
+        "radius": 6,
+        "style": "serrated",
+        "variableRadius": false,
+        "componentRadius": 4,
+        "imageRadius": 2,
+        "asymmetric": false
+      },
+      "ch8_motion": {
+        "physics": "none",
+        "durationScale": 1.36015625,
+        "staggerDelay": 0.07578125000000001,
+        "enterDirection": "scale",
+        "exitBehavior": "shrink",
+        "hoverIntensity": 0.1,
+        "reducedMotionFallback": "none"
+      },
+      "ch27_motion_choreography": {
+        "entrySequence": "stagger_center",
+        "staggerInterval": 52,
+        "scrollTrigger": {
+          "triggerPoint": 0.234375,
+          "scrubIntensity": 0.52734375
+        },
+        "hoverMicrointeraction": {
+          "type": "lift",
+          "intensity": 0.35218750000000004,
+          "duration": 154
+        },
+        "pageTransition": "fade",
+        "choreographyStyle": "snappy"
+      },
+      "ch9_grid": {
+        "logic": "broken",
+        "asymmetry": 0.557421875,
+        "columns": 3,
+        "gap": 14,
+        "mobileColumns": 1,
+        "alignment": "start"
+      },
+      "ch10_hierarchy": {
+        "depth": "overlapping",
+        "zIndexBehavior": "isolation",
+        "layerBlur": 9.1796875,
+        "elevationSystem": "material",
+        "shadowScale": 0.00625,
+        "depthCues": "none"
+      },
+      "ch11_texture": {
+        "surface": "flat",
+        "noiseLevel": 0.140625,
+        "grainFrequency": 0.18984375,
+        "overlayBlend": "overlay",
+        "animatedTexture": false
+      },
+      "ch12_signature": {
+        "entropy": 0.91796875,
+        "uniqueMutation": "209e3169",
+        "variantSeed": 0.0625,
+        "designPhilosophy": "chaotic",
+        "depthPhilosophy": "immersive",
+        "variationSequence": "mixed_chaos",
+        "rhythmPattern": "color_band"
+      },
+      "ch28_iconography": {
+        "style": "rounded",
+        "strokeWeight": "regular",
+        "cornerTreatment": "sharp",
+        "sizeScale": 1.096875,
+        "library": "phosphor",
+        "colorTreatment": "inherit",
+        "animation": "draw"
+      },
+      "ch13_atmosphere": {
+        "fx": "none",
+        "intensity": 0.01875,
+        "enabled": false,
+        "coverage": "element",
+        "performanceBudget": "low"
+      },
+      "ch14_physics": {
+        "material": "matte",
+        "roughness": 0.296875,
+        "metalness": 0.0859375,
+        "transmission": 0,
+        "emissive": false,
+        "enabled": false
+      },
+      "ch15_biomarker": {
+        "geometry": "monolithic",
+        "shapeFamily": "geometric",
+        "animationStyle": "static",
+        "polycount": "low",
+        "colorTreatment": "monochrome",
+        "complexity": 0,
+        "enabled": false,
+        "usage": "none"
+      },
+      "ch16_typography": {
+        "display": {
+          "size": "39px",
+          "lineHeight": "1.60",
+          "letterSpacing": "0em"
+        },
+        "h1": {
+          "size": "31px",
+          "lineHeight": "1.64",
+          "letterSpacing": "0em"
+        },
+        "h2": {
+          "size": "25px",
+          "lineHeight": "1.68",
+          "letterSpacing": "0em"
+        },
+        "h3": {
+          "size": "20px",
+          "lineHeight": "1.72",
+          "letterSpacing": "0em"
+        },
+        "body": {
+          "size": "16px",
+          "lineHeight": "1.80",
+          "letterSpacing": "0em"
+        },
+        "small": {
+          "size": "14px",
+          "lineHeight": "1.76",
+          "letterSpacing": "0em"
+        },
+        "ratio": 1.25,
+        "baseSize": 16
+      },
+      "ch17_accessibility": {
+        "minContrastRatio": 4.5,
+        "focusIndicator": "outline",
+        "respectMotionPreference": true,
+        "minTouchTarget": 44,
+        "screenReaderOptimized": false
+      },
+      "ch18_rendering": {
+        "primary": "hybrid_gpu",
+        "fallback": "css",
+        "animate": true,
+        "complexity": "minimal",
+        "antialias": "none",
+        "hdr": true,
+        "shadowQuality": "hard"
+      },
+      "ch19_hero_type": {
+        "hasHero": false,
+        "type": "product_ui",
+        "variant": "split_left",
+        "variantIndex": 9,
+        "starType": "svg_mark"
+      },
+      "ch19_hero_variant_detail": {
+        "layout": "split_left",
+        "elements": [
+          "comparison_view",
+          "headline",
+          "feature_list",
+          "cta_primary"
+        ],
+        "alignment": "center",
+        "textPosition": "overlay",
+        "height": "medium",
+        "backgroundTreatment": "solid",
+        "overlayOpacity": 0.47578125,
+        "mobileBehavior": "collapse_image"
+      },
+      "ch20_visual_treatment": {
+        "treatment": "illustration",
+        "videoStrategy": "none",
+        "imageTreatment": "high_contrast",
+        "hasVideo": false,
+        "imageAspectRatio": "16:9",
+        "colorGrading": "natural",
+        "imageCount": 3
+      },
+      "ch21_trust_signals": {
+        "hasTrustSignals": true,
+        "approach": "credentials",
+        "prominence": "integrated",
+        "layoutVariant": "trust_credentials_3",
+        "contentProvided": false,
+        "suggestedStats": [
+          "{{STAT_1}}",
+          "{{STAT_2}}",
+          "{{STAT_3}}"
+        ],
+        "animationType": "none"
+      },
+      "ch21_trust_content": {
+        "credentials": [],
+        "testimonials": [],
+        "stats": [
+          {
+            "label": "{{STAT_1_LABEL}}",
+            "value": "{{STAT_1_VALUE}}"
+          },
+          {
+            "label": "{{STAT_2_LABEL}}",
+            "value": "{{STAT_2_VALUE}}"
+          },
+          {
+            "label": "{{STAT_3_LABEL}}",
+            "value": "{{STAT_3_VALUE}}"
+          }
+        ],
+        "securityBadges": []
+      },
+      "ch22_social_proof": {
+        "hasSocialProof": false,
+        "type": "none",
+        "prominence": "integrated",
+        "layout": "static",
+        "logoCount": 3,
+        "updateFrequency": "static",
+        "displayStyle": "logos_with_name"
+      },
+      "ch22_impact_demonstration": {
+        "type": "live_counter",
+        "realTime": false,
+        "interactive": true,
+        "animationTrigger": "scroll_enter",
+        "counterFormat": "percentage"
+      },
+      "ch23_content_depth": {
+        "level": "moderate",
+        "estimatedSections": 5,
+        "hasHero": false,
+        "hasFeatures": true,
+        "hasCTA": false,
+        "hasFAQ": false,
+        "hasTestimonials": false
+      },
+      "ch23_information_architecture": {
+        "pattern": "modular_sections",
+        "navigationType": "header",
+        "hasFooter": true,
+        "footerType": "full"
+      },
+      "ch24_personalization": {
+        "approach": "static",
+        "dynamicContent": true,
+        "userSegmentation": false,
+        "abTestingReady": false,
+        "segmentCount": 3
+      },
+      "ch25_copy_engine": {
+        "headline": "",
+        "subheadline": "",
+        "cta": "",
+        "ctaSecondary": "",
+        "tagline": "",
+        "companyName": "",
+        "authorName": "",
+        "authorTitle": "",
+        "testimonial": "",
+        "sectionTitleTestimonials": "",
+        "sectionTitleFeatures": "",
+        "sectionTitleFAQ": "",
+        "stats": [],
+        "faq": [],
+        "features": [],
+        "footerProductTitle": "",
+        "footerCompanyTitle": "",
+        "footerNavProduct": [],
+        "footerNavCompany": []
+      },
+      "ch29_copy_intelligence": {
+        "industryTerminology": [
+          "integration",
+          "automation",
+          "scalability",
+          "deployment"
+        ],
+        "emotionalRegister": "professional",
+        "formalityLevel": 0.4,
+        "ctaAggression": 0.4,
+        "headlineStyle": "how_to",
+        "vocabularyComplexity": "technical",
+        "sentenceStructure": "balanced",
+        "emojiUsage": false,
+        "contractionUsage": true
+      },
+      "ch26_color_system": {
+        "secondary": {
+          "hue": 74,
+          "saturation": 0.3,
+          "lightness": 0.41,
+          "hex": "#798849",
+          "relationship": "split"
+        },
+        "accent": {
+          "hue": 167,
+          "saturation": 0.48,
+          "lightness": 0.57,
+          "hex": "#5ec7b0",
+          "usage": "success"
+        },
+        "semantic": {
+          "success": {
+            "hue": 135,
+            "hex": "#28bd4d"
+          },
+          "warning": {
+            "hue": 45,
+            "hex": "#f2b90d"
+          },
+          "error": {
+            "hue": 0,
+            "hex": "#df2020"
+          },
+          "info": {
+            "hue": 210,
+            "hex": "#1980e6"
+          }
+        },
+        "neutral": {
+          "scale": [
+            "#0d0d0d",
+            "#292829",
+            "#454446",
+            "#615f63",
+            "#7e7981",
+            "#99979b",
+            "#b5b4b6",
+            "#d1d1d1",
+            "#ededed"
+          ],
+          "tintStrength": 0.03
+        },
+        "darkMode": {
+          "surfaceStack": [
+            "#0d0d0d",
+            "#1a191a",
+            "#262627",
+            "#333234",
+            "#403f41",
+            "#4d4b4e",
+            "#5a585b",
+            "#666468"
+          ],
+          "elevationMap": [
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40
+          ]
+        },
+        "harmonyRule": "double_complementary",
+        "palette": {
+          "rule": "double_complementary",
+          "colors": [
+            {
+              "name": "iris",
+              "oklch": {
+                "l": 0.45,
+                "c": 0.10149999999999999,
+                "h": 276
+              },
+              "hex": "#474f8d",
+              "role": "primary",
+              "usageHints": [
+                "CTAs"
+              ]
+            },
+            {
+              "name": "chartreuse",
+              "oklch": {
+                "l": 0.55,
+                "c": 0.08627499999999999,
+                "h": 96
+              },
+              "hex": "#817131",
+              "role": "secondary",
+              "usageHints": [
+                "alternate primary"
+              ]
+            },
+            {
+              "name": "mauve",
+              "oklch": {
+                "l": 0.58,
+                "c": 0.08627499999999999,
+                "h": 306
+              },
+              "hex": "#876da3",
+              "role": "accent",
+              "usageHints": [
+                "highlights"
+              ]
+            },
+            {
+              "name": "sage",
+              "oklch": {
+                "l": 0.55,
+                "c": 0.08627499999999999,
+                "h": 126
+              },
+              "hex": "#657b41",
+              "role": "surface",
+              "usageHints": [
+                "decorative"
+              ]
+            },
+            {
+              "name": "snow",
+              "oklch": {
+                "l": 0.93,
+                "c": 0.006089999999999999,
+                "h": 276
+              },
+              "hex": "#e6e8ec",
+              "role": "background",
+              "usageHints": [
+                "page bg"
+              ]
+            },
+            {
+              "name": "lavender",
+              "oklch": {
+                "l": 0.7,
+                "c": 0.07104999999999999,
+                "h": 286
+              },
+              "hex": "#9a98c9",
+              "role": "surface",
+              "usageHints": [
+                "tonal variant"
+              ]
+            },
+            {
+              "name": "iris",
+              "oklch": {
+                "l": 0.37999999999999995,
+                "c": 0.05176499999999999,
+                "h": 291
+              },
+              "hex": "#423d5c",
+              "role": "surface",
+              "usageHints": [
+                "accent variant"
+              ]
+            }
+          ],
+          "dominant": 0,
+          "background": 4,
+          "text": 6,
+          "accent": 2,
+          "neutral": 3
+        },
+        "fontCount": 3,
+        "fontStrategy": "clash"
+      },
+      "ch3_type_accent": null,
+      "ch30_state_topology": {
+        "topology": "federated",
+        "sharedSurfaces": 0
+      },
+      "ch31_routing_pattern": {
+        "pattern": "single_page",
+        "guardedRoutes": 0
+      },
+      "ch32_token_inheritance": {
+        "inheritance": "semantic",
+        "themeLayers": 4
+      },
+      "ch33_composition_strategy": {
+        "layoutPattern": "magazine_editorial",
+        "sectionCount": 5,
+        "sectionTypes": [
+          "thirty_thirty",
+          "preview_section",
+          "hundred_mile",
+          "connoted",
+          "novel",
+          "pattern_section",
+          "arranged_section"
+        ],
+        "navRequirement": "bottom_tab",
+        "heroProminence": "none",
+        "interactionModel": "dashboard_live",
+        "contentFlow": "data_driven",
+        "densityDistribution": "islands",
+        "responsiveBehavior": "grid_to_list"
+      },
+      "ch34_component_topology": {
+        "primaryFramework": "vanilla",
+        "componentDensity": 0.37109375,
+        "nestingDepth": 2,
+        "compositionStyle": "template",
+        "stateBoundaries": 2,
+        "propComplexity": "complex",
+        "animationScope": "enter_exit"
+      },
+      "ch35_signature_motif": {
+        "separator": "_",
+        "numberFormat": "_73",
+        "dateFormat": "04_11_93",
+        "locationFormat": "_CITY_COUNTRY",
+        "labelFormat": "_SECTION",
+        "hoverIndicator": "✦",
+        "deployment": 0.93359375,
+        "characterFamily": "underscore"
+      },
+      "ch36_tension_rhythm": {
+        "primarySurface": "#151515",
+        "secondarySurface": "hsl(276, 13%, 36%)",
+        "surfaceContrast": 0.3671875,
+        "sharedConstants": [
+          "typeface",
+          "signature_motif",
+          "nav_style",
+          "text_color"
+        ],
+        "alternationWeight": 0.3828125
+      }
+    },
+    "constraints": {
+      "forbiddenPatterns": [
+        "outline_none_no_replacement"
+      ],
+      "requiredPatterns": [
+        "prefers_reduced_motion_wrap"
+      ],
+      "bondingRules": [
+        "[wcag_contrast_minimum] WCAG 1.4.3, informationDensity: 0.60 → Minimum contrast ratio 4.5:1 required for WCAG AA",
+        "[wcag_text_spacing] WCAG 1.4.12, informationDensity: 0.60 → Line height 1.5 minimum for readability",
+        "[universal_focus_visible] WCAG 2.4.11 → Focus visibility is non-negotiable for keyboard users — outline:none without replacement is a WCAG failure",
+        "[universal_reduced_motion] WCAG 2.3.3 → All CSS animations must be wrapped in @media (prefers-reduced-motion: no-preference)"
+      ],
+      "compensatorySignals": []
+    },
+    "viabilityScore": 1,
+    "generation": {
+      "timestamp": "2026-05-22T00:01:41.250Z",
+      "version": "2.0.0",
+      "options": {},
+      "brand": null,
+      "rationale": [
+        "[Accessibility] Motion physics preserved in genome; CSS generator will add prefers-reduced-motion media query per WCAG 2.3.3",
+        "[Accessibility Profile] Contrast: 4.5:1, Motion: reduced, Touch: 44px",
+        "[universal_focus_visible] wins over [no_confirmshaming] for constraints.forbiddenPatterns: Focus visibility is non-negotiable for keyboard users — outline:none without replacement is a WCAG failure"
+      ]
+    }
+  },
+  "organisms": null,
+  "chromosome_utilization": {
+    "layer": "L3_Civilization",
+    "total_chromosomes": 16,
+    "used": [],
+    "unused": [
+      "civ_ch1_archetype",
+      "civ_ch2_governance",
+      "civ_ch3_economics",
+      "civ_ch4_technology",
+      "civ_ch5_culture",
+      "civ_ch6_resilience",
+      "civ_ch7_knowledge",
+      "civ_ch8_expansion",
+      "civ_ch9_age",
+      "civ_ch10_fragility",
+      "civ_ch11_topology",
+      "civ_ch12_cosmos",
+      "civ_ch13_memory",
+      "civ_ch14_interface",
+      "civ_ch15_evolution",
+      "civ_ch16_communication"
+    ],
+    "utilizationRate": 0,
+    "warning": "CRITICAL: Only 0% of L3 civilization chromosomes used. Architecture implementation requires all 16 chromosomes (governance, knowledge, expansion, etc.).",
+    "critical_note": "L3 chromosomes control application architecture (archetype, governance, knowledge, expansion). You MUST implement all 16 as architecture decisions.",
+    "all_chromosomes": [
+      "civ_ch1_archetype",
+      "civ_ch2_governance",
+      "civ_ch3_economics",
+      "civ_ch4_technology",
+      "civ_ch5_culture",
+      "civ_ch6_resilience",
+      "civ_ch7_knowledge",
+      "civ_ch8_expansion",
+      "civ_ch9_age",
+      "civ_ch10_fragility",
+      "civ_ch11_topology",
+      "civ_ch12_cosmos",
+      "civ_ch13_memory",
+      "civ_ch14_interface",
+      "civ_ch15_evolution",
+      "civ_ch16_communication"
+    ],
+    "architecture_mapping": {
+      "civ_ch1_archetype": "Design philosophy and character",
+      "civ_ch2_governance": "State management topology",
+      "civ_ch3_economics": "Resource/data flow patterns",
+      "civ_ch4_technology": "Tech stack sophistication",
+      "civ_ch5_culture": "UX patterns and conventions",
+      "civ_ch6_resilience": "Error handling and recovery",
+      "civ_ch7_knowledge": "Routing and navigation model",
+      "civ_ch8_expansion": "Scalability approach",
+      "civ_ch9_age": "Legacy/compatibility concerns",
+      "civ_ch10_fragility": "Risk tolerance and testing",
+      "civ_ch11_topology": "Network architecture",
+      "civ_ch12_cosmos": "Integration worldview",
+      "civ_ch13_memory": "Caching and persistence",
+      "civ_ch14_interface": "API design patterns",
+      "civ_ch15_evolution": "Migration strategy",
+      "civ_ch16_communication": "Event/interaction bus"
+    },
+    "checklist": {
+      "civ_ch1_archetype": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch2_governance": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch3_economics": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch4_technology": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch5_culture": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch6_resilience": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch7_knowledge": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch8_expansion": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch9_age": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch10_fragility": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch11_topology": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch12_cosmos": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch13_memory": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch14_interface": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch15_evolution": "⚠ VERIFY IMPLEMENTATION",
+      "civ_ch16_communication": "⚠ VERIFY IMPLEMENTATION"
+    },
+    "enforcement": "Every L3 chromosome maps to a concrete architecture decision. You MUST implement from tier.architecture using all 16 chromosome values."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "thesis": "This design organism is a sleek, modern, and professional technology infrastructure platform that values clarity, simplicity, and accessibility. The combination of a flat topology, airtight rhythm density, and a geometric display font like Asta Sans creates a sense of precision and attention to detail. The use of a warm, dark mode color scheme with a neutral temperature and organic edge style adds a touch of sophistication and approachability. The overall creative philosophy emerging from this chromosome combination is one of refined, high-tech minimalism.",
+  "mandates": [
+    "Use a flat, 7-section topology to create a sense of breadth and simplicity",
+    "Employ airtight rhythm density to maintain a consistent and precise visual flow",
+    "Utilize the geometric, tight-tracking characteristics of Asta Sans to create a sense of modernity and sophistication",
+    "Balance the narrow line length of Noto Sans Soyombo with the 1.25 type scale ratio to create a clear visual hierarchy",
+    "Apply the warm, dark mode color scheme (HSL(348°, 66%, 42%)) with 74% lightness to create a sense of depth and contrast",
+    "Incorporate organic edge styles to add a touch of approachability and humanity",
+    "Ensure all interactive elements have a matte physics material with roughness of 0.13 and metalness of 0.10"
+  ],
+  "anti_patterns": [
+    "Avoid using overly complex or ornate typography, as it would contradict the geometric, modern aesthetic of Asta Sans",
+    "Refrain from using bright, bold colors, as they would clash with the warm, dark mode color scheme",
+    "Do not use overly dramatic or attention-seeking motion effects, as they would disrupt the airtight rhythm density and refined atmosphere",
+    "Steer clear of using non-organic or overly sharp edge styles, as they would detract from the sophisticated, approachable feel"
+  ],
+  "layer_guide": {
+    "l1": "The combination of motion physics, edge style, and typography charge in this genome suggests a design that values subtlety and restraint. The absence of physics (ch8) and the use of a matte physics material (ch14) indicate a preference for flat, 2D visual elements. The organic edge style (ch7) and geometric display font (ch3) should be used in conjunction to create a sense of refined, modern sophistication. The color system should be implemented using the warm, dark mode color scheme (ch5) with careful attention to contrast and accessibility, as mandated by the WCAG 7:1 and motion-safe requirements (ch17)."
+  },
+  "usage_md": "# DESIGN_SYSTEM.md",
+  "layers_synthesized": 1,
+  "note": "Synthesized from 1 layer(s). Pass ecosystem_genome and civilization_genome for full 3-layer philosophy.",
+  "suggested_next": [
+    {
+      "action": "write_file",
+      "file": "DESIGN_SYSTEM.md",
+      "field": "usage_md",
+      "instruction": "Write the `usage_md` field to DESIGN_SYSTEM.md in the project root. This is the design constitution the entire build must follow.",
+      "always": true
+    },
+    {
+      "tool": "generate_page_composition",
+      "reason": "Generate the structural blueprint — layout, sections, components, libraries. Call before writing any HTML/CSS/JS.",
+      "when": "building a page or screen"
+    },
+    {
+      "tool": "generate_ecosystem",
+      "reason": "Build a component library architecture — biome, energy, symbiosis patterns. Call when building a full design system.",
+      "when": "building multiple components or a full UI library"
+    },
+    {
+      "tool": "validate_design",
+      "reason": "Run before shipping any CSS or HTML. Validates genome against accessibility, contrast, and motion constraints.",
+      "always": true
+    }
+  ]
+}

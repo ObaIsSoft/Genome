@@ -1,0 +1,1476 @@
+{
+  "ecosystem_report": "# Ecosystem Report\n\n## Seed → Organisms\n| Field | Value |\n|---|---|\n| Intent | Documentation and product showcase for Genome, a Model Context Protocol server that generates deterministic design systems from a four-layer SHA-256 hash chain. |\n| Seed | `7aab6631671779ad0b25f3d39f35dab4f8b8e12b4a4c3caea937f6507f7ed83f` |\n| Sector | **technology** |\n| Complexity | 0.330 |\n| Civilization ready | No — gap: 0.480 |\n\n## Ecosystem Character\n**Biome:** rainforest — *dense and layered — stratified with canopy and understory hierarchy*\n\n## Organism Hierarchy\n\n### Microbial (atomic components) — 10\n- **HashIndicator** (M-0-HashIndicator) — Displays the status of a hash chain\n- **LayerBadge** (M-1-LayerBadge) — Shows the current layer in the four-layer hash chain\n- **DesignSystemIcon** (M-2-DesignSystemIcon) — Represents the generated design system\n- **DeterministicLoader** (M-3-DeterministicLoader) — Indicates the progress of deterministic design system generation\n- **CanopyInput** (M-4-CanopyInput) — Allows users to input data for the design system\n- **UnderstoryStatus** (M-5-UnderstoryStatus) — Displays the status of the understory hierarchy\n- **SHA256HashCell** (M-6-SHA256HashCell) — Displays a single SHA-256 hash value\n- **StratifiedButton** (M-7-StratifiedButton) — Triggers an action in the stratified hierarchy\n- **GenomeLogo** (M-8-GenomeLogo) — Displays the Genome product logo\n- **ChainLinkIcon** (M-9-ChainLinkIcon) — Represents a link in the hash chain\n\n### Flora (composite components) — 4\n- **DesignSystemCard** (F-0-DesignSystemCard) — Displays information about a generated design system\n- **HashChainForm** (F-1-HashChainForm) — Allows users to input data for the hash chain\n- **LayerNavBar** (F-2-LayerNavBar) — Provides navigation for the different layers in the hash chain\n- **GenomeFilterPanel** (F-3-GenomeFilterPanel) — Allows users to filter design systems based on specific criteria\n\n### Fauna (complex components) — 0\n\n## Containment Map\n- **F-0-DesignSystemCard** → contains → **M-1-LayerBadge** (pattern: DesignSystemCard contains M-1-LayerBadge)\n- **F-0-DesignSystemCard** → contains → **M-2-DesignSystemIcon** (pattern: DesignSystemCard contains M-2-DesignSystemIcon)\n- **F-0-DesignSystemCard** → contains → **M-3-DeterministicLoader** (pattern: DesignSystemCard contains M-3-DeterministicLoader)\n- **F-0-DesignSystemCard** → contains → **M-4-CanopyInput** (pattern: DesignSystemCard contains M-4-CanopyInput)\n- **F-1-HashChainForm** → contains → **M-1-LayerBadge** (pattern: HashChainForm contains M-1-LayerBadge)\n- **F-1-HashChainForm** → contains → **M-2-DesignSystemIcon** (pattern: HashChainForm contains M-2-DesignSystemIcon)\n- **F-1-HashChainForm** → contains → **M-3-DeterministicLoader** (pattern: HashChainForm contains M-3-DeterministicLoader)\n- **F-1-HashChainForm** → contains → **M-4-CanopyInput** (pattern: HashChainForm contains M-4-CanopyInput)\n- **F-2-LayerNavBar** → contains → **M-1-LayerBadge** (pattern: LayerNavBar contains M-1-LayerBadge)\n- **F-2-LayerNavBar** → contains → **M-2-DesignSystemIcon** (pattern: LayerNavBar contains M-2-DesignSystemIcon)\n\n## What This Means for Implementation\n- Microbial = atoms: build these first\n- Flora = molecules: compose from microbial\n- Fauna = organisms: compose from flora + microbial\n- All components share one genome — colors, spacing, and motion are inherited, not redefined per component",
+  "ecosystem": {
+    "environment": {
+      "dnaHash": "7aab6631671779ad0b25f3d39f35dab4f8b8e12b4a4c3caea937f6507f7ed83f",
+      "habitabilityScore": 0.8700000000000001,
+      "carryingCapacity": 0.3684210526315789,
+      "ecosystemGenome": {
+        "hash": "209e31698991aff65f28bf13eeb3a5c248eb105f9ec6a203907aaaa3dfd4fe04",
+        "parentHash": "7aab6631671779ad0b25f3d39f35dab4f8b8e12b4a4c3caea937f6507f7ed83f",
+        "chromosomes": {
+          "eco_ch1_biome": {
+            "class": "rainforest",
+            "intensity": 0.6196078431372549
+          },
+          "eco_ch2_energy": {
+            "source": "decomposer",
+            "flux": 0.4117647058823529
+          },
+          "eco_ch3_symbiosis": {
+            "pattern": "commensal",
+            "depth": 0.5686274509803921
+          },
+          "eco_ch4_trophic": {
+            "structure": "linear",
+            "cascade": 0.9647058823529412
+          },
+          "eco_ch5_succession": {
+            "stage": "mid",
+            "drift": 0.1568627450980392
+          },
+          "eco_ch6_adaptation": {
+            "axis": "chemical",
+            "strength": 0.07450980392156863
+          },
+          "eco_ch7_population": {
+            "pattern": "fractal",
+            "variance": 0.7019607843137254
+          },
+          "eco_ch8_temporal": {
+            "rhythm": "diurnal",
+            "intensity": 0.7607843137254902
+          },
+          "eco_ch9_spatial": {
+            "axis": "surface",
+            "isolation": 0.9215686274509803
+          },
+          "eco_ch10_capacity": {
+            "class": "minimal",
+            "pressure": 0.37254901960784315
+          },
+          "eco_ch11_mutation": {
+            "rate": 0.6196078431372549,
+            "variance": 0.7764705882352941
+          },
+          "eco_ch12_expressiveness": {
+            "personality": "bold",
+            "score": 0.5523529411764706,
+            "unlocks": [
+              "expressive_type"
+            ]
+          }
+        }
+      }
+    },
+    "organisms": {
+      "counts": {
+        "microbial": 10,
+        "flora": 4,
+        "fauna": 0,
+        "total": 14
+      },
+      "microbial": [
+        {
+          "id": "M-0-HashIndicator",
+          "name": "HashIndicator",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "colorTreatment": "secondary"
+        },
+        {
+          "id": "M-1-LayerBadge",
+          "name": "LayerBadge",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "colorTreatment": "accent"
+        },
+        {
+          "id": "M-2-DesignSystemIcon",
+          "name": "DesignSystemIcon",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "colorTreatment": "neutral"
+        },
+        {
+          "id": "M-3-DeterministicLoader",
+          "name": "DeterministicLoader",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "containedBy": "F-1",
+          "colorTreatment": "primary"
+        },
+        {
+          "id": "M-4-CanopyInput",
+          "name": "CanopyInput",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "containedBy": "F-1",
+          "colorTreatment": "secondary"
+        },
+        {
+          "id": "M-5-UnderstoryStatus",
+          "name": "UnderstoryStatus",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "containedBy": "F-1",
+          "colorTreatment": "accent"
+        },
+        {
+          "id": "M-6-SHA256HashCell",
+          "name": "SHA256HashCell",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "containedBy": "F-2",
+          "colorTreatment": "neutral"
+        },
+        {
+          "id": "M-7-StratifiedButton",
+          "name": "StratifiedButton",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "containedBy": "F-2",
+          "colorTreatment": "primary"
+        },
+        {
+          "id": "M-8-GenomeLogo",
+          "name": "GenomeLogo",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "containedBy": "F-2",
+          "colorTreatment": "secondary"
+        },
+        {
+          "id": "M-9-ChainLinkIcon",
+          "name": "ChainLinkIcon",
+          "variants": [
+            "default",
+            "active",
+            "disabled"
+          ],
+          "props": [
+            "className",
+            "style",
+            "onClick",
+            "disabled"
+          ],
+          "containedBy": "F-3",
+          "colorTreatment": "accent"
+        }
+      ],
+      "flora": [
+        {
+          "id": "F-0-DesignSystemCard",
+          "name": "DesignSystemCard",
+          "variants": [
+            "default",
+            "active",
+            "disabled",
+            "loading"
+          ],
+          "props": [
+            "className",
+            "style",
+            "value",
+            "onChange",
+            "error"
+          ],
+          "contains": [
+            "M-1-LayerBadge",
+            "M-2-DesignSystemIcon",
+            "M-3-DeterministicLoader",
+            "M-4-CanopyInput"
+          ],
+          "containedBy": "A-0",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-1-HashChainForm",
+          "name": "HashChainForm",
+          "variants": [
+            "default",
+            "active",
+            "disabled",
+            "loading"
+          ],
+          "props": [
+            "className",
+            "style",
+            "value",
+            "onChange",
+            "error"
+          ],
+          "contains": [
+            "M-1-LayerBadge",
+            "M-2-DesignSystemIcon",
+            "M-3-DeterministicLoader",
+            "M-4-CanopyInput"
+          ],
+          "containedBy": "A-0",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-2-LayerNavBar",
+          "name": "LayerNavBar",
+          "variants": [
+            "default",
+            "active",
+            "disabled",
+            "loading"
+          ],
+          "props": [
+            "className",
+            "style",
+            "value",
+            "onChange",
+            "error"
+          ],
+          "contains": [
+            "M-1-LayerBadge",
+            "M-2-DesignSystemIcon",
+            "M-3-DeterministicLoader",
+            "M-4-CanopyInput"
+          ],
+          "containedBy": "A-1",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-3-GenomeFilterPanel",
+          "name": "GenomeFilterPanel",
+          "variants": [
+            "default",
+            "active",
+            "disabled",
+            "loading"
+          ],
+          "props": [
+            "className",
+            "style",
+            "value",
+            "onChange",
+            "error"
+          ],
+          "contains": [
+            "M-1-LayerBadge",
+            "M-2-DesignSystemIcon",
+            "M-3-DeterministicLoader",
+            "M-4-CanopyInput"
+          ],
+          "containedBy": "A-1",
+          "motionStyle": "active"
+        }
+      ],
+      "fauna": []
+    },
+    "evolution": {
+      "complexity": 0.3304166666666667,
+      "diversity": 0.46,
+      "stability": 0.9339166666666666,
+      "generations": 3
+    },
+    "relationships": {
+      "total": 37,
+      "containment": [
+        {
+          "container": "F-0-DesignSystemCard",
+          "contained": "M-1-LayerBadge",
+          "pattern": "DesignSystemCard contains M-1-LayerBadge"
+        },
+        {
+          "container": "F-0-DesignSystemCard",
+          "contained": "M-2-DesignSystemIcon",
+          "pattern": "DesignSystemCard contains M-2-DesignSystemIcon"
+        },
+        {
+          "container": "F-0-DesignSystemCard",
+          "contained": "M-3-DeterministicLoader",
+          "pattern": "DesignSystemCard contains M-3-DeterministicLoader"
+        },
+        {
+          "container": "F-0-DesignSystemCard",
+          "contained": "M-4-CanopyInput",
+          "pattern": "DesignSystemCard contains M-4-CanopyInput"
+        },
+        {
+          "container": "F-1-HashChainForm",
+          "contained": "M-1-LayerBadge",
+          "pattern": "HashChainForm contains M-1-LayerBadge"
+        },
+        {
+          "container": "F-1-HashChainForm",
+          "contained": "M-2-DesignSystemIcon",
+          "pattern": "HashChainForm contains M-2-DesignSystemIcon"
+        },
+        {
+          "container": "F-1-HashChainForm",
+          "contained": "M-3-DeterministicLoader",
+          "pattern": "HashChainForm contains M-3-DeterministicLoader"
+        },
+        {
+          "container": "F-1-HashChainForm",
+          "contained": "M-4-CanopyInput",
+          "pattern": "HashChainForm contains M-4-CanopyInput"
+        },
+        {
+          "container": "F-2-LayerNavBar",
+          "contained": "M-1-LayerBadge",
+          "pattern": "LayerNavBar contains M-1-LayerBadge"
+        },
+        {
+          "container": "F-2-LayerNavBar",
+          "contained": "M-2-DesignSystemIcon",
+          "pattern": "LayerNavBar contains M-2-DesignSystemIcon"
+        }
+      ],
+      "symbiosis": [
+        {
+          "organisms": [
+            "M-0-HashIndicator",
+            "M-1"
+          ],
+          "pattern": "HashIndicator + M-1 work together"
+        },
+        {
+          "organisms": [
+            "M-0-HashIndicator",
+            "M-2"
+          ],
+          "pattern": "HashIndicator + M-2 work together"
+        },
+        {
+          "organisms": [
+            "M-1-LayerBadge",
+            "M-2"
+          ],
+          "pattern": "LayerBadge + M-2 work together"
+        },
+        {
+          "organisms": [
+            "M-1-LayerBadge",
+            "M-3"
+          ],
+          "pattern": "LayerBadge + M-3 work together"
+        },
+        {
+          "organisms": [
+            "M-2-DesignSystemIcon",
+            "M-3"
+          ],
+          "pattern": "DesignSystemIcon + M-3 work together"
+        }
+      ]
+    },
+    "civilization": {
+      "ready": false,
+      "threshold": 0.81,
+      "currentComplexity": 0.3304166666666667,
+      "gap": 0.47958333333333336
+    },
+    "navigation": {
+      "routingPattern": "single_page",
+      "routingGuidance": "Pure HTML/CSS. Single scrollable page. Anchor links scroll to sections.",
+      "stateApproach": "none",
+      "stateGuidance": "No state management. Pure HTML/CSS. Any interactivity uses :checked pseudo-class or minimal JS.",
+      "complexityTier": "abiotic/prokaryotic — simplest possible",
+      "note": "Derived from ch30 (state: federated) and ch31 (routing: multi_page). Available at ALL tiers — not just civilization."
+    }
+  },
+  "sharedGenome": {
+    "dnaHash": "7aab6631671779ad0b25f3d39f35dab4f8b8e12b4a4c3caea937f6507f7ed83f",
+    "traits": {
+      "informationDensity": 0.8,
+      "temporalUrgency": 0.2,
+      "emotionalTemperature": 0.4,
+      "playfulness": 0.2,
+      "spatialDependency": 0.3,
+      "trustRequirement": 0.7,
+      "visualEmphasis": 0.6,
+      "conversionFocus": 0.3
+    },
+    "sectorContext": {
+      "primary": "technology",
+      "secondary": null,
+      "subSector": "technology_infrastructure"
+    },
+    "chromosomes": {
+      "ch0_sector_primary": {
+        "sector": "technology",
+        "influence": 0.5
+      },
+      "ch0_sector_secondary": {
+        "sector": null,
+        "influence": 0
+      },
+      "ch0_sub_sector": {
+        "classification": "technology_infrastructure",
+        "confidence": 0.85,
+        "keywords": [
+          "data-rich",
+          "structured",
+          "tabular",
+          "editorial",
+          "long-form",
+          "archival",
+          "evergreen",
+          "timeless",
+          "professional",
+          "corporate",
+          "neutral",
+          "clean",
+          "restrained",
+          "trusted",
+          "verified",
+          "secure"
+        ]
+      },
+      "ch0_brand_weight": {
+        "brandVsSector": 0.7,
+        "appliedOverrides": []
+      },
+      "ch1_structure": {
+        "hasSections": true,
+        "sectionCount": 7,
+        "topology": "flat",
+        "maxNesting": 1,
+        "scrollBehavior": "continuous",
+        "breakpointStrategy": "fluid",
+        "contentFlow": "f_pattern"
+      },
+      "ch2_rhythm": {
+        "density": "airtight",
+        "baseSpacing": 12,
+        "sectionSpacing": 48,
+        "componentSpacing": 6,
+        "verticalRhythm": 4,
+        "negativeSpaceRatio": 0.19999999999999996
+      },
+      "ch3_type_display": {
+        "family": "Asta Sans, system-ui, -apple-system, sans-serif",
+        "displayName": "Asta Sans",
+        "importUrl": "https://fonts.bunny.net/css?family=asta-sans:400,700&display=swap",
+        "provider": "bunny",
+        "charge": "geometric",
+        "weight": 700,
+        "fallback": "system-ui, -apple-system, sans-serif",
+        "tracking": "tight",
+        "casing": "small_caps"
+      },
+      "ch4_type_body": {
+        "family": "Noto Sans Soyombo, Arial, sans-serif",
+        "displayName": "Noto Sans Soyombo",
+        "importUrl": "https://fonts.bunny.net/css?family=noto-sans-soyombo:400,700&display=swap",
+        "provider": "bunny",
+        "charge": "grotesque",
+        "xHeightRatio": 0.50859375,
+        "contrast": 0.8578125000000001,
+        "fallback": "Arial, sans-serif",
+        "optimalLineLength": "narrow",
+        "paragraphSpacing": 1.6,
+        "hyphenation": false
+      },
+      "ch5_color_primary": {
+        "hue": 348,
+        "saturation": 0.66,
+        "lightness": 0.42,
+        "darkModeLightness": 0.74,
+        "temperature": "warm",
+        "hex": "#b02440",
+        "darkModeHex": "#e991a2",
+        "sectorAppropriate": true
+      },
+      "ch6_color_temp": {
+        "backgroundTemp": "neutral",
+        "contrastRatio": 11.6875,
+        "surfaceColor": "#dfdfdf",
+        "elevatedSurface": "#cbcbcb",
+        "isDark": false,
+        "accentColor": "#50bd28",
+        "surfaceStack": [
+          "#f6f6f6",
+          "#dfdfdf",
+          "#cbcbcb",
+          "#a3a3a3"
+        ]
+      },
+      "ch7_edge": {
+        "radius": 6,
+        "style": "organic",
+        "variableRadius": false,
+        "componentRadius": 4,
+        "imageRadius": 2,
+        "asymmetric": false
+      },
+      "ch8_motion": {
+        "physics": "none",
+        "durationScale": 1.7328125,
+        "staggerDelay": 0.0703125,
+        "enterDirection": "spiral",
+        "exitBehavior": "rotate_out",
+        "hoverIntensity": 0.1,
+        "reducedMotionFallback": "none"
+      },
+      "ch27_motion_choreography": {
+        "entrySequence": "cascade_up",
+        "staggerInterval": 35,
+        "scrollTrigger": {
+          "triggerPoint": 0.375,
+          "scrubIntensity": 0.94921875
+        },
+        "hoverMicrointeraction": {
+          "type": "lift",
+          "intensity": 0.2834375,
+          "duration": 311
+        },
+        "pageTransition": "fade",
+        "choreographyStyle": "snappy"
+      },
+      "ch9_grid": {
+        "logic": "broken",
+        "asymmetry": 0.61953125,
+        "columns": 4,
+        "gap": 31,
+        "mobileColumns": 2,
+        "alignment": "start"
+      },
+      "ch10_hierarchy": {
+        "depth": "flat",
+        "zIndexBehavior": "isolation",
+        "layerBlur": 7.1875,
+        "elevationSystem": "material",
+        "shadowScale": 0.09843750000000001,
+        "depthCues": "none"
+      },
+      "ch11_texture": {
+        "surface": "flat",
+        "noiseLevel": 0.484375,
+        "grainFrequency": 0.263671875,
+        "overlayBlend": "overlay",
+        "animatedTexture": false
+      },
+      "ch12_signature": {
+        "entropy": 0.71875,
+        "uniqueMutation": "7aab6631",
+        "variantSeed": 0.87890625,
+        "designPhilosophy": "chaotic",
+        "depthPhilosophy": "immersive",
+        "variationSequence": "mixed_chaos",
+        "rhythmPattern": "color_band"
+      },
+      "ch28_iconography": {
+        "style": "filled",
+        "strokeWeight": "regular",
+        "cornerTreatment": "rounded",
+        "sizeScale": 0.9328125,
+        "library": "lucide",
+        "colorTreatment": "secondary",
+        "animation": "bounce"
+      },
+      "ch13_atmosphere": {
+        "fx": "none",
+        "intensity": 0.263671875,
+        "enabled": false,
+        "coverage": "element",
+        "performanceBudget": "low"
+      },
+      "ch14_physics": {
+        "material": "matte",
+        "roughness": 0.134375,
+        "metalness": 0.09531250000000001,
+        "transmission": 0,
+        "emissive": false,
+        "enabled": false
+      },
+      "ch15_biomarker": {
+        "geometry": "monolithic",
+        "shapeFamily": "geometric",
+        "animationStyle": "static",
+        "polycount": "low",
+        "colorTreatment": "monochrome",
+        "complexity": 0,
+        "enabled": false,
+        "usage": "none"
+      },
+      "ch16_typography": {
+        "display": {
+          "size": "39px",
+          "lineHeight": "1.60",
+          "letterSpacing": "-0.01em"
+        },
+        "h1": {
+          "size": "31px",
+          "lineHeight": "1.64",
+          "letterSpacing": "-0.006em"
+        },
+        "h2": {
+          "size": "25px",
+          "lineHeight": "1.68",
+          "letterSpacing": "-0.004em"
+        },
+        "h3": {
+          "size": "20px",
+          "lineHeight": "1.72",
+          "letterSpacing": "-0.002em"
+        },
+        "body": {
+          "size": "16px",
+          "lineHeight": "1.80",
+          "letterSpacing": "0em"
+        },
+        "small": {
+          "size": "14px",
+          "lineHeight": "1.76",
+          "letterSpacing": "-0.004em"
+        },
+        "ratio": 1.25,
+        "baseSize": 16
+      },
+      "ch17_accessibility": {
+        "minContrastRatio": 7,
+        "focusIndicator": "outline",
+        "respectMotionPreference": true,
+        "minTouchTarget": 44,
+        "screenReaderOptimized": true
+      },
+      "ch18_rendering": {
+        "primary": "hybrid_canvas",
+        "fallback": "css",
+        "animate": false,
+        "complexity": "extreme",
+        "antialias": "none",
+        "hdr": false,
+        "shadowQuality": "hard"
+      },
+      "ch19_hero_type": {
+        "hasHero": false,
+        "type": "product_ui",
+        "variant": "centered",
+        "variantIndex": 8,
+        "starType": "color_field"
+      },
+      "ch19_hero_variant_detail": {
+        "layout": "centered",
+        "elements": [
+          "calculator",
+          "headline",
+          "result_display",
+          "cta_primary"
+        ],
+        "alignment": "left",
+        "textPosition": "adjacent",
+        "height": "compact",
+        "backgroundTreatment": "solid",
+        "overlayOpacity": 0.4875,
+        "mobileBehavior": "stack"
+      },
+      "ch20_visual_treatment": {
+        "treatment": "illustration",
+        "videoStrategy": "none",
+        "imageTreatment": "cool",
+        "hasVideo": false,
+        "imageAspectRatio": "1:1",
+        "colorGrading": "natural",
+        "imageCount": 1
+      },
+      "ch21_trust_signals": {
+        "hasTrustSignals": false,
+        "approach": "credentials",
+        "prominence": "prominent",
+        "layoutVariant": "trust_social_proof_logos_0",
+        "contentProvided": false,
+        "suggestedStats": [],
+        "animationType": "count_up"
+      },
+      "ch21_trust_content": {
+        "credentials": [],
+        "testimonials": [
+          "{{TESTIMONIAL_1}}",
+          "{{TESTIMONIAL_2}}"
+        ],
+        "stats": [
+          {
+            "label": "{{STAT_1_LABEL}}",
+            "value": "{{STAT_1_VALUE}}"
+          },
+          {
+            "label": "{{STAT_2_LABEL}}",
+            "value": "{{STAT_2_VALUE}}"
+          },
+          {
+            "label": "{{STAT_3_LABEL}}",
+            "value": "{{STAT_3_VALUE}}"
+          }
+        ],
+        "securityBadges": []
+      },
+      "ch22_social_proof": {
+        "hasSocialProof": true,
+        "type": "customer_logos",
+        "prominence": "prominent",
+        "layout": "carousel",
+        "logoCount": 5,
+        "updateFrequency": "static",
+        "displayStyle": "full_testimonial"
+      },
+      "ch22_impact_demonstration": {
+        "type": "live_counter",
+        "realTime": false,
+        "interactive": true,
+        "animationTrigger": "scroll_enter",
+        "counterFormat": "abbreviated_k"
+      },
+      "ch23_content_depth": {
+        "level": "extensive",
+        "estimatedSections": 7,
+        "hasHero": false,
+        "hasFeatures": true,
+        "hasCTA": false,
+        "hasFAQ": true,
+        "hasTestimonials": true
+      },
+      "ch23_information_architecture": {
+        "pattern": "data_dashboard",
+        "navigationType": "sidebar",
+        "hasFooter": true,
+        "footerType": "full"
+      },
+      "ch24_personalization": {
+        "approach": "behavior_based",
+        "dynamicContent": true,
+        "userSegmentation": true,
+        "abTestingReady": false,
+        "segmentCount": 4
+      },
+      "ch25_copy_engine": {
+        "headline": "Genome: Mathematical Design DNA",
+        "subheadline": "Generate unique, deterministic design systems from SHA-256 hashes and content intent",
+        "cta": "Explore Genome",
+        "ctaSecondary": "Learn More",
+        "tagline": "No Templates. Only Math.",
+        "companyName": "Genome",
+        "authorName": "Emily Lee",
+        "authorTitle": "Design Lead at Meridian Creative",
+        "testimonial": "Genome has revolutionized our design process, allowing us to focus on high-level creative decisions rather than tedious template management",
+        "sectionTitleTestimonials": "What Our Customers Say",
+        "sectionTitleFeatures": "How It Works",
+        "sectionTitleFAQ": "Frequently Asked Questions",
+        "stats": [
+          {
+            "label": "Designs Generated",
+            "value": "10,000+"
+          },
+          {
+            "label": "Uptime",
+            "value": "99.9%"
+          },
+          {
+            "label": "Customer Satisfaction",
+            "value": "95%"
+          }
+        ],
+        "faq": [
+          {
+            "question": "How does Genome ensure design consistency?",
+            "answer": "Genome uses a proprietary algorithm to generate deterministic design systems from SHA-256 hashes"
+          },
+          {
+            "question": "Can I integrate Genome with my existing design tools?",
+            "answer": "Yes, Genome supports integration with popular design tools and workflows"
+          }
+        ],
+        "features": [
+          {
+            "title": "SHA-256 Design DNA",
+            "description": "Every design is mathematically generated from a hash, ensuring uniqueness and reproducibility"
+          },
+          {
+            "title": "Model Context Protocol",
+            "description": "Integrate Genome with your existing design workflow for seamless collaboration"
+          },
+          {
+            "title": "Deterministic Design Systems",
+            "description": "Ensure consistency across your design ecosystem with Genome's proprietary algorithms"
+          }
+        ],
+        "footerProductTitle": "Product",
+        "footerCompanyTitle": "Company",
+        "footerNavProduct": [
+          "Features",
+          "Pricing",
+          "API"
+        ],
+        "footerNavCompany": [
+          "About",
+          "Careers",
+          "Contact"
+        ]
+      },
+      "ch29_copy_intelligence": {
+        "industryTerminology": [
+          "deterministic design",
+          "SHA-256 hash",
+          "model context protocol"
+        ],
+        "emotionalRegister": "professional",
+        "formalityLevel": 0.8,
+        "ctaAggression": 0.2,
+        "headlineStyle": "benefit_forward",
+        "vocabularyComplexity": "technical",
+        "sentenceStructure": "balanced",
+        "emojiUsage": false,
+        "contractionUsage": false
+      },
+      "ch26_color_system": {
+        "secondary": {
+          "hue": 67,
+          "saturation": 0.7,
+          "lightness": 0.56,
+          "hex": "#cbdd40",
+          "relationship": "analogous"
+        },
+        "accent": {
+          "hue": 241,
+          "saturation": 0.4,
+          "lightness": 0.45,
+          "hex": "#4746a2",
+          "usage": "alert"
+        },
+        "semantic": {
+          "success": {
+            "hue": 135,
+            "hex": "#28bd4d"
+          },
+          "warning": {
+            "hue": 45,
+            "hex": "#f2b90d"
+          },
+          "error": {
+            "hue": 0,
+            "hex": "#df2020"
+          },
+          "info": {
+            "hue": 210,
+            "hex": "#1980e6"
+          }
+        },
+        "neutral": {
+          "scale": [
+            "#0d0d0d",
+            "#2c2627",
+            "#4f3b3f",
+            "#774b54",
+            "#a25766",
+            "#b0828b",
+            "#c0aaae",
+            "#d5cecf",
+            "#ededed"
+          ],
+          "tintStrength": 0.3
+        },
+        "darkMode": {
+          "surfaceStack": [
+            "#0f0b0c",
+            "#1d1617",
+            "#2c2123",
+            "#3b2b2e",
+            "#49363a",
+            "#584146",
+            "#674c51",
+            "#75575d"
+          ],
+          "elevationMap": [
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40
+          ]
+        },
+        "harmonyRule": "tetradic",
+        "palette": {
+          "rule": "tetradic",
+          "colors": [
+            {
+              "name": "berry",
+              "oklch": {
+                "l": 0.45,
+                "c": 0.23099999999999998,
+                "h": 348
+              },
+              "hex": "#a4006b",
+              "role": "primary",
+              "usageHints": [
+                "CTAs, headlines"
+              ]
+            },
+            {
+              "name": "chartreuse",
+              "oklch": {
+                "l": 0.52,
+                "c": 0.1848,
+                "h": 78
+              },
+              "hex": "#a05300",
+              "role": "secondary",
+              "usageHints": [
+                "subheads"
+              ]
+            },
+            {
+              "name": "seafoam",
+              "oklch": {
+                "l": 0.52,
+                "c": 0.1848,
+                "h": 168
+              },
+              "hex": "#008754",
+              "role": "accent",
+              "usageHints": [
+                "highlights"
+              ]
+            },
+            {
+              "name": "cobalt",
+              "oklch": {
+                "l": 0.52,
+                "c": 0.1848,
+                "h": 258
+              },
+              "hex": "#0d63d0",
+              "role": "surface",
+              "usageHints": [
+                "decorative"
+              ]
+            },
+            {
+              "name": "snow",
+              "oklch": {
+                "l": 0.95,
+                "c": 0.01155,
+                "h": 348
+              },
+              "hex": "#f5ebf0",
+              "role": "background",
+              "usageHints": [
+                "page bg"
+              ]
+            },
+            {
+              "name": "blush",
+              "oklch": {
+                "l": 0.7,
+                "c": 0.16169999999999998,
+                "h": 358
+              },
+              "hex": "#eb6e9e",
+              "role": "surface",
+              "usageHints": [
+                "tonal variant"
+              ]
+            },
+            {
+              "name": "teal",
+              "oklch": {
+                "l": 0.32,
+                "c": 0.11087999999999999,
+                "h": 153
+              },
+              "hex": "#004213",
+              "role": "surface",
+              "usageHints": [
+                "accent variant"
+              ]
+            }
+          ],
+          "dominant": 0,
+          "background": 4,
+          "text": 6,
+          "accent": 2,
+          "neutral": 3
+        },
+        "fontCount": 3,
+        "fontStrategy": "expressive_pair"
+      },
+      "ch3_type_accent": null,
+      "ch30_state_topology": {
+        "topology": "federated",
+        "sharedSurfaces": 3
+      },
+      "ch31_routing_pattern": {
+        "pattern": "multi_page",
+        "guardedRoutes": 8
+      },
+      "ch32_token_inheritance": {
+        "inheritance": "semantic",
+        "themeLayers": 3
+      },
+      "ch33_composition_strategy": {
+        "layoutPattern": "profile_page",
+        "sectionCount": 13,
+        "sectionTypes": [
+          "newsletter",
+          "contact",
+          "denary",
+          "generated",
+          "version"
+        ],
+        "navRequirement": "bottom_tab",
+        "heroProminence": "standard",
+        "interactionModel": "pagination",
+        "contentFlow": "top_down",
+        "densityDistribution": "content_dense",
+        "responsiveBehavior": "stack"
+      },
+      "ch34_component_topology": {
+        "primaryFramework": "htmx",
+        "componentDensity": 0.171875,
+        "nestingDepth": 1,
+        "compositionStyle": "template",
+        "stateBoundaries": 4,
+        "propComplexity": "complex",
+        "animationScope": "orchestrated"
+      },
+      "ch35_signature_motif": {
+        "separator": "·",
+        "numberFormat": "85·",
+        "dateFormat": "15·03·53",
+        "locationFormat": "CITY·COUNTRY",
+        "labelFormat": "SECTION·",
+        "hoverIndicator": "•",
+        "deployment": 0.46875,
+        "characterFamily": "mid_dot"
+      },
+      "ch36_tension_rhythm": {
+        "primarySurface": "#f6f6f6",
+        "secondarySurface": "hsl(348, 20%, 53%)",
+        "surfaceContrast": 0.859375,
+        "sharedConstants": [
+          "typeface",
+          "signature_motif",
+          "nav_style",
+          "text_color"
+        ],
+        "alternationWeight": 0.35820312499999996
+      }
+    },
+    "constraints": {
+      "forbiddenPatterns": [
+        "outline_none_no_replacement"
+      ],
+      "requiredPatterns": [
+        "prefers_reduced_motion_wrap"
+      ],
+      "bondingRules": [
+        "[wcag_contrast_minimum] WCAG 1.4.3, informationDensity: 0.80 → Minimum contrast ratio 7:1 required for WCAG AAA",
+        "[wcag_text_spacing] WCAG 1.4.12, informationDensity: 0.80 → Line height 1.5 minimum for readability",
+        "[trust_prominent] trustRequirement: 0.70 → High trust requirement mandates visible credentials and proof signals",
+        "[trust_credentials_approach] trustRequirement: 0.70 → High-stakes interfaces need hard credentials over social testimonials",
+        "[density_behavior_personalization] informationDensity: 0.80 → Dense data interfaces benefit from behavior-based content personalization",
+        "[universal_focus_visible] WCAG 2.4.11 → Focus visibility is non-negotiable for keyboard users — outline:none without replacement is a WCAG failure",
+        "[universal_reduced_motion] WCAG 2.3.3 → All CSS animations must be wrapped in @media (prefers-reduced-motion: no-preference)"
+      ],
+      "compensatorySignals": []
+    },
+    "viabilityScore": 1,
+    "generation": {
+      "timestamp": "2026-05-21T23:39:20.283Z",
+      "version": "2.0.0",
+      "options": {
+        "fontProvider": "bunny",
+        "copyIntelligence": {
+          "industryTerminology": [
+            "deterministic design",
+            "SHA-256 hash",
+            "model context protocol"
+          ],
+          "emotionalRegister": "professional",
+          "formalityLevel": 0.8,
+          "ctaAggression": 0.2,
+          "headlineStyle": "benefit_forward",
+          "vocabularyComplexity": "technical",
+          "sentenceStructure": "balanced",
+          "emojiUsage": false,
+          "contractionUsage": false
+        },
+        "copy": {
+          "headline": "Genome: Mathematical Design DNA",
+          "subheadline": "Generate unique, deterministic design systems from SHA-256 hashes and content intent",
+          "cta": "Explore Genome",
+          "tagline": "No Templates. Only Math.",
+          "companyName": "Genome",
+          "features": [
+            {
+              "title": "SHA-256 Design DNA",
+              "description": "Every design is mathematically generated from a hash, ensuring uniqueness and reproducibility"
+            },
+            {
+              "title": "Model Context Protocol",
+              "description": "Integrate Genome with your existing design workflow for seamless collaboration"
+            },
+            {
+              "title": "Deterministic Design Systems",
+              "description": "Ensure consistency across your design ecosystem with Genome's proprietary algorithms"
+            }
+          ],
+          "stats": [
+            {
+              "label": "Designs Generated",
+              "value": "10,000+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.9%"
+            },
+            {
+              "label": "Customer Satisfaction",
+              "value": "95%"
+            }
+          ],
+          "testimonial": "Genome has revolutionized our design process, allowing us to focus on high-level creative decisions rather than tedious template management",
+          "authorName": "Emily Lee",
+          "authorTitle": "Design Lead at Meridian Creative",
+          "ctaSecondary": "Learn More",
+          "sectionTitleTestimonials": "What Our Customers Say",
+          "sectionTitleFeatures": "How It Works",
+          "sectionTitleFAQ": "Frequently Asked Questions",
+          "faq": [
+            {
+              "question": "How does Genome ensure design consistency?",
+              "answer": "Genome uses a proprietary algorithm to generate deterministic design systems from SHA-256 hashes"
+            },
+            {
+              "question": "Can I integrate Genome with my existing design tools?",
+              "answer": "Yes, Genome supports integration with popular design tools and workflows"
+            }
+          ],
+          "footerProductTitle": "Product",
+          "footerCompanyTitle": "Company",
+          "footerNavProduct": [
+            "Features",
+            "Pricing",
+            "API"
+          ],
+          "footerNavCompany": [
+            "About",
+            "Careers",
+            "Contact"
+          ]
+        }
+      },
+      "brand": null,
+      "rationale": [
+        "[Accessibility] Motion physics preserved in genome; CSS generator will add prefers-reduced-motion media query per WCAG 2.3.3",
+        "[Accessibility] Screen reader landmarks enabled per WCAG 1.3.1 (info and relationships)",
+        "[Accessibility] ARIA labels required for data tables and complex components",
+        "[Accessibility Profile] Contrast: 7:1, Motion: reduced, Touch: 44px",
+        "[universal_reduced_motion] wins over [trust_required_pattern] for constraints.requiredPatterns: All CSS animations must be wrapped in @media (prefers-reduced-motion: no-preference)",
+        "[universal_focus_visible] wins over [no_confirmshaming] for constraints.forbiddenPatterns: Focus visibility is non-negotiable for keyboard users — outline:none without replacement is a WCAG failure"
+      ]
+    },
+    "selectedLibraries": {
+      "icon": "@phosphor-icons/react",
+      "animation": "motion",
+      "state": "zustand",
+      "styling": "shadcn-ui",
+      "font_display_provider": "bunny",
+      "font_body_provider": "bunny",
+      "font_display_import": "https://fonts.bunny.net/css?family=asta-sans:400,700&display=swap",
+      "font_body_import": "https://fonts.bunny.net/css?family=noto-sans-soyombo:400,700&display=swap"
+    }
+  },
+  "biome": "rainforest",
+  "biomeDescription": "dense and layered — stratified with canopy and understory hierarchy",
+  "css": "/* Genome CSS Reset */\n*, *::before, *::after {\nbox-sizing: border-box;\nmargin: 0;\npadding: 0;\n}\n\nhtml {\nscroll-behavior: smooth;\n}\n\nbody {\nfont-family: var(--font-body, system-ui, sans-serif);\nbackground: var(--color-bg, var(--color-surface));\ncolor: var(--color-text);\nline-height: 1.6;\n}\n\nimg, picture, video, canvas, svg {\ndisplay: block;\nmax-width: 100%;\n}\n\ninput, button, textarea, select {\nfont: inherit;\n}\n\n:focus-visible {\noutline: var(--focus-indicator, 2px solid var(--color-primary));\noutline-offset: 2px;\n}:root {/* Colors */--color-primary: #b02440;--color-primary-interactive: #e991a2; /* use for buttons/links on dark surfaces */--color-primary-h: 348;--color-primary-s: 66%;--color-primary-l: 42%;--primary-hue: 348;--primary-sat: 66%;--primary-light: 42%;--color-primary-dim: hsla(348, 66%, 42%, 0.12);--color-primary-glow: hsla(348, 66%, 42%, 0.35);--color-primary-50: hsl(348, 66%, 82%);--color-primary-100: hsl(348, 66%, 72%);--color-primary-200: hsl(348, 66%, 62%);--color-primary-300: hsl(348, 66%, 52%);--color-primary-400: hsl(348, 66%, 47%);--color-primary-500: #b02440;--color-primary-600: hsl(348, 66%, 32%);--color-primary-700: hsl(348, 66%, 22%);--color-primary-800: hsl(348, 66%, 12%);--color-primary-900: hsl(348, 66%, 5%);/* Secondary Color */--color-secondary: #cbdd40;--color-secondary-h: 67;--color-secondary-s: 70%;--color-secondary-l: 56%;--color-secondary-light: hsl(67, 70%, 76%);--color-secondary-dark: hsl(67, 70%, 36%);/* Accent Color */--color-accent: #4746a2;--color-accent-light: hsl(241, 40%, 65%);/* Semantic Colors */--color-success: #28bd4d;--color-warning: #f2b90d;--color-error: #df2020;--color-info: #1980e6;/* Neutral Scale */--color-neutral-100: #0d0d0d;--color-neutral-200: #2c2627;--color-neutral-300: #4f3b3f;--color-neutral-400: #774b54;--color-neutral-500: #a25766;--color-neutral-600: #b0828b;--color-neutral-700: #c0aaae;--color-neutral-800: #d5cecf;--color-neutral-900: #ededed;/* Dark Mode */--color-dark-surface-0: #0f0b0c;--color-dark-surface-1: #1d1617;--color-dark-surface-2: #2c2123;--color-dark-surface-3: #3b2b2e;--color-dark-surface-4: #49363a;--color-dark-surface-5: #584146;--color-dark-surface-6: #674c51;--color-dark-surface-7: #75575d;--color-surface: #f6f6f6;--color-surface-elevated: #dfdfdf;--color-surface-overlay: #cbcbcb;--color-surface-modal: #a3a3a3;--color-bg: hsl(348, 5%, 98%);--color-text: hsl(0, 0%, 8%);--color-text-secondary: hsla(0, 0%, 8%, 0.7);--color-text-tertiary: hsla(0, 0%, 8%, 0.5);/* Semantic utilities */--color-on-primary: hsl(0, 0%, 97%);--color-surface-dark: hsl(348, 12%, 8%);--color-surface-dark-border: hsla(0, 0%, 100%, 0.1);--color-surface-dark-hover: hsla(0, 0%, 100%, 0.08);--color-text-on-dark: hsl(0, 0%, 96%);--color-text-on-dark-muted: hsla(0, 0%, 96%, 0.5);--color-overlay: hsla(348, 20%, 5%, 0.5);--color-overlay-light: hsla(348, 20%, 5%, 0.4);--color-overlay-subtle: hsla(348, 20%, 5%, 0.1);--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);--shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);/* Typography */--font-display: Asta Sans, system-ui, -apple-system, sans-serif;--font-body: Noto Sans Soyombo, Arial, sans-serif;--font-mono: 'SF Mono', Monaco, monospace;--text-ratio: 1.25;--text-base: 16px;--text-display: clamp(1.341rem, 2.19vw + 0.5rem, 2.438rem);--text-h1: clamp(1.066rem, 1.74vw + 0.5rem, 1.938rem);--text-h2: clamp(0.875rem, 1.41vw + 0.5rem, 1.563rem);--text-h3: clamp(0.875rem, 1.13vw + 0.5rem, 1.25rem);--text-body: clamp(0.875rem, 0.9vw + 0.5rem, 1rem);--text-small: clamp(0.875rem, 0.79vw + 0.5rem, 0.875rem);--leading-display: 1.60;--leading-h1: 1.64;--leading-h2: 1.68;--leading-h3: 1.72;--leading-body: 1.80;/* Spacing */--spacing-xs: 3px;--spacing-sm: 6px;--spacing-md: 12px;--spacing-lg: 18px;--spacing-xl: 24px;--spacing-2xl: 36px;--spacing-section: 48px;/* Radii */--radius-sm: 3px;--radius-md: 6px;--radius-lg: 12px;--radius-xl: 24px;--radius-full: 9999px;/* Motion */--duration-fast: 0.26s;--duration-normal: 0.52s;--duration-slow: 1.04s;--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);/* Accessibility */--focus-indicator: outline;--touch-target: 44px;/* Design philosophy */--design-philosophy: \"chaotic\";--depth-philosophy: \"immersive\";--genome-entropy: 0.719;/* Font system (3 fonts, expressive_pair strategy) */--font-anchor: 'Asta Sans, system-ui, -apple-system, sans-serif';--font-body: 'Noto Sans Soyombo, Arial, sans-serif';--font-accent: 'Noto Sans Soyombo, Arial, sans-serif';--font-count: 3;/* Opacity philosophy */--opacity-primary:   1.0;--opacity-secondary: 0.65;--opacity-tertiary:  0.38;--opacity-ghost:     0.06;--opacity-border:    0.12;--opacity-image:     0.92;}\n/* OKLCH Color Palette — tetradic harmony */@supports (color: oklch(0 0 0)) {\n  :root {\n  --palette-1: oklch(0.450 0.231 348.0); /* berry — primary */\n  --palette-2: oklch(0.520 0.185 78.0); /* chartreuse — secondary */\n  --palette-3: oklch(0.520 0.185 168.0); /* seafoam — accent */\n  --palette-4: oklch(0.520 0.185 258.0); /* cobalt — surface */\n  --palette-5: oklch(0.950 0.012 348.0); /* snow — background */\n  --palette-6: oklch(0.700 0.162 358.0); /* blush — surface */\n  --palette-7: oklch(0.320 0.111 153.0); /* teal — surface */\n  }\n}\n\n:root {\n  --palette-1: hsl(321, 100.0%, 32.2%); /* berry fallback */\n  --palette-2: hsl(31, 100.0%, 31.4%); /* chartreuse fallback */\n  --palette-3: hsl(157, 100.0%, 26.5%); /* seafoam fallback */\n  --palette-4: hsl(214, 88.2%, 43.3%); /* cobalt fallback */\n  --palette-5: hsl(330, 33.3%, 94.1%); /* snow fallback */\n  --palette-6: hsl(337, 75.8%, 67.6%); /* blush fallback */\n  --palette-7: hsl(137, 100.0%, 12.9%); /* teal fallback */\n}\n\n:root {\n/* Semantic palette aliases */\n  --color-bg:         var(--palette-5); /* snow */\n  --color-primary:    var(--palette-1); /* berry */\n  --color-accent:     var(--palette-3); /* seafoam */\n  --color-neutral:    var(--palette-4); /* cobalt */\n  --color-text:       var(--palette-7); /* teal */\n\n/* color-mix() derived variants */\n  --color-primary-10:  color-mix(in oklch, var(--color-primary) 10%, transparent);\n  --color-primary-20:  color-mix(in oklch, var(--color-primary) 20%, transparent);\n  --color-primary-50:  color-mix(in oklch, var(--color-primary) 50%, transparent);\n  --color-accent-10:   color-mix(in oklch, var(--color-accent) 10%, transparent);\n  --color-accent-on-dark: color-mix(in oklch, var(--color-accent) 85%, white);\n  --color-neutral-10:  color-mix(in oklch, var(--color-neutral) 10%, transparent);\n  --color-surface:     color-mix(in oklch, var(--color-bg) 85%, var(--color-primary));\n}\n/* Font system */:root {\n  /* Font system — 3 fonts */\n  --font-anchor: 'Asta Sans, system-ui, -apple-system, sans-serif';   /* display headlines, large statements */\n  --font-body:   'Noto Sans Soyombo, Arial, sans-serif';   /* long-form reading, UI labels */\n  --font-accent: 'Noto Sans Soyombo, Arial, sans-serif';   /* numbers, code, labels, pull quotes */\n}\n/* Grain overlay — chaotic depth philosophy */.grain-overlay {\n  position: fixed; inset: 0; pointer-events: none; z-index: 9999;\n  opacity: 0.073;\n  background-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.669' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='1'/></svg>\");\n  mix-blend-mode: overlay;\n}/* Grid */.container {\nmax-width: 1011px;\nmargin-inline: auto;\npadding-inline: var(--spacing-lg);\n}.grid {\ndisplay: grid;\ngap: var(--spacing-md);\ngrid-template-columns: repeat(4, 1fr);\n}.text-display {\nfont-family: var(--font-display);\nfont-size: var(--text-display);\nline-height: var(--leading-display);\nfont-weight: 700;\n}.text-h1 {\nfont-family: var(--font-display);\nfont-size: var(--text-h1);\nline-height: var(--leading-h1);\nfont-weight: 700;\n}.btn {\ndisplay: inline-flex;\nalign-items: center;\njustify-content: center;\ngap: var(--spacing-xs);\npadding: var(--spacing-lg) var(--spacing-xl);\nfont-size: var(--text-body);\nfont-weight: 500;\nborder-radius: var(--radius-md);\nborder: none;\ncursor: pointer;\ntransition: all var(--duration-fast) var(--ease-smooth);\n}.btn-primary {\nbackground: var(--color-primary);\ncolor: white;\n}.btn-primary:hover {\nbackground: var(--color-primary-600);\ntransform: translateY(-3px);\n}/* Iconography - ch28 */:root {\n--icon-size: 0.93em;\n--icon-stroke: 1.5px;\n--icon-color: var(--color-secondary);\n--icon-radius: var(--radius-sm);\n}.icon {\nwidth: var(--icon-size);\nheight: var(--icon-size);\nstroke: var(--icon-color);\nstroke-width: var(--icon-stroke);\nfill: var(--icon-color);\ncolor: var(--icon-color);\nflex-shrink: 0;\n}@keyframes icon-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }\n.icon-animate { animation: icon-bounce 1s ease-in-out infinite; }/* Responsive */@media (max-width: 748px) {\n.hero {\nmin-height: auto;\npadding: var(--spacing-xl) 0;\n}\n.hero-content {\nwidth: 100% !important;\nmargin-left: 0 !important;\ntext-align: center;\n}\n.hero-visual {\nposition: relative;\nwidth: 100%;\nheight: 288px;\nmargin-top: var(--spacing-lg);\n}\n.grid,\n.features-grid,\n.trust-grid,\n.hero-services-grid,\n.footer-grid {\ngrid-template-columns: 1fr;\n}\n.hero-stats {\ngrid-template-columns: 1fr;\ngap: var(--spacing-md);\n}\n.testimonials-grid {\ngrid-template-columns: 1fr;\n}\n.nav-links {\ndisplay: none;\n}\n.hero-ctas {\njustify-content: center;\n}\n}@media (min-width: 749px) and (max-width: 1072px) {\n.grid {\ngrid-template-columns: repeat(2, 1fr);\n}\n.hero-content {\nwidth: 60%;\n}\n}@media (min-width: 1384px) {\n.container {\nmax-width: 1399px;\n}\n}.fx-atmosphere { /* ch13 fx: none — intensity: 0.26 */ }/* Star: color_field — A section of pure intense colour — the palette becomes the hero. */\n:root {\n  --star-type: color_field;\n  --star-width: 100%;\n  --star-height: 100vh;\n  --star-cta-anchor: below_center;\n}\n.hero-star {\n  width: var(--star-width);\n  height: var(--star-height);\n  max-width: 100%;\n  position: relative;\n}\n\n.hero-star-color-field {\n  position: absolute; inset: 0; z-index: 0;\n  background: var(--color-primary);\n}/* ── Section Mode System ────────────────────────────────────────────────── */\n/* All values reference genome CSS vars — no hardcoded colours or sizes.    */\n\n/* loud — full-bleed, asymmetric, vivid, dense */\n[data-mode=\"loud\"] {\n  padding: var(--spacing-lg) 0;\n  background: linear-gradient(\n    var(--gradient-dir, 135deg),\n    var(--color-primary),\n    var(--color-accent)\n  );\n  color: var(--color-on-primary);\n  overflow: hidden;\n}\n[data-mode=\"loud\"] .section-headline {\n  font-size: var(--size-display-xl, clamp(3rem, 8vw, 10rem));\n  font-weight: var(--weight-display, 900);\n  letter-spacing: var(--tracking-display, -0.03em);\n  line-height: var(--leading-display, 0.9);\n  font-family: var(--font-anchor);\n}\n\n/* quiet — centred narrow, generous space */\n[data-mode=\"quiet\"] {\n  max-width: 65ch;\n  margin-inline: auto;\n  padding: var(--spacing-2xl) var(--spacing-md);\n}\n[data-mode=\"quiet\"] .section-headline {\n  font-size: var(--size-display-sm, clamp(1.75rem, 3vw, 3rem));\n  font-weight: var(--weight-body, 400);\n  letter-spacing: var(--tracking-tight, -0.01em);\n  font-family: var(--font-anchor);\n  color: var(--color-text);\n}\n[data-mode=\"quiet\"] .section-body {\n  font-size: var(--size-body-lg, clamp(1rem, 1.5vw, 1.25rem));\n  line-height: var(--leading-body, 1.7);\n  font-family: var(--font-body, var(--font-anchor));\n  color: var(--color-text);\n  opacity: var(--opacity-secondary);\n}\n\n/* data — grid/bento, structured, numbers first */\n[data-mode=\"data\"] {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n  gap: var(--spacing-md);\n  padding: var(--spacing-xl) var(--spacing-lg);\n  background: var(--color-surface);\n}\n[data-mode=\"data\"] .stat-value {\n  font-size: var(--size-display-lg, clamp(2.5rem, 6vw, 7rem));\n  font-weight: var(--weight-display, 900);\n  font-family: var(--font-accent, var(--font-anchor));\n  font-variant-numeric: tabular-nums;\n  color: var(--color-primary);\n}\n[data-mode=\"data\"] .stat-label {\n  font-size: var(--size-label, clamp(0.75rem, 1.2vw, 1rem));\n  font-family: var(--font-body, var(--font-anchor));\n  color: var(--color-text);\n  opacity: var(--opacity-tertiary);\n  letter-spacing: 0.08em;\n  text-transform: uppercase;\n}\n\n/* editorial — magazine, pull quote, unequal columns */\n[data-mode=\"editorial\"] {\n  display: grid;\n  grid-template-columns: 1fr 1.6fr;\n  gap: var(--spacing-xl);\n  padding: var(--spacing-xl) var(--spacing-lg);\n  align-items: start;\n  background: var(--color-bg);\n}\n@media (max-width: 768px) {\n  [data-mode=\"editorial\"] { grid-template-columns: 1fr; }\n}\n[data-mode=\"editorial\"] .pull-quote {\n  font-size: var(--size-display-sm, clamp(1.5rem, 3vw, 3rem));\n  font-family: var(--font-anchor);\n  font-weight: var(--weight-display, 700);\n  letter-spacing: var(--tracking-tight, -0.02em);\n  border-left: var(--line-weight, 3px) solid var(--color-primary);\n  padding-left: var(--spacing-md);\n  color: var(--color-text);\n  font-style: italic;\n}\n\n/* cinematic — full viewport, one phrase, maximum impact */\n[data-mode=\"cinematic\"] {\n  min-height: 100vh;\n  display: grid;\n  place-items: center;\n  position: relative;\n  overflow: hidden;\n  background: var(--strata-bg, var(--color-bg));\n}\n[data-mode=\"cinematic\"] .section-headline {\n  font-size: var(--size-display-max, clamp(5rem, 15vw, 18rem));\n  font-weight: var(--weight-display, 900);\n  letter-spacing: var(--tracking-ultra, -0.04em);\n  line-height: var(--leading-display, 0.85);\n  font-family: var(--font-anchor);\n  color: var(--color-on-surface-dark, var(--color-on-primary));\n  text-align: center;\n}\n\n/* technical — code-style, monospace, dark terminal */\n[data-mode=\"technical\"] {\n  padding: var(--spacing-xl) var(--spacing-lg);\n  background: var(--strata-bg, color-mix(in oklch, var(--color-bg) 95%, black));\n  color: var(--color-terminal, color-mix(in oklch, var(--color-primary) 80%, oklch(0.9 0.1 150)));\n}\n[data-mode=\"technical\"] * {\n  font-family: var(--font-accent, var(--font-anchor));\n}\n[data-mode=\"technical\"] .section-headline {\n  font-size: var(--size-display-sm, clamp(1.5rem, 3vw, 2.5rem));\n  font-weight: var(--weight-body, 400);\n  letter-spacing: 0.02em;\n  opacity: var(--opacity-secondary);\n}\n[data-mode=\"technical\"] .code-prefix {\n  opacity: var(--opacity-tertiary);\n}\n\n/* social — logo wall, testimonials, faces */\n[data-mode=\"social\"] {\n  padding: var(--spacing-xl) var(--spacing-lg);\n  background: var(--color-surface);\n}\n[data-mode=\"social\"] .logo-grid {\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--spacing-lg);\n  align-items: center;\n  justify-content: center;\n  opacity: var(--opacity-secondary);\n}\n[data-mode=\"social\"] .testimonial-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n  gap: var(--spacing-md);\n}\n\n/* action — CTA-focused, convert */\n[data-mode=\"action\"] {\n  padding: var(--spacing-2xl) var(--spacing-lg);\n  text-align: center;\n  background: var(--color-accent);\n  color: var(--color-on-accent, var(--color-on-primary));\n}\n[data-mode=\"action\"] .cta-headline {\n  font-size: var(--size-display-md, clamp(2rem, 5vw, 5rem));\n  font-weight: var(--weight-display, 900);\n  letter-spacing: var(--tracking-tight, -0.02em);\n  font-family: var(--font-anchor);\n  margin-bottom: var(--spacing-md);\n}\n[data-mode=\"action\"] .btn-primary {\n  font-size: var(--size-body-lg, clamp(1rem, 2vw, 1.375rem));\n  padding: 1em 2.5em;\n  border-radius: var(--radius-full);\n  background: var(--color-on-accent, var(--color-surface));\n  color: var(--color-accent);\n  font-weight: var(--weight-display, 700);\n  border: none;\n  cursor: pointer;\n  transition: transform var(--duration-fast, 0.2s), box-shadow var(--duration-fast, 0.2s);\n}\n[data-mode=\"action\"] .btn-primary:hover {\n  transform: scale(1.04);\n  box-shadow: var(--shadow-elevation-2, 0 8px 24px color-mix(in oklch, var(--color-accent) 30%, transparent));\n}\n\n/* parity alternation for color_band and spacing_scale rhythms */\n[data-parity=\"odd\"]  { background: var(--band-odd, var(--color-bg)); }\n[data-parity=\"even\"] { background: var(--band-even, var(--color-surface)); }/* Rhythm: color_band */\n:root {\n  --band-odd: var(--color-bg);\n  --band-even: var(--color-surface);\n  --rhythm-pattern: color_band;\n}\n[data-parity=\"odd\"]  { background: var(--band-odd); }\n[data-parity=\"even\"] { background: var(--band-even); }/* Depth Philosophy: immersive */\n\n/* Active techniques: white_space_depth, shadow_strata, midground_shapes, ghost_text_bg, parallax_layers, css_3d_card_tilt, shadow_typography, blend_mode_overlay, scroll_clip_reveal, sticky_depth, drop_cap, grain_subtle, noise_texture_surface */\n\n/* depth: white_space_depth */\n.section { padding-block: var(--spacing-section); }\n\n/* depth: shadow_strata */\n:root {\n  --shadow-ambient:  0 1px 2px color-mix(in oklch, var(--color-primary) 8%, black);\n  --shadow-penumbra: 0 4px 12px color-mix(in oklch, var(--color-primary) 6%, black);\n  --shadow-diffuse:  0 12px 32px color-mix(in oklch, var(--color-primary) 4%, black);\n  --shadow-elevation-1: var(--shadow-ambient), var(--shadow-penumbra);\n  --shadow-elevation-2: var(--shadow-ambient), var(--shadow-penumbra), var(--shadow-diffuse);\n}\n.card, .panel { box-shadow: var(--shadow-elevation-1); }\n.card:hover   { box-shadow: var(--shadow-elevation-2); transition: box-shadow var(--duration-fast, 0.25s) ease; }\n\n/* depth: midground_shapes */\n.midground-shape {\n  position: absolute;\n  width: var(--shape-size, clamp(200px, 35vw, 500px));\n  aspect-ratio: 1;\n  border-radius: var(--motif-radius, 50%);\n  background: color-mix(in oklch, var(--color-primary) var(--midground-opacity-pct, 8%), transparent);\n  filter: blur(var(--midground-blur, 40px));\n  pointer-events: none;\n}\n\n/* depth: ghost_text_bg */\n.ghost-text {\n  position: absolute;\n  font-size: var(--size-display-max, clamp(8rem, 25vw, 22rem));\n  font-weight: var(--weight-display, 900);\n  font-family: var(--font-anchor);\n  letter-spacing: var(--tracking-ultra, -0.05em);\n  opacity: var(--opacity-ghost);\n  pointer-events: none;\n  user-select: none;\n  color: var(--color-primary);\n  line-height: 0.85;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n/* depth: parallax_layers */\n[data-speed] { will-change: transform; }\n\n/* depth: css_3d_card_tilt */\n.tilt-card {\n  transform-style: preserve-3d;\n  transition: transform var(--duration-fast, 0.25s) ease-out, box-shadow var(--duration-fast, 0.25s) ease-out;\n  will-change: transform;\n}\n.tilt-card:hover { box-shadow: var(--shadow-elevation-2); }\n.tilt-card[style] { transform: rotateX(calc(var(--rx, 0) * 1deg)) rotateY(calc(var(--ry, 0) * 1deg)); }\n\n/* depth: shadow_typography */\n.display-type {\n  text-shadow:\n    2px 2px 0 color-mix(in oklch, var(--color-primary) var(--text-shadow-near, 15%), transparent),\n    4px 4px 0 color-mix(in oklch, var(--color-primary) var(--text-shadow-mid, 10%), transparent),\n    8px 8px 16px color-mix(in oklch, black var(--text-shadow-far, 20%), transparent);\n}\n\n/* depth: blend_mode_overlay */\n.blend-multiply { mix-blend-mode: multiply; }\n.blend-overlay  { mix-blend-mode: overlay; }\n.blend-screen   { mix-blend-mode: screen; }\n\n/* depth: scroll_clip_reveal */\n.clip-reveal { clip-path: inset(0 100% 0 0); transition: clip-path var(--duration-slow, 0.7s) var(--easing-standard); }\n.clip-reveal.is-visible { clip-path: inset(0 0% 0 0); }\n\n/* depth: sticky_depth */\n.sticky-section {\n  position: sticky; top: 0;\n  z-index: calc(var(--z-sticky-base, 10) - var(--section-index, 0));\n  transition: transform var(--duration-normal, 0.3s), opacity var(--duration-normal, 0.3s);\n}\n\n/* depth: drop_cap */\n.prose p:first-of-type::first-letter {\n  font-size: var(--size-drop-cap, clamp(3rem, 6vw, 5rem));\n  font-weight: var(--weight-display, 900);\n  line-height: 0.8; float: left;\n  margin-right: 0.15em;\n  color: var(--color-accent);\n  font-family: var(--font-anchor);\n}\n\n/* depth: grain_subtle */\n.grain-overlay {\n  position: fixed; inset: 0; pointer-events: none; z-index: var(--z-grain, 9999);\n  opacity: var(--grain-opacity, 0.025);\n  background-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='var(--grain-freq, 0.65)' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>\");\n  mix-blend-mode: var(--grain-blend, soft-light);\n}\n\n/* depth: noise_texture_surface */\n.textured-surface { position: relative; isolation: isolate; }\n.textured-surface::after {\n  content: ''; position: absolute; inset: 0; pointer-events: none;\n  background-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>\");\n  opacity: var(--noise-opacity-surface, 0.04);\n  mix-blend-mode: soft-light;\n  border-radius: inherit;\n}",
+  "selectedLibraries": {
+    "animation": "aos",
+    "organism": "@radix-ui/react-primitive",
+    "interaction": "focus-trap-react",
+    "charts": null
+  },
+  "libraries": {
+    "animation": {
+      "name": "AOS",
+      "package": "aos",
+      "style": "scroll",
+      "bundle_size": "~13kb",
+      "license": "MIT",
+      "description": "Animate on scroll — dead-simple data-attribute API, 20+ preset animations",
+      "choreography": [
+        "smooth",
+        "snappy"
+      ],
+      "import_example": "import AOS from \"aos\"; import \"aos/dist/aos.css\"; AOS.init();",
+      "usage_example": "<div data-aos=\"fade-up\" data-aos-duration=\"800\" data-aos-delay=\"100\">...</div>",
+      "cdn": "https://cdn.jsdelivr.net/npm/aos@latest/dist/aos.css",
+      "note": "/* ── Animation Library ───────────────────────────────────────\n   Library  : AOS\n   Style    : scroll — Animate on scroll — dead-simple data-attribute API, 20+ preset animations\n   Package  : aos\n   Size     : ~13kb\n   License  : MIT\n   Timing   : smooth, snappy\n\n   Install  : npm install aos\n   Import   : import AOS from \"aos\"; import \"aos/dist/aos.css\"; AOS.init();\n\n   Usage    :\n   <div data-aos=\"fade-up\" data-aos-duration=\"800\" data-aos-delay=\"100\">...</div>\n   CDN      : https://cdn.jsdelivr.net/npm/aos@latest/dist/aos.css\n─────────────────────────────────────────────────────────── */"
+    },
+    "organism": {
+      "primary": {
+        "name": "Radix UI Primitives",
+        "package": "@radix-ui/react-primitive",
+        "philosophy": "headless",
+        "installCmd": "npm i @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-tooltip",
+        "importExample": "import * as Dialog from '@radix-ui/react-dialog';\nimport * as DropdownMenu from '@radix-ui/react-dropdown-menu';",
+        "combinableWith": [
+          "@floating-ui/react",
+          "tailwindcss",
+          "css_modules",
+          "@vanilla-extract/css",
+          "@use-gesture/react"
+        ]
+      },
+      "alternative": {
+        "name": "Floating UI",
+        "package": "@floating-ui/react",
+        "philosophy": "positioning",
+        "installCmd": "npm i @floating-ui/react",
+        "importExample": "import { useFloating, autoUpdate, offset, flip, shift } from '@floating-ui/react';",
+        "combinableWith": [
+          "react-aria-components",
+          "@radix-ui/react-primitive",
+          "@ark-ui/react",
+          "@headlessui/react",
+          "@chakra-ui/react"
+        ]
+      },
+      "also_consider": [
+        {
+          "name": "Ark UI",
+          "package": "@ark-ui/react",
+          "philosophy": "headless"
+        },
+        {
+          "name": "daisyUI",
+          "package": "daisyui",
+          "philosophy": "styled"
+        },
+        {
+          "name": "Headless UI",
+          "package": "@headlessui/react",
+          "philosophy": "headless"
+        }
+      ]
+    },
+    "interaction": {
+      "primary": {
+        "name": "focus-trap-react",
+        "package": "focus-trap-react",
+        "domain": [
+          "focus_management"
+        ],
+        "installCmd": "npm i focus-trap-react",
+        "importExample": "import FocusTrap from 'focus-trap-react';",
+        "combinableWith": [
+          "react-aria-components",
+          "@ark-ui/react",
+          "@radix-ui/react-dialog",
+          "tinykeys"
+        ]
+      },
+      "alternative": {
+        "name": "TanStack Virtual",
+        "package": "@tanstack/react-virtual",
+        "domain": [
+          "virtual_scroll"
+        ],
+        "installCmd": "npm i @tanstack/react-virtual",
+        "importExample": "import { useVirtualizer } from '@tanstack/react-virtual';",
+        "combinableWith": [
+          "@tanstack/react-table",
+          "@dnd-kit/core",
+          "recharts",
+          "@nivo/core"
+        ]
+      },
+      "coverage": [
+        "focus_management",
+        "virtual_scroll"
+      ],
+      "all_ranked": [
+        {
+          "name": "focus-trap-react",
+          "package": "focus-trap-react",
+          "domain": [
+            "focus_management"
+          ]
+        },
+        {
+          "name": "TanStack Virtual",
+          "package": "@tanstack/react-virtual",
+          "domain": [
+            "virtual_scroll"
+          ]
+        },
+        {
+          "name": "tinykeys",
+          "package": "tinykeys",
+          "domain": [
+            "keyboard"
+          ]
+        },
+        {
+          "name": "hotkeys-js",
+          "package": "hotkeys-js",
+          "domain": [
+            "keyboard"
+          ]
+        },
+        {
+          "name": "Pragmatic Drag and Drop",
+          "package": "@atlaskit/pragmatic-drag-and-drop",
+          "domain": [
+            "drag_drop"
+          ]
+        },
+        {
+          "name": "Virtua",
+          "package": "virtua",
+          "domain": [
+            "virtual_scroll"
+          ]
+        }
+      ]
+    },
+    "charts": null
+  },
+  "usage": {
+    "whenCivilizationReady": "Add complexity (dashboard, 3D, real-time keywords) or increase counts to reach threshold 0.81",
+    "componentHierarchy": "Fauna contain Flora contain Microbial — use relationships.containment for composition",
+    "implementation": "Each organism is a component spec. Implement from its prop contract and colorTreatment — the agent writes the actual code.",
+    "componentHierarchyGuide": "Composition depth: microbial (atoms) → flora (composites) → fauna (complex). Check relationships.containment — fauna contain flora contain microbial. This is component composition depth, not page structure."
+  },
+  "chromosome_utilization": {
+    "layer": "L2_Ecosystem",
+    "total_chromosomes": 12,
+    "used": [
+      "eco_ch1_biome",
+      "eco_ch2_energy",
+      "eco_ch3_symbiosis",
+      "eco_ch4_trophic",
+      "eco_ch5_succession",
+      "eco_ch6_adaptation",
+      "eco_ch7_population",
+      "eco_ch8_temporal",
+      "eco_ch9_spatial",
+      "eco_ch10_capacity",
+      "eco_ch11_mutation",
+      "eco_ch12_expressiveness"
+    ],
+    "unused": [],
+    "utilizationRate": 100,
+    "warning": null,
+    "critical_note": "L2 chromosomes control organism hierarchy (biome, energy, symbiosis, trophic). You MUST apply all 12 when building components.",
+    "all_chromosomes": [
+      "eco_ch1_biome",
+      "eco_ch2_energy",
+      "eco_ch3_symbiosis",
+      "eco_ch4_trophic",
+      "eco_ch5_succession",
+      "eco_ch6_adaptation",
+      "eco_ch7_population",
+      "eco_ch8_temporal",
+      "eco_ch9_spatial",
+      "eco_ch10_capacity",
+      "eco_ch11_mutation",
+      "eco_ch12_expressiveness"
+    ],
+    "checklist": {
+      "eco_ch1_biome": "✓ USED",
+      "eco_ch2_energy": "✓ USED",
+      "eco_ch3_symbiosis": "✓ USED",
+      "eco_ch4_trophic": "✓ USED",
+      "eco_ch5_succession": "✓ USED",
+      "eco_ch6_adaptation": "✓ USED",
+      "eco_ch7_population": "✓ USED",
+      "eco_ch8_temporal": "✓ USED",
+      "eco_ch9_spatial": "✓ USED",
+      "eco_ch10_capacity": "✓ USED",
+      "eco_ch11_mutation": "✓ USED",
+      "eco_ch12_expressiveness": "✓ USED"
+    },
+    "guide": "Apply all 12 L2 chromosomes to your component architecture. Containment depth: microbial inside flora inside fauna."
+  }
+}

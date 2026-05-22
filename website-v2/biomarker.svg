@@ -1,0 +1,18 @@
+<svg viewBox="0 0 100 100" class="w-full h-full text-current" xmlns="http://www.w3.org/2000/svg"
+  data-shape-family="geometric"
+  data-anim="static"
+  data-complexity="0.000"
+  data-dna="7aab6631">
+  <!-- Genome Biomarker — geometric/static — technology -->
+  <g stroke-width="4.0" fill="none" stroke="currentColor">
+    <path d="M 20 40 L 80 40" stroke-width="3.5" />
+<path d="M 40 20 L 40 80" stroke-width="3.5" />
+<polygon points="20,40 40,60 60,40" stroke-width="4.0" />
+<polygon points="60,60 80,40 60,20" stroke-width="4.0" />
+<line x1="40" y1="20" x2="60" y2="80" stroke-width="4.5" />
+<line x1="60" y1="20" x2="40" y2="80" stroke-width="4.5" />
+<circle cx="50" cy="50" r="10" fill="currentColor" />
+<path d="M 30 50 L 50 70 L 70 50" stroke-width="4.0" />
+<path d="M 50 30 L 70 50 L 50 70" stroke-width="4.0" />
+  </g>
+</svg>

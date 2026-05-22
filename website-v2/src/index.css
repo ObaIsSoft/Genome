@@ -1,0 +1,81 @@
+@import './tokens.css';
+@import './component-tokens.css';
+@import './mobile.css';
+
+/* Genome Base Overrides / Boilerplate Reset */
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+/* Base link styles */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast, 0.2s) var(--ease-smooth, ease);
+}
+a:hover {
+  color: var(--color-primary-600, var(--color-primary));
+}
+
+/* Layout - from Genome page-composition.json */
+:root {
+  --sidebar-width: 280px;
+}
+.docs-layout { 
+  display: grid; 
+  grid-template-columns: var(--sidebar-width) 1fr; 
+}
+@media (max-width: 768px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+  }
+  .nav-sidebar-persistent {
+    display: none; /* Mobile nav would go here */
+  }
+}
+
+/* Sidebar - from Genome */
+.nav-sidebar-persistent { 
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  bottom: 0; 
+  width: var(--sidebar-width, 280px); 
+  background: var(--color-surface); 
+  border-right: 1px solid color-mix(in oklch, var(--color-text) 10%, transparent); 
+  overflow-y: auto; 
+  z-index: 50; 
+}
+.nav-sidebar-header { padding: 1.5rem; border-bottom: 1px solid color-mix(in oklch, var(--color-text) 10%, transparent); }
+.nav-sidebar-links { padding: 1rem 0; display: flex; flexDirection: column; }
+.nav-link { display: block; padding: 0.75rem 1.5rem; color: var(--color-text); font-weight: 500; font-family: var(--font-accent); }
+.nav-link:hover, .nav-link.active { background: var(--color-primary-10); color: var(--color-primary); border-right: 3px solid var(--color-primary); }
+.nav-sidebar-footer { position: absolute; bottom: 0; width: 100%; padding: 1rem 1.5rem; border-top: 1px solid color-mix(in oklch, var(--color-text) 10%, transparent); background: var(--color-surface); }
+
+/* Footer - from Genome */
+.footer-multi-column { background: var(--color-surface-elevated); border-top: 1px solid color-mix(in oklch, var(--color-text) 10%, transparent); padding: 4rem 2rem 2rem; }
+.footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 3rem; }
+.footer-brand { max-width: 280px; }
+.footer-logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; display: block; margin-bottom: 0.5rem; }
+.footer-tagline { color: var(--color-text-secondary); font-size: 0.9375rem; line-height: 1.5; margin-top: 1rem; }
+.footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid color-mix(in oklch, var(--color-text) 10%, transparent); text-align: center; color: var(--color-text-tertiary); font-size: 0.875rem; }
+@media (max-width: 1024px) { .footer-container { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .footer-container { grid-template-columns: 1fr; } }
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

@@ -1,0 +1,17 @@
+{
+  "ecoAnimationLibrary": {
+    "name": "AOS"
+  },
+  "organismSelection": {
+    "primary": "Radix UI Primitives",
+    "alternative": "Floating UI"
+  },
+  "interactionSelection": {
+    "primary": "focus-trap-react",
+    "alternative": "TanStack Virtual"
+  },
+  "chartSelection": {
+    "primary": "Recharts",
+    "alternative": "Tremor"
+  }
+}

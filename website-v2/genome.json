@@ -1,0 +1,1605 @@
+{
+  "genome": {
+    "dnaHash": "7aab6631671779ad0b25f3d39f35dab4f8b8e12b4a4c3caea937f6507f7ed83f",
+    "traits": {
+      "informationDensity": 0.8,
+      "temporalUrgency": 0.2,
+      "emotionalTemperature": 0.4,
+      "playfulness": 0.2,
+      "spatialDependency": 0.3,
+      "trustRequirement": 0.7,
+      "visualEmphasis": 0.6,
+      "conversionFocus": 0.3
+    },
+    "sectorContext": {
+      "primary": "technology",
+      "secondary": null,
+      "subSector": "technology_infrastructure"
+    },
+    "chromosomes": {
+      "ch0_sector_primary": {
+        "sector": "technology",
+        "influence": 0.5
+      },
+      "ch0_sector_secondary": {
+        "sector": null,
+        "influence": 0
+      },
+      "ch0_sub_sector": {
+        "classification": "technology_infrastructure",
+        "confidence": 0.85,
+        "keywords": [
+          "data-rich",
+          "structured",
+          "tabular",
+          "editorial",
+          "long-form",
+          "archival",
+          "evergreen",
+          "timeless",
+          "professional",
+          "corporate",
+          "neutral",
+          "clean",
+          "restrained",
+          "trusted",
+          "verified",
+          "secure"
+        ]
+      },
+      "ch0_brand_weight": {
+        "brandVsSector": 0.7,
+        "appliedOverrides": []
+      },
+      "ch1_structure": {
+        "hasSections": true,
+        "sectionCount": 7,
+        "topology": "flat",
+        "maxNesting": 1,
+        "scrollBehavior": "continuous",
+        "breakpointStrategy": "fluid",
+        "contentFlow": "f_pattern"
+      },
+      "ch2_rhythm": {
+        "density": "airtight",
+        "baseSpacing": 12,
+        "sectionSpacing": 48,
+        "componentSpacing": 6,
+        "verticalRhythm": 4,
+        "negativeSpaceRatio": 0.19999999999999996
+      },
+      "ch3_type_display": {
+        "family": "Asta Sans, system-ui, -apple-system, sans-serif",
+        "displayName": "Asta Sans",
+        "importUrl": "https://fonts.bunny.net/css?family=asta-sans:400,700&display=swap",
+        "provider": "bunny",
+        "charge": "geometric",
+        "weight": 700,
+        "fallback": "system-ui, -apple-system, sans-serif",
+        "tracking": "tight",
+        "casing": "small_caps"
+      },
+      "ch4_type_body": {
+        "family": "Noto Sans Soyombo, Arial, sans-serif",
+        "displayName": "Noto Sans Soyombo",
+        "importUrl": "https://fonts.bunny.net/css?family=noto-sans-soyombo:400,700&display=swap",
+        "provider": "bunny",
+        "charge": "grotesque",
+        "xHeightRatio": 0.50859375,
+        "contrast": 0.8578125000000001,
+        "fallback": "Arial, sans-serif",
+        "optimalLineLength": "narrow",
+        "paragraphSpacing": 1.6,
+        "hyphenation": false
+      },
+      "ch5_color_primary": {
+        "hue": 348,
+        "saturation": 0.66,
+        "lightness": 0.42,
+        "darkModeLightness": 0.74,
+        "temperature": "warm",
+        "hex": "#b02440",
+        "darkModeHex": "#e991a2",
+        "sectorAppropriate": true
+      },
+      "ch6_color_temp": {
+        "backgroundTemp": "neutral",
+        "contrastRatio": 11.6875,
+        "surfaceColor": "#dfdfdf",
+        "elevatedSurface": "#cbcbcb",
+        "isDark": false,
+        "accentColor": "#50bd28",
+        "surfaceStack": [
+          "#f6f6f6",
+          "#dfdfdf",
+          "#cbcbcb",
+          "#a3a3a3"
+        ]
+      },
+      "ch7_edge": {
+        "radius": 6,
+        "style": "organic",
+        "variableRadius": false,
+        "componentRadius": 4,
+        "imageRadius": 2,
+        "asymmetric": false
+      },
+      "ch8_motion": {
+        "physics": "none",
+        "durationScale": 1.7328125,
+        "staggerDelay": 0.0703125,
+        "enterDirection": "spiral",
+        "exitBehavior": "rotate_out",
+        "hoverIntensity": 0.1,
+        "reducedMotionFallback": "none"
+      },
+      "ch27_motion_choreography": {
+        "entrySequence": "cascade_up",
+        "staggerInterval": 35,
+        "scrollTrigger": {
+          "triggerPoint": 0.375,
+          "scrubIntensity": 0.94921875
+        },
+        "hoverMicrointeraction": {
+          "type": "lift",
+          "intensity": 0.2834375,
+          "duration": 311
+        },
+        "pageTransition": "fade",
+        "choreographyStyle": "snappy"
+      },
+      "ch9_grid": {
+        "logic": "broken",
+        "asymmetry": 0.61953125,
+        "columns": 4,
+        "gap": 31,
+        "mobileColumns": 2,
+        "alignment": "start"
+      },
+      "ch10_hierarchy": {
+        "depth": "flat",
+        "zIndexBehavior": "isolation",
+        "layerBlur": 7.1875,
+        "elevationSystem": "material",
+        "shadowScale": 0.09843750000000001,
+        "depthCues": "none"
+      },
+      "ch11_texture": {
+        "surface": "flat",
+        "noiseLevel": 0.484375,
+        "grainFrequency": 0.263671875,
+        "overlayBlend": "overlay",
+        "animatedTexture": false
+      },
+      "ch12_signature": {
+        "entropy": 0.71875,
+        "uniqueMutation": "7aab6631",
+        "variantSeed": 0.87890625,
+        "designPhilosophy": "chaotic",
+        "depthPhilosophy": "immersive",
+        "variationSequence": "mixed_chaos",
+        "rhythmPattern": "color_band"
+      },
+      "ch28_iconography": {
+        "style": "filled",
+        "strokeWeight": "regular",
+        "cornerTreatment": "rounded",
+        "sizeScale": 0.9328125,
+        "library": "lucide",
+        "colorTreatment": "secondary",
+        "animation": "bounce"
+      },
+      "ch13_atmosphere": {
+        "fx": "none",
+        "intensity": 0.263671875,
+        "enabled": false,
+        "coverage": "element",
+        "performanceBudget": "low"
+      },
+      "ch14_physics": {
+        "material": "matte",
+        "roughness": 0.134375,
+        "metalness": 0.09531250000000001,
+        "transmission": 0,
+        "emissive": false,
+        "enabled": false
+      },
+      "ch15_biomarker": {
+        "geometry": "monolithic",
+        "shapeFamily": "geometric",
+        "animationStyle": "static",
+        "polycount": "low",
+        "colorTreatment": "monochrome",
+        "complexity": 0,
+        "enabled": false,
+        "usage": "none"
+      },
+      "ch16_typography": {
+        "display": {
+          "size": "39px",
+          "lineHeight": "1.60",
+          "letterSpacing": "-0.01em"
+        },
+        "h1": {
+          "size": "31px",
+          "lineHeight": "1.64",
+          "letterSpacing": "-0.006em"
+        },
+        "h2": {
+          "size": "25px",
+          "lineHeight": "1.68",
+          "letterSpacing": "-0.004em"
+        },
+        "h3": {
+          "size": "20px",
+          "lineHeight": "1.72",
+          "letterSpacing": "-0.002em"
+        },
+        "body": {
+          "size": "16px",
+          "lineHeight": "1.80",
+          "letterSpacing": "0em"
+        },
+        "small": {
+          "size": "14px",
+          "lineHeight": "1.76",
+          "letterSpacing": "-0.004em"
+        },
+        "ratio": 1.25,
+        "baseSize": 16
+      },
+      "ch17_accessibility": {
+        "minContrastRatio": 7,
+        "focusIndicator": "outline",
+        "respectMotionPreference": true,
+        "minTouchTarget": 44,
+        "screenReaderOptimized": true
+      },
+      "ch18_rendering": {
+        "primary": "hybrid_canvas",
+        "fallback": "css",
+        "animate": false,
+        "complexity": "extreme",
+        "antialias": "none",
+        "hdr": false,
+        "shadowQuality": "hard"
+      },
+      "ch19_hero_type": {
+        "hasHero": false,
+        "type": "product_ui",
+        "variant": "centered",
+        "variantIndex": 8,
+        "starType": "color_field"
+      },
+      "ch19_hero_variant_detail": {
+        "layout": "centered",
+        "elements": [
+          "calculator",
+          "headline",
+          "result_display",
+          "cta_primary"
+        ],
+        "alignment": "left",
+        "textPosition": "adjacent",
+        "height": "compact",
+        "backgroundTreatment": "solid",
+        "overlayOpacity": 0.4875,
+        "mobileBehavior": "stack"
+      },
+      "ch20_visual_treatment": {
+        "treatment": "illustration",
+        "videoStrategy": "none",
+        "imageTreatment": "cool",
+        "hasVideo": false,
+        "imageAspectRatio": "1:1",
+        "colorGrading": "natural",
+        "imageCount": 1
+      },
+      "ch21_trust_signals": {
+        "hasTrustSignals": false,
+        "approach": "credentials",
+        "prominence": "prominent",
+        "layoutVariant": "trust_social_proof_logos_0",
+        "contentProvided": false,
+        "suggestedStats": [],
+        "animationType": "count_up"
+      },
+      "ch21_trust_content": {
+        "credentials": [],
+        "testimonials": [
+          "{{TESTIMONIAL_1}}",
+          "{{TESTIMONIAL_2}}"
+        ],
+        "stats": [
+          {
+            "label": "{{STAT_1_LABEL}}",
+            "value": "{{STAT_1_VALUE}}"
+          },
+          {
+            "label": "{{STAT_2_LABEL}}",
+            "value": "{{STAT_2_VALUE}}"
+          },
+          {
+            "label": "{{STAT_3_LABEL}}",
+            "value": "{{STAT_3_VALUE}}"
+          }
+        ],
+        "securityBadges": []
+      },
+      "ch22_social_proof": {
+        "hasSocialProof": true,
+        "type": "customer_logos",
+        "prominence": "prominent",
+        "layout": "carousel",
+        "logoCount": 5,
+        "updateFrequency": "static",
+        "displayStyle": "full_testimonial"
+      },
+      "ch22_impact_demonstration": {
+        "type": "live_counter",
+        "realTime": false,
+        "interactive": true,
+        "animationTrigger": "scroll_enter",
+        "counterFormat": "abbreviated_k"
+      },
+      "ch23_content_depth": {
+        "level": "extensive",
+        "estimatedSections": 7,
+        "hasHero": false,
+        "hasFeatures": true,
+        "hasCTA": false,
+        "hasFAQ": true,
+        "hasTestimonials": true
+      },
+      "ch23_information_architecture": {
+        "pattern": "data_dashboard",
+        "navigationType": "sidebar",
+        "hasFooter": true,
+        "footerType": "full"
+      },
+      "ch24_personalization": {
+        "approach": "behavior_based",
+        "dynamicContent": true,
+        "userSegmentation": true,
+        "abTestingReady": false,
+        "segmentCount": 4
+      },
+      "ch25_copy_engine": {
+        "headline": "Genome: Mathematical Design DNA",
+        "subheadline": "Generate unique, deterministic design systems from SHA-256 hashes and content intent",
+        "cta": "Explore Genome",
+        "ctaSecondary": "Learn More",
+        "tagline": "No Templates. Only Math.",
+        "companyName": "Genome",
+        "authorName": "Emily Lee",
+        "authorTitle": "Design Lead at Meridian Creative",
+        "testimonial": "Genome has revolutionized our design process, allowing us to focus on high-level creative decisions rather than tedious template management",
+        "sectionTitleTestimonials": "What Our Customers Say",
+        "sectionTitleFeatures": "How It Works",
+        "sectionTitleFAQ": "Frequently Asked Questions",
+        "stats": [
+          {
+            "label": "Designs Generated",
+            "value": "10,000+"
+          },
+          {
+            "label": "Uptime",
+            "value": "99.9%"
+          },
+          {
+            "label": "Customer Satisfaction",
+            "value": "95%"
+          }
+        ],
+        "faq": [
+          {
+            "question": "How does Genome ensure design consistency?",
+            "answer": "Genome uses a proprietary algorithm to generate deterministic design systems from SHA-256 hashes"
+          },
+          {
+            "question": "Can I integrate Genome with my existing design tools?",
+            "answer": "Yes, Genome supports integration with popular design tools and workflows"
+          }
+        ],
+        "features": [
+          {
+            "title": "SHA-256 Design DNA",
+            "description": "Every design is mathematically generated from a hash, ensuring uniqueness and reproducibility"
+          },
+          {
+            "title": "Model Context Protocol",
+            "description": "Integrate Genome with your existing design workflow for seamless collaboration"
+          },
+          {
+            "title": "Deterministic Design Systems",
+            "description": "Ensure consistency across your design ecosystem with Genome's proprietary algorithms"
+          }
+        ],
+        "footerProductTitle": "Product",
+        "footerCompanyTitle": "Company",
+        "footerNavProduct": [
+          "Features",
+          "Pricing",
+          "API"
+        ],
+        "footerNavCompany": [
+          "About",
+          "Careers",
+          "Contact"
+        ]
+      },
+      "ch29_copy_intelligence": {
+        "industryTerminology": [
+          "deterministic design",
+          "SHA-256 hash",
+          "model context protocol"
+        ],
+        "emotionalRegister": "professional",
+        "formalityLevel": 0.8,
+        "ctaAggression": 0.2,
+        "headlineStyle": "benefit_forward",
+        "vocabularyComplexity": "technical",
+        "sentenceStructure": "balanced",
+        "emojiUsage": false,
+        "contractionUsage": false
+      },
+      "ch26_color_system": {
+        "secondary": {
+          "hue": 67,
+          "saturation": 0.7,
+          "lightness": 0.56,
+          "hex": "#cbdd40",
+          "relationship": "analogous"
+        },
+        "accent": {
+          "hue": 241,
+          "saturation": 0.4,
+          "lightness": 0.45,
+          "hex": "#4746a2",
+          "usage": "alert"
+        },
+        "semantic": {
+          "success": {
+            "hue": 135,
+            "hex": "#28bd4d"
+          },
+          "warning": {
+            "hue": 45,
+            "hex": "#f2b90d"
+          },
+          "error": {
+            "hue": 0,
+            "hex": "#df2020"
+          },
+          "info": {
+            "hue": 210,
+            "hex": "#1980e6"
+          }
+        },
+        "neutral": {
+          "scale": [
+            "#0d0d0d",
+            "#2c2627",
+            "#4f3b3f",
+            "#774b54",
+            "#a25766",
+            "#b0828b",
+            "#c0aaae",
+            "#d5cecf",
+            "#ededed"
+          ],
+          "tintStrength": 0.3
+        },
+        "darkMode": {
+          "surfaceStack": [
+            "#0f0b0c",
+            "#1d1617",
+            "#2c2123",
+            "#3b2b2e",
+            "#49363a",
+            "#584146",
+            "#674c51",
+            "#75575d"
+          ],
+          "elevationMap": [
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40
+          ]
+        },
+        "harmonyRule": "tetradic",
+        "palette": {
+          "rule": "tetradic",
+          "colors": [
+            {
+              "name": "berry",
+              "oklch": {
+                "l": 0.45,
+                "c": 0.23099999999999998,
+                "h": 348
+              },
+              "hex": "#a4006b",
+              "role": "primary",
+              "usageHints": [
+                "CTAs, headlines"
+              ]
+            },
+            {
+              "name": "chartreuse",
+              "oklch": {
+                "l": 0.52,
+                "c": 0.1848,
+                "h": 78
+              },
+              "hex": "#a05300",
+              "role": "secondary",
+              "usageHints": [
+                "subheads"
+              ]
+            },
+            {
+              "name": "seafoam",
+              "oklch": {
+                "l": 0.52,
+                "c": 0.1848,
+                "h": 168
+              },
+              "hex": "#008754",
+              "role": "accent",
+              "usageHints": [
+                "highlights"
+              ]
+            },
+            {
+              "name": "cobalt",
+              "oklch": {
+                "l": 0.52,
+                "c": 0.1848,
+                "h": 258
+              },
+              "hex": "#0d63d0",
+              "role": "surface",
+              "usageHints": [
+                "decorative"
+              ]
+            },
+            {
+              "name": "snow",
+              "oklch": {
+                "l": 0.95,
+                "c": 0.01155,
+                "h": 348
+              },
+              "hex": "#f5ebf0",
+              "role": "background",
+              "usageHints": [
+                "page bg"
+              ]
+            },
+            {
+              "name": "blush",
+              "oklch": {
+                "l": 0.7,
+                "c": 0.16169999999999998,
+                "h": 358
+              },
+              "hex": "#eb6e9e",
+              "role": "surface",
+              "usageHints": [
+                "tonal variant"
+              ]
+            },
+            {
+              "name": "teal",
+              "oklch": {
+                "l": 0.32,
+                "c": 0.11087999999999999,
+                "h": 153
+              },
+              "hex": "#004213",
+              "role": "surface",
+              "usageHints": [
+                "accent variant"
+              ]
+            }
+          ],
+          "dominant": 0,
+          "background": 4,
+          "text": 6,
+          "accent": 2,
+          "neutral": 3
+        },
+        "fontCount": 3,
+        "fontStrategy": "expressive_pair"
+      },
+      "ch3_type_accent": null,
+      "ch30_state_topology": {
+        "topology": "federated",
+        "sharedSurfaces": 3
+      },
+      "ch31_routing_pattern": {
+        "pattern": "multi_page",
+        "guardedRoutes": 8
+      },
+      "ch32_token_inheritance": {
+        "inheritance": "semantic",
+        "themeLayers": 3
+      },
+      "ch33_composition_strategy": {
+        "layoutPattern": "profile_page",
+        "sectionCount": 13,
+        "sectionTypes": [
+          "newsletter",
+          "contact",
+          "denary",
+          "generated",
+          "version"
+        ],
+        "navRequirement": "bottom_tab",
+        "heroProminence": "standard",
+        "interactionModel": "pagination",
+        "contentFlow": "top_down",
+        "densityDistribution": "content_dense",
+        "responsiveBehavior": "stack"
+      },
+      "ch34_component_topology": {
+        "primaryFramework": "htmx",
+        "componentDensity": 0.171875,
+        "nestingDepth": 1,
+        "compositionStyle": "template",
+        "stateBoundaries": 4,
+        "propComplexity": "complex",
+        "animationScope": "orchestrated"
+      },
+      "ch35_signature_motif": {
+        "separator": "·",
+        "numberFormat": "85·",
+        "dateFormat": "15·03·53",
+        "locationFormat": "CITY·COUNTRY",
+        "labelFormat": "SECTION·",
+        "hoverIndicator": "•",
+        "deployment": 0.46875,
+        "characterFamily": "mid_dot"
+      },
+      "ch36_tension_rhythm": {
+        "primarySurface": "#f6f6f6",
+        "secondarySurface": "hsl(348, 20%, 53%)",
+        "surfaceContrast": 0.859375,
+        "sharedConstants": [
+          "typeface",
+          "signature_motif",
+          "nav_style",
+          "text_color"
+        ],
+        "alternationWeight": 0.35820312499999996
+      }
+    },
+    "constraints": {
+      "forbiddenPatterns": [
+        "outline_none_no_replacement"
+      ],
+      "requiredPatterns": [
+        "prefers_reduced_motion_wrap"
+      ],
+      "bondingRules": [
+        "[wcag_contrast_minimum] WCAG 1.4.3, informationDensity: 0.80 → Minimum contrast ratio 7:1 required for WCAG AAA",
+        "[wcag_text_spacing] WCAG 1.4.12, informationDensity: 0.80 → Line height 1.5 minimum for readability",
+        "[trust_prominent] trustRequirement: 0.70 → High trust requirement mandates visible credentials and proof signals",
+        "[trust_credentials_approach] trustRequirement: 0.70 → High-stakes interfaces need hard credentials over social testimonials",
+        "[density_behavior_personalization] informationDensity: 0.80 → Dense data interfaces benefit from behavior-based content personalization",
+        "[universal_focus_visible] WCAG 2.4.11 → Focus visibility is non-negotiable for keyboard users — outline:none without replacement is a WCAG failure",
+        "[universal_reduced_motion] WCAG 2.3.3 → All CSS animations must be wrapped in @media (prefers-reduced-motion: no-preference)"
+      ],
+      "compensatorySignals": []
+    },
+    "viabilityScore": 1,
+    "generation": {
+      "timestamp": "2026-05-21T23:39:20.283Z",
+      "version": "2.0.0",
+      "options": {
+        "fontProvider": "bunny",
+        "copyIntelligence": {
+          "industryTerminology": [
+            "deterministic design",
+            "SHA-256 hash",
+            "model context protocol"
+          ],
+          "emotionalRegister": "professional",
+          "formalityLevel": 0.8,
+          "ctaAggression": 0.2,
+          "headlineStyle": "benefit_forward",
+          "vocabularyComplexity": "technical",
+          "sentenceStructure": "balanced",
+          "emojiUsage": false,
+          "contractionUsage": false
+        },
+        "copy": {
+          "headline": "Genome: Mathematical Design DNA",
+          "subheadline": "Generate unique, deterministic design systems from SHA-256 hashes and content intent",
+          "cta": "Explore Genome",
+          "tagline": "No Templates. Only Math.",
+          "companyName": "Genome",
+          "features": [
+            {
+              "title": "SHA-256 Design DNA",
+              "description": "Every design is mathematically generated from a hash, ensuring uniqueness and reproducibility"
+            },
+            {
+              "title": "Model Context Protocol",
+              "description": "Integrate Genome with your existing design workflow for seamless collaboration"
+            },
+            {
+              "title": "Deterministic Design Systems",
+              "description": "Ensure consistency across your design ecosystem with Genome's proprietary algorithms"
+            }
+          ],
+          "stats": [
+            {
+              "label": "Designs Generated",
+              "value": "10,000+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.9%"
+            },
+            {
+              "label": "Customer Satisfaction",
+              "value": "95%"
+            }
+          ],
+          "testimonial": "Genome has revolutionized our design process, allowing us to focus on high-level creative decisions rather than tedious template management",
+          "authorName": "Emily Lee",
+          "authorTitle": "Design Lead at Meridian Creative",
+          "ctaSecondary": "Learn More",
+          "sectionTitleTestimonials": "What Our Customers Say",
+          "sectionTitleFeatures": "How It Works",
+          "sectionTitleFAQ": "Frequently Asked Questions",
+          "faq": [
+            {
+              "question": "How does Genome ensure design consistency?",
+              "answer": "Genome uses a proprietary algorithm to generate deterministic design systems from SHA-256 hashes"
+            },
+            {
+              "question": "Can I integrate Genome with my existing design tools?",
+              "answer": "Yes, Genome supports integration with popular design tools and workflows"
+            }
+          ],
+          "footerProductTitle": "Product",
+          "footerCompanyTitle": "Company",
+          "footerNavProduct": [
+            "Features",
+            "Pricing",
+            "API"
+          ],
+          "footerNavCompany": [
+            "About",
+            "Careers",
+            "Contact"
+          ]
+        }
+      },
+      "brand": null,
+      "rationale": [
+        "[Accessibility] Motion physics preserved in genome; CSS generator will add prefers-reduced-motion media query per WCAG 2.3.3",
+        "[Accessibility] Screen reader landmarks enabled per WCAG 1.3.1 (info and relationships)",
+        "[Accessibility] ARIA labels required for data tables and complex components",
+        "[Accessibility Profile] Contrast: 7:1, Motion: reduced, Touch: 44px",
+        "[universal_reduced_motion] wins over [trust_required_pattern] for constraints.requiredPatterns: All CSS animations must be wrapped in @media (prefers-reduced-motion: no-preference)",
+        "[universal_focus_visible] wins over [no_confirmshaming] for constraints.forbiddenPatterns: Focus visibility is non-negotiable for keyboard users — outline:none without replacement is a WCAG failure"
+      ]
+    },
+    "selectedLibraries": {
+      "icon": "@phosphor-icons/react",
+      "animation": "motion",
+      "state": "zustand",
+      "styling": "shadcn-ui",
+      "font_display_provider": "bunny",
+      "font_body_provider": "bunny",
+      "font_display_import": "https://fonts.bunny.net/css?family=asta-sans:400,700&display=swap",
+      "font_body_import": "https://fonts.bunny.net/css?family=noto-sans-soyombo:400,700&display=swap"
+    }
+  },
+  "tier": "endotherm_fauna",
+  "finalComplexity": 0.7699999999999999,
+  "css": "/* Genome CSS Reset */\n*, *::before, *::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nbody {\n  font-family: var(--font-body, system-ui, sans-serif);\n  background: var(--color-bg, var(--color-surface));\n  color: var(--color-text);\n  line-height: 1.6;\n}\n\nimg, picture, video, canvas, svg {\n  display: block;\n  max-width: 100%;\n}\n\ninput, button, textarea, select {\n  font: inherit;\n}\n\n:focus-visible {\n  outline: var(--focus-indicator, 2px solid var(--color-primary));\n  outline-offset: 2px;\n}\n\n:root {\n  /* Colors */\n  --color-primary: #b02440;\n  --color-primary-interactive: #e991a2; /* use for buttons/links on dark surfaces */\n  --color-primary-h: 348;\n  --color-primary-s: 66%;\n  --color-primary-l: 42%;\n  --primary-hue: 348;\n  --primary-sat: 66%;\n  --primary-light: 42%;\n  --color-primary-dim: hsla(348, 66%, 42%, 0.12);\n  --color-primary-glow: hsla(348, 66%, 42%, 0.35);\n  --color-primary-50: hsl(348, 66%, 82%);\n  --color-primary-100: hsl(348, 66%, 72%);\n  --color-primary-200: hsl(348, 66%, 62%);\n  --color-primary-300: hsl(348, 66%, 52%);\n  --color-primary-400: hsl(348, 66%, 47%);\n  --color-primary-500: #b02440;\n  --color-primary-600: hsl(348, 66%, 32%);\n  --color-primary-700: hsl(348, 66%, 22%);\n  --color-primary-800: hsl(348, 66%, 12%);\n  --color-primary-900: hsl(348, 66%, 5%);\n  /* Secondary Color */\n  --color-secondary: #cbdd40;\n  --color-secondary-h: 67;\n  --color-secondary-s: 70%;\n  --color-secondary-l: 56%;\n  --color-secondary-light: hsl(67, 70%, 76%);\n  --color-secondary-dark: hsl(67, 70%, 36%);\n  /* Accent Color */\n  --color-accent: #4746a2;\n  --color-accent-light: hsl(241, 40%, 65%);\n  /* Semantic Colors */\n  --color-success: #28bd4d;\n  --color-warning: #f2b90d;\n  --color-error: #df2020;\n  --color-info: #1980e6;\n  /* Neutral Scale */\n  --color-neutral-100: #0d0d0d;\n  --color-neutral-200: #2c2627;\n  --color-neutral-300: #4f3b3f;\n  --color-neutral-400: #774b54;\n  --color-neutral-500: #a25766;\n  --color-neutral-600: #b0828b;\n  --color-neutral-700: #c0aaae;\n  --color-neutral-800: #d5cecf;\n  --color-neutral-900: #ededed;\n  /* Dark Mode */\n  --color-dark-surface-0: #0f0b0c;\n  --color-dark-surface-1: #1d1617;\n  --color-dark-surface-2: #2c2123;\n  --color-dark-surface-3: #3b2b2e;\n  --color-dark-surface-4: #49363a;\n  --color-dark-surface-5: #584146;\n  --color-dark-surface-6: #674c51;\n  --color-dark-surface-7: #75575d;\n  --color-surface: #f6f6f6;\n  --color-surface-elevated: #dfdfdf;\n  --color-surface-overlay: #cbcbcb;\n  --color-surface-modal: #a3a3a3;\n  --color-bg: hsl(348, 5%, 98%);\n  --color-text: hsl(0, 0%, 8%);\n  --color-text-secondary: hsla(0, 0%, 8%, 0.7);\n  --color-text-tertiary: hsla(0, 0%, 8%, 0.5);\n  /* Semantic utilities */\n  --color-on-primary: hsl(0, 0%, 97%);\n  --color-surface-dark: hsl(348, 12%, 8%);\n  --color-surface-dark-border: hsla(0, 0%, 100%, 0.1);\n  --color-surface-dark-hover: hsla(0, 0%, 100%, 0.08);\n  --color-text-on-dark: hsl(0, 0%, 96%);\n  --color-text-on-dark-muted: hsla(0, 0%, 96%, 0.5);\n  --color-overlay: hsla(348, 20%, 5%, 0.5);\n  --color-overlay-light: hsla(348, 20%, 5%, 0.4);\n  --color-overlay-subtle: hsla(348, 20%, 5%, 0.1);\n  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);\n  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);\n  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);\n  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);\n  /* Typography */\n  --font-display: Asta Sans, system-ui, -apple-system, sans-serif;\n  --font-body: Noto Sans Soyombo, Arial, sans-serif;\n  --font-mono: 'SF Mono', Monaco, monospace;\n  --text-ratio: 1.25;\n  --text-base: 16px;\n  --text-display: clamp(1.341rem, 2.19vw + 0.5rem, 2.438rem);\n  --text-h1: clamp(1.066rem, 1.74vw + 0.5rem, 1.938rem);\n  --text-h2: clamp(0.875rem, 1.41vw + 0.5rem, 1.563rem);\n  --text-h3: clamp(0.875rem, 1.13vw + 0.5rem, 1.25rem);\n  --text-body: clamp(0.875rem, 0.9vw + 0.5rem, 1rem);\n  --text-small: clamp(0.875rem, 0.79vw + 0.5rem, 0.875rem);\n  --leading-display: 1.60;\n  --leading-h1: 1.64;\n  --leading-h2: 1.68;\n  --leading-h3: 1.72;\n  --leading-body: 1.80;\n  /* Spacing */\n  --spacing-xs: 3px;\n  --spacing-sm: 6px;\n  --spacing-md: 12px;\n  --spacing-lg: 18px;\n  --spacing-xl: 24px;\n  --spacing-2xl: 36px;\n  --spacing-section: 48px;\n  /* Radii */\n  --radius-sm: 3px;\n  --radius-md: 6px;\n  --radius-lg: 12px;\n  --radius-xl: 24px;\n  --radius-full: 9999px;\n  /* Motion */\n  --duration-fast: 0.26s;\n  --duration-normal: 0.52s;\n  --duration-slow: 1.04s;\n  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);\n  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);\n  /* Accessibility */\n  --focus-indicator: outline;\n  --touch-target: 44px;\n  /* Design philosophy */\n  --design-philosophy: \"chaotic\";\n  --depth-philosophy: \"immersive\";\n  --genome-entropy: 0.719;\n  /* Font system (3 fonts, expressive_pair strategy) */\n  --font-anchor: 'Asta Sans, system-ui, -apple-system, sans-serif';\n  --font-body: 'Noto Sans Soyombo, Arial, sans-serif';\n  --font-accent: 'Noto Sans Soyombo, Arial, sans-serif';\n  --font-count: 3;\n  /* Opacity philosophy */\n  --opacity-primary:   1.0;\n  --opacity-secondary: 0.65;\n  --opacity-tertiary:  0.38;\n  --opacity-ghost:     0.06;\n  --opacity-border:    0.12;\n  --opacity-image:     0.92;\n}\n\n/* OKLCH Color Palette — tetradic harmony */\n@supports (color: oklch(0 0 0)) {\n  :root {\n  --palette-1: oklch(0.450 0.231 348.0); /* berry — primary */\n  --palette-2: oklch(0.520 0.185 78.0); /* chartreuse — secondary */\n  --palette-3: oklch(0.520 0.185 168.0); /* seafoam — accent */\n  --palette-4: oklch(0.520 0.185 258.0); /* cobalt — surface */\n  --palette-5: oklch(0.950 0.012 348.0); /* snow — background */\n  --palette-6: oklch(0.700 0.162 358.0); /* blush — surface */\n  --palette-7: oklch(0.320 0.111 153.0); /* teal — surface */\n  }\n}\n\n:root {\n  --palette-1: hsl(321, 100.0%, 32.2%); /* berry fallback */\n  --palette-2: hsl(31, 100.0%, 31.4%); /* chartreuse fallback */\n  --palette-3: hsl(157, 100.0%, 26.5%); /* seafoam fallback */\n  --palette-4: hsl(214, 88.2%, 43.3%); /* cobalt fallback */\n  --palette-5: hsl(330, 33.3%, 94.1%); /* snow fallback */\n  --palette-6: hsl(337, 75.8%, 67.6%); /* blush fallback */\n  --palette-7: hsl(137, 100.0%, 12.9%); /* teal fallback */\n}\n\n:root {\n/* Semantic palette aliases */\n  --color-bg:         var(--palette-5); /* snow */\n  --color-primary:    var(--palette-1); /* berry */\n  --color-accent:     var(--palette-3); /* seafoam */\n  --color-neutral:    var(--palette-4); /* cobalt */\n  --color-text:       var(--palette-7); /* teal */\n\n/* color-mix() derived variants */\n  --color-primary-10:  color-mix(in oklch, var(--color-primary) 10%, transparent);\n  --color-primary-20:  color-mix(in oklch, var(--color-primary) 20%, transparent);\n  --color-primary-50:  color-mix(in oklch, var(--color-primary) 50%, transparent);\n  --color-accent-10:   color-mix(in oklch, var(--color-accent) 10%, transparent);\n  --color-accent-on-dark: color-mix(in oklch, var(--color-accent) 85%, white);\n  --color-neutral-10:  color-mix(in oklch, var(--color-neutral) 10%, transparent);\n  --color-surface:     color-mix(in oklch, var(--color-bg) 85%, var(--color-primary));\n}\n\n/* Font system */\n:root {\n  /* Font system — 3 fonts */\n  --font-anchor: 'Asta Sans, system-ui, -apple-system, sans-serif';   /* display headlines, large statements */\n  --font-body:   'Noto Sans Soyombo, Arial, sans-serif';   /* long-form reading, UI labels */\n  --font-accent: 'Noto Sans Soyombo, Arial, sans-serif';   /* numbers, code, labels, pull quotes */\n}\n\n/* Grain overlay — chaotic depth philosophy */\n.grain-overlay {\n  position: fixed; inset: 0; pointer-events: none; z-index: 9999;\n  opacity: 0.073;\n  background-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.669' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='1'/></svg>\");\n  mix-blend-mode: overlay;\n}\n\n/* Grid */\n\n.container {\n  max-width: 1011px;\n  margin-inline: auto;\n  padding-inline: var(--spacing-lg);\n}\n\n.grid {\n  display: grid;\n  gap: var(--spacing-md);\n  grid-template-columns: repeat(4, 1fr);\n}\n\n.text-display {\n  font-family: var(--font-display);\n  font-size: var(--text-display);\n  line-height: var(--leading-display);\n  font-weight: 700;\n}\n\n.text-h1 {\n  font-family: var(--font-display);\n  font-size: var(--text-h1);\n  line-height: var(--leading-h1);\n  font-weight: 700;\n}\n\n.btn {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: var(--spacing-xs);\n  padding: var(--spacing-lg) var(--spacing-xl);\n  font-size: var(--text-body);\n  font-weight: 500;\n  border-radius: var(--radius-md);\n  border: none;\n  cursor: pointer;\n  transition: all var(--duration-fast) var(--ease-smooth);\n}\n\n.btn-primary {\n  background: var(--color-primary);\n  color: white;\n}\n\n.btn-primary:hover {\n  background: var(--color-primary-600);\n  transform: translateY(-3px);\n}\n\n\n\n\n\n/* Iconography - ch28 */\n\n:root {\n  --icon-size: 0.93em;\n  --icon-stroke: 1.5px;\n  --icon-color: var(--color-secondary);\n  --icon-radius: var(--radius-sm);\n}\n\n.icon {\n  width: var(--icon-size);\n  height: var(--icon-size);\n  stroke: var(--icon-color);\n  stroke-width: var(--icon-stroke);\n  fill: var(--icon-color);\n  color: var(--icon-color);\n  flex-shrink: 0;\n}\n\n@keyframes icon-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }\n.icon-animate { animation: icon-bounce 1s ease-in-out infinite; }\n\n\n\n/* Responsive */\n\n@media (max-width: 748px) {\n  .hero {\n    min-height: auto;\n    padding: var(--spacing-xl) 0;\n  }\n  .hero-content {\n    width: 100% !important;\n    margin-left: 0 !important;\n    text-align: center;\n  }\n  .hero-visual {\n    position: relative;\n    width: 100%;\n    height: 288px;\n    margin-top: var(--spacing-lg);\n  }\n  .grid,\n  .features-grid,\n  .trust-grid,\n  .hero-services-grid,\n  .footer-grid {\n    grid-template-columns: 1fr;\n  }\n  .hero-stats {\n    grid-template-columns: 1fr;\n    gap: var(--spacing-md);\n  }\n  .testimonials-grid {\n    grid-template-columns: 1fr;\n  }\n  .nav-links {\n    display: none;\n  }\n  .hero-ctas {\n    justify-content: center;\n  }\n}\n\n@media (min-width: 749px) and (max-width: 1072px) {\n  .grid {\n    grid-template-columns: repeat(2, 1fr);\n  }\n  .hero-content {\n    width: 60%;\n  }\n}\n\n@media (min-width: 1384px) {\n  .container {\n    max-width: 1399px;\n  }\n}\n\n.fx-atmosphere { /* ch13 fx: none — intensity: 0.26 */ }\n\n/* Star: color_field — A section of pure intense colour — the palette becomes the hero. */\n:root {\n  --star-type: color_field;\n  --star-width: 100%;\n  --star-height: 100vh;\n  --star-cta-anchor: below_center;\n}\n.hero-star {\n  width: var(--star-width);\n  height: var(--star-height);\n  max-width: 100%;\n  position: relative;\n}\n\n.hero-star-color-field {\n  position: absolute; inset: 0; z-index: 0;\n  background: var(--color-primary);\n}\n\n/* ── Section Mode System ────────────────────────────────────────────────── */\n/* All values reference genome CSS vars — no hardcoded colours or sizes.    */\n\n/* loud — full-bleed, asymmetric, vivid, dense */\n[data-mode=\"loud\"] {\n  padding: var(--spacing-lg) 0;\n  background: linear-gradient(\n    var(--gradient-dir, 135deg),\n    var(--color-primary),\n    var(--color-accent)\n  );\n  color: var(--color-on-primary);\n  overflow: hidden;\n}\n[data-mode=\"loud\"] .section-headline {\n  font-size: var(--size-display-xl, clamp(3rem, 8vw, 10rem));\n  font-weight: var(--weight-display, 900);\n  letter-spacing: var(--tracking-display, -0.03em);\n  line-height: var(--leading-display, 0.9);\n  font-family: var(--font-anchor);\n}\n\n/* quiet — centred narrow, generous space */\n[data-mode=\"quiet\"] {\n  max-width: 65ch;\n  margin-inline: auto;\n  padding: var(--spacing-2xl) var(--spacing-md);\n}\n[data-mode=\"quiet\"] .section-headline {\n  font-size: var(--size-display-sm, clamp(1.75rem, 3vw, 3rem));\n  font-weight: var(--weight-body, 400);\n  letter-spacing: var(--tracking-tight, -0.01em);\n  font-family: var(--font-anchor);\n  color: var(--color-text);\n}\n[data-mode=\"quiet\"] .section-body {\n  font-size: var(--size-body-lg, clamp(1rem, 1.5vw, 1.25rem));\n  line-height: var(--leading-body, 1.7);\n  font-family: var(--font-body, var(--font-anchor));\n  color: var(--color-text);\n  opacity: var(--opacity-secondary);\n}\n\n/* data — grid/bento, structured, numbers first */\n[data-mode=\"data\"] {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n  gap: var(--spacing-md);\n  padding: var(--spacing-xl) var(--spacing-lg);\n  background: var(--color-surface);\n}\n[data-mode=\"data\"] .stat-value {\n  font-size: var(--size-display-lg, clamp(2.5rem, 6vw, 7rem));\n  font-weight: var(--weight-display, 900);\n  font-family: var(--font-accent, var(--font-anchor));\n  font-variant-numeric: tabular-nums;\n  color: var(--color-primary);\n}\n[data-mode=\"data\"] .stat-label {\n  font-size: var(--size-label, clamp(0.75rem, 1.2vw, 1rem));\n  font-family: var(--font-body, var(--font-anchor));\n  color: var(--color-text);\n  opacity: var(--opacity-tertiary);\n  letter-spacing: 0.08em;\n  text-transform: uppercase;\n}\n\n/* editorial — magazine, pull quote, unequal columns */\n[data-mode=\"editorial\"] {\n  display: grid;\n  grid-template-columns: 1fr 1.6fr;\n  gap: var(--spacing-xl);\n  padding: var(--spacing-xl) var(--spacing-lg);\n  align-items: start;\n  background: var(--color-bg);\n}\n@media (max-width: 768px) {\n  [data-mode=\"editorial\"] { grid-template-columns: 1fr; }\n}\n[data-mode=\"editorial\"] .pull-quote {\n  font-size: var(--size-display-sm, clamp(1.5rem, 3vw, 3rem));\n  font-family: var(--font-anchor);\n  font-weight: var(--weight-display, 700);\n  letter-spacing: var(--tracking-tight, -0.02em);\n  border-left: var(--line-weight, 3px) solid var(--color-primary);\n  padding-left: var(--spacing-md);\n  color: var(--color-text);\n  font-style: italic;\n}\n\n/* cinematic — full viewport, one phrase, maximum impact */\n[data-mode=\"cinematic\"] {\n  min-height: 100vh;\n  display: grid;\n  place-items: center;\n  position: relative;\n  overflow: hidden;\n  background: var(--strata-bg, var(--color-bg));\n}\n[data-mode=\"cinematic\"] .section-headline {\n  font-size: var(--size-display-max, clamp(5rem, 15vw, 18rem));\n  font-weight: var(--weight-display, 900);\n  letter-spacing: var(--tracking-ultra, -0.04em);\n  line-height: var(--leading-display, 0.85);\n  font-family: var(--font-anchor);\n  color: var(--color-on-surface-dark, var(--color-on-primary));\n  text-align: center;\n}\n\n/* technical — code-style, monospace, dark terminal */\n[data-mode=\"technical\"] {\n  padding: var(--spacing-xl) var(--spacing-lg);\n  background: var(--strata-bg, color-mix(in oklch, var(--color-bg) 95%, black));\n  color: var(--color-terminal, color-mix(in oklch, var(--color-primary) 80%, oklch(0.9 0.1 150)));\n}\n[data-mode=\"technical\"] * {\n  font-family: var(--font-accent, var(--font-anchor));\n}\n[data-mode=\"technical\"] .section-headline {\n  font-size: var(--size-display-sm, clamp(1.5rem, 3vw, 2.5rem));\n  font-weight: var(--weight-body, 400);\n  letter-spacing: 0.02em;\n  opacity: var(--opacity-secondary);\n}\n[data-mode=\"technical\"] .code-prefix {\n  opacity: var(--opacity-tertiary);\n}\n\n/* social — logo wall, testimonials, faces */\n[data-mode=\"social\"] {\n  padding: var(--spacing-xl) var(--spacing-lg);\n  background: var(--color-surface);\n}\n[data-mode=\"social\"] .logo-grid {\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--spacing-lg);\n  align-items: center;\n  justify-content: center;\n  opacity: var(--opacity-secondary);\n}\n[data-mode=\"social\"] .testimonial-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n  gap: var(--spacing-md);\n}\n\n/* action — CTA-focused, convert */\n[data-mode=\"action\"] {\n  padding: var(--spacing-2xl) var(--spacing-lg);\n  text-align: center;\n  background: var(--color-accent);\n  color: var(--color-on-accent, var(--color-on-primary));\n}\n[data-mode=\"action\"] .cta-headline {\n  font-size: var(--size-display-md, clamp(2rem, 5vw, 5rem));\n  font-weight: var(--weight-display, 900);\n  letter-spacing: var(--tracking-tight, -0.02em);\n  font-family: var(--font-anchor);\n  margin-bottom: var(--spacing-md);\n}\n[data-mode=\"action\"] .btn-primary {\n  font-size: var(--size-body-lg, clamp(1rem, 2vw, 1.375rem));\n  padding: 1em 2.5em;\n  border-radius: var(--radius-full);\n  background: var(--color-on-accent, var(--color-surface));\n  color: var(--color-accent);\n  font-weight: var(--weight-display, 700);\n  border: none;\n  cursor: pointer;\n  transition: transform var(--duration-fast, 0.2s), box-shadow var(--duration-fast, 0.2s);\n}\n[data-mode=\"action\"] .btn-primary:hover {\n  transform: scale(1.04);\n  box-shadow: var(--shadow-elevation-2, 0 8px 24px color-mix(in oklch, var(--color-accent) 30%, transparent));\n}\n\n/* parity alternation for color_band and spacing_scale rhythms */\n[data-parity=\"odd\"]  { background: var(--band-odd, var(--color-bg)); }\n[data-parity=\"even\"] { background: var(--band-even, var(--color-surface)); }\n\n/* Rhythm: color_band */\n:root {\n  --band-odd: var(--color-bg);\n  --band-even: var(--color-surface);\n  --rhythm-pattern: color_band;\n}\n[data-parity=\"odd\"]  { background: var(--band-odd); }\n[data-parity=\"even\"] { background: var(--band-even); }\n\n/* Depth Philosophy: immersive */\n\n/* Active techniques: white_space_depth, shadow_strata, midground_shapes, ghost_text_bg, parallax_layers, css_3d_card_tilt, shadow_typography, blend_mode_overlay, scroll_clip_reveal, sticky_depth, drop_cap, grain_subtle, noise_texture_surface */\n\n/* depth: white_space_depth */\n.section { padding-block: var(--spacing-section); }\n\n/* depth: shadow_strata */\n:root {\n  --shadow-ambient:  0 1px 2px color-mix(in oklch, var(--color-primary) 8%, black);\n  --shadow-penumbra: 0 4px 12px color-mix(in oklch, var(--color-primary) 6%, black);\n  --shadow-diffuse:  0 12px 32px color-mix(in oklch, var(--color-primary) 4%, black);\n  --shadow-elevation-1: var(--shadow-ambient), var(--shadow-penumbra);\n  --shadow-elevation-2: var(--shadow-ambient), var(--shadow-penumbra), var(--shadow-diffuse);\n}\n.card, .panel { box-shadow: var(--shadow-elevation-1); }\n.card:hover   { box-shadow: var(--shadow-elevation-2); transition: box-shadow var(--duration-fast, 0.25s) ease; }\n\n/* depth: midground_shapes */\n.midground-shape {\n  position: absolute;\n  width: var(--shape-size, clamp(200px, 35vw, 500px));\n  aspect-ratio: 1;\n  border-radius: var(--motif-radius, 50%);\n  background: color-mix(in oklch, var(--color-primary) var(--midground-opacity-pct, 8%), transparent);\n  filter: blur(var(--midground-blur, 40px));\n  pointer-events: none;\n}\n\n/* depth: ghost_text_bg */\n.ghost-text {\n  position: absolute;\n  font-size: var(--size-display-max, clamp(8rem, 25vw, 22rem));\n  font-weight: var(--weight-display, 900);\n  font-family: var(--font-anchor);\n  letter-spacing: var(--tracking-ultra, -0.05em);\n  opacity: var(--opacity-ghost);\n  pointer-events: none;\n  user-select: none;\n  color: var(--color-primary);\n  line-height: 0.85;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n/* depth: parallax_layers */\n[data-speed] { will-change: transform; }\n\n/* depth: css_3d_card_tilt */\n.tilt-card {\n  transform-style: preserve-3d;\n  transition: transform var(--duration-fast, 0.25s) ease-out, box-shadow var(--duration-fast, 0.25s) ease-out;\n  will-change: transform;\n}\n.tilt-card:hover { box-shadow: var(--shadow-elevation-2); }\n.tilt-card[style] { transform: rotateX(calc(var(--rx, 0) * 1deg)) rotateY(calc(var(--ry, 0) * 1deg)); }\n\n/* depth: shadow_typography */\n.display-type {\n  text-shadow:\n    2px 2px 0 color-mix(in oklch, var(--color-primary) var(--text-shadow-near, 15%), transparent),\n    4px 4px 0 color-mix(in oklch, var(--color-primary) var(--text-shadow-mid, 10%), transparent),\n    8px 8px 16px color-mix(in oklch, black var(--text-shadow-far, 20%), transparent);\n}\n\n/* depth: blend_mode_overlay */\n.blend-multiply { mix-blend-mode: multiply; }\n.blend-overlay  { mix-blend-mode: overlay; }\n.blend-screen   { mix-blend-mode: screen; }\n\n/* depth: scroll_clip_reveal */\n.clip-reveal { clip-path: inset(0 100% 0 0); transition: clip-path var(--duration-slow, 0.7s) var(--easing-standard); }\n.clip-reveal.is-visible { clip-path: inset(0 0% 0 0); }\n\n/* depth: sticky_depth */\n.sticky-section {\n  position: sticky; top: 0;\n  z-index: calc(var(--z-sticky-base, 10) - var(--section-index, 0));\n  transition: transform var(--duration-normal, 0.3s), opacity var(--duration-normal, 0.3s);\n}\n\n/* depth: drop_cap */\n.prose p:first-of-type::first-letter {\n  font-size: var(--size-drop-cap, clamp(3rem, 6vw, 5rem));\n  font-weight: var(--weight-display, 900);\n  line-height: 0.8; float: left;\n  margin-right: 0.15em;\n  color: var(--color-accent);\n  font-family: var(--font-anchor);\n}\n\n/* depth: grain_subtle */\n.grain-overlay {\n  position: fixed; inset: 0; pointer-events: none; z-index: var(--z-grain, 9999);\n  opacity: var(--grain-opacity, 0.025);\n  background-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='var(--grain-freq, 0.65)' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>\");\n  mix-blend-mode: var(--grain-blend, soft-light);\n}\n\n/* depth: noise_texture_surface */\n.textured-surface { position: relative; isolation: isolate; }\n.textured-surface::after {\n  content: ''; position: absolute; inset: 0; pointer-events: none;\n  background-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>\");\n  opacity: var(--noise-opacity-surface, 0.04);\n  mix-blend-mode: soft-light;\n  border-radius: inherit;\n}",
+  "scaffold_css": "/* SCAFFOLD CSS — optional reference patterns. These classes are not required.\n   Use what fits your structure. Ignore the rest. */\n\n/* Navigation */\n\n.header {\n  position: sticky;\n  top: 0;\n  z-index: 100;\n  background: var(--color-surface);\n  border-bottom: 1px solid var(--color-primary-100);\n  padding: var(--spacing-md) 0;\n}\n\n.nav {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: var(--spacing-lg);\n}\n\n.logo {\n  font-family: var(--font-display);\n  font-weight: 700;\n  font-size: var(--text-h3);\n  color: var(--color-primary);\n  text-decoration: none;\n}\n\n.nav-links {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-lg);\n  list-style: none;\n}\n.nav-links a {\n  color: var(--color-text-secondary);\n  text-decoration: none;\n  font-size: var(--text-body);\n  transition: color var(--duration-fast) var(--ease-smooth);\n}\n.nav-links a:hover {\n  color: var(--color-primary);\n}\n\n/* Buttons */\n\n.btn-secondary {\n  background: transparent;\n  color: var(--color-primary);\n  border: 2px solid var(--color-primary);\n  border-radius: var(--radius-md);\n}\n.btn-secondary:hover {\n  background: var(--color-primary);\n  color: white;\n}\n.btn-large {\n  padding: var(--spacing-lg) var(--spacing-2xl);\n  font-size: var(--text-h3);\n}\n\n/* Hero shared */\n\n.hero-ctas {\n  display: flex;\n  gap: var(--spacing-md);\n  flex-wrap: wrap;\n  margin-top: var(--spacing-lg);\n}\n\n.hero-subtitle,\n.hero-tagline,\n.hero-excerpt {\n  font-size: var(--text-h3);\n  color: var(--color-text-secondary);\n  line-height: var(--leading-h3);\n  margin-top: var(--spacing-md);\n}\n\n.hero-meta {\n  display: flex;\n  gap: var(--spacing-md);\n  color: var(--color-text-tertiary);\n  font-size: var(--text-small);\n  margin-top: var(--spacing-sm);\n}\n\n.hero-services-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: var(--spacing-lg);\n  margin-top: var(--spacing-xl);\n}\n.service-card {\n  background: var(--color-surface-elevated);\n  padding: var(--spacing-lg);\n  border-radius: var(--radius-md);\n}\n\n.hero-carousel {\n  display: flex;\n  gap: var(--spacing-lg);\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  margin-top: var(--spacing-lg);\n}\n.carousel-item {\n  flex: 0 0 280px;\n  scroll-snap-align: start;\n}\n\n.hero-filters {\n  display: flex;\n  gap: var(--spacing-sm);\n  flex-wrap: wrap;\n  margin-top: var(--spacing-md);\n}\n.filter-link {\n  padding: var(--spacing-xs) var(--spacing-md);\n  background: var(--color-surface-elevated);\n  border-radius: var(--radius-full);\n  font-size: var(--text-small);\n  text-decoration: none;\n  color: var(--color-text-secondary);\n}\n\n.play-button {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-sm);\n  background: transparent;\n  border: 2px solid var(--color-primary);\n  border-radius: var(--radius-full);\n  padding: var(--spacing-md) var(--spacing-lg);\n  cursor: pointer;\n  color: var(--color-primary);\n  font-size: var(--text-body);\n}\n\n.hero-testimonial-featured {\n  max-width: 700px;\n  margin: var(--spacing-xl) auto;\n}\n.hero-testimonial-featured blockquote {\n  font-family: var(--font-display);\n  font-size: var(--text-h3);\n  font-style: italic;\n  color: var(--color-text);\n  margin-bottom: var(--spacing-lg);\n}\n\n.configurator-preview {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: var(--spacing-xl);\n  margin-top: var(--spacing-xl);\n}\n.config-3d-viewer {\n  background: var(--color-surface-elevated);\n  border-radius: var(--radius-lg);\n  aspect-ratio: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.config-placeholder {\n  color: var(--color-text-secondary);\n  font-size: var(--text-small);\n}\n.config-options {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-lg);\n}\n.config-price {\n  display: flex;\n  align-items: baseline;\n  gap: var(--spacing-sm);\n}\n.price-label {\n  font-size: var(--text-small);\n  color: var(--color-text-secondary);\n}\n.price-value {\n  font-family: var(--font-display);\n  font-size: var(--text-h2);\n  font-weight: 700;\n  color: var(--color-primary);\n}\n.color-options {\n  display: flex;\n  gap: var(--spacing-sm);\n}\n.color-swatch {\n  width: 32px;\n  height: 32px;\n  border-radius: var(--radius-full);\n  border: 2px solid transparent;\n  cursor: pointer;\n}\n.color-swatch.active {\n  border-color: var(--color-text);\n}\n\n/* Sections */\n\n.section-title {\n  font-family: var(--font-display);\n  font-size: var(--text-h2);\n  line-height: var(--leading-h2);\n  font-weight: 700;\n  margin-bottom: var(--spacing-lg);\n}\n.section-intro {\n  font-size: var(--text-body);\n  color: var(--color-text-secondary);\n  margin-bottom: var(--spacing-xl);\n  max-width: 640px;\n}\n\n/* Trust grid */\n\n.trust-section {\n  padding: var(--spacing-2xl) 0;\n}\n.trust-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));\n  gap: var(--spacing-xl);\n  text-align: center;\n}\n.trust-number {\n  font-family: var(--font-display);\n  font-size: var(--text-h1);\n  font-weight: 700;\n  color: var(--color-primary);\n}\n.trust-label {\n  font-size: var(--text-small);\n  color: var(--color-text-secondary);\n  margin-top: var(--spacing-xs);\n}\n\n/* Social proof */\n\n.social-proof {\n  padding: var(--spacing-2xl) 0;\n  background: var(--color-surface-elevated);\n}\n.testimonial-author {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-md);\n  margin-top: var(--spacing-md);\n}\n.author-avatar {\n  width: 48px;\n  height: 48px;\n  border-radius: var(--radius-full);\n  object-fit: cover;\n}\n\n/* Features */\n\n.features {\n  padding: var(--spacing-2xl) 0;\n}\n.features-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n  gap: var(--spacing-lg);\n}\n.feature-card {\n  background: var(--color-surface-elevated);\n  padding: var(--spacing-lg);\n  border-radius: var(--radius-md);\n  border: 1px solid var(--color-primary-100);\n}\n.feature-card h3 {\n  font-family: var(--font-display);\n  font-size: var(--text-h3);\n  font-weight: 600;\n  margin-bottom: var(--spacing-sm);\n  color: var(--color-text);\n}\n.feature-card p {\n  color: var(--color-text-secondary);\n  font-size: var(--text-body);\n}\n\n/* FAQ */\n\n.faq {\n  padding: var(--spacing-2xl) 0;\n}\n.faq-list {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-md);\n}\n.faq-item {\n  border: 1px solid var(--color-primary-100);\n  border-radius: var(--radius-md);\n  overflow: hidden;\n}\n.faq-item summary {\n  cursor: pointer;\n  padding: var(--spacing-lg);\n  font-weight: 600;\n  list-style: none;\n  color: var(--color-text);\n}\n.faq-item summary::-webkit-details-marker { display: none; }\n.faq-item p {\n  padding: 0 var(--spacing-lg) var(--spacing-lg);\n  color: var(--color-text-secondary);\n}\n\n/* CTA */\n\n.cta {\n  padding: var(--spacing-2xl) 0;\n  background: var(--color-primary);\n  text-align: center;\n}\n.cta-title {\n  font-family: var(--font-display);\n  font-size: var(--text-h2);\n  font-weight: 700;\n  color: white;\n  margin-bottom: var(--spacing-md);\n}\n.cta-subtitle {\n  color: rgba(255,255,255,0.8);\n  font-size: var(--text-body);\n  margin-bottom: var(--spacing-xl);\n}\n\n/* Footer */\n\n.footer {\n  padding: var(--spacing-2xl) 0;\n  background: var(--color-surface-elevated);\n  border-top: 1px solid var(--color-primary-100);\n}\n.footer-grid {\n  display: grid;\n  grid-template-columns: 2fr 1fr 1fr;\n  gap: var(--spacing-2xl);\n  margin-bottom: var(--spacing-xl);\n}\n.footer-brand p {\n  color: var(--color-text-secondary);\n  margin-top: var(--spacing-sm);\n  font-size: var(--text-small);\n}\n.footer-links h4 {\n  font-weight: 600;\n  margin-bottom: var(--spacing-md);\n  color: var(--color-text);\n}\n.footer-links ul {\n  list-style: none;\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-sm);\n}\n.footer-links a {\n  color: var(--color-text-secondary);\n  text-decoration: none;\n  font-size: var(--text-small);\n  transition: color var(--duration-fast) var(--ease-smooth);\n}\n.footer-links a:hover {\n  color: var(--color-primary);\n}\n.footer-bottom {\n  padding-top: var(--spacing-lg);\n  border-top: 1px solid var(--color-primary-100);\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  font-size: var(--text-small);\n  color: var(--color-text-tertiary);\n}\n\n.logo-wordmark {\n  font-family: var(--font-display);\n  font-size: var(--text-h3);\n  font-weight: 700;\n  color: var(--color-text-secondary);\n}\n\n/* Hero Section */\n\n.hero {\n  position: relative;\n  min-height: 80vh;\n  display: flex;\n  align-items: center;\n  overflow: hidden;\n}\n\n.hero-content {\n  width: 100%;\n  max-width: 731px;\n  margin-inline: auto;\n  text-align: center;\n  padding: var(--spacing-xl);\n}\n\n.hero-screenshot {\n  border-radius: var(--radius-lg);\n  box-shadow: 0 34px 41px -12px rgba(0, 0, 0, 0.29);\n  overflow: hidden;\n}\n\n/* Trust Signals */\n\n.trust-section {\n  padding: var(--spacing-2xl) var(--spacing-xl);\n  background: var(--color-surface-elevated);\n}\n\n.logos-row {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: var(--spacing-2xl);\n  flex-wrap: wrap;\n}  .logo-item {\n  opacity: 0.6;\n  filter: grayscale(100%);\n  transition: all var(--duration-fast) var(--ease-smooth);\n}  .logo-item:hover {\n  opacity: 1;\n  filter: grayscale(0%);\n}\n\n.credentials-list {\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--spacing-md);\n}  .credential-badge {\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-xs);\n  padding: var(--spacing-xs) var(--spacing-sm);\n  background: var(--color-primary-100);\n  border-radius: var(--radius-sm);\n  font-size: var(--text-small);\n}",
+  "scaffold_css_note": "OPTIONAL — reference CSS for common patterns (nav, hero variants, trust, features, FAQ, CTA, footer). Use what fits your structure. Ignore the rest. Your page structure is your decision.",
+  "layout_contract": {
+    "_note": "These are genome-derived design constraints — NOT a page blueprint. Page structure, section selection, and layout order are YOUR decision as the implementer. Apply these constraints to whatever structure fits the intent. Avoid defaulting to hero → features → CTA — that pattern is slop.",
+    "hero_constraints": {
+      "present": false,
+      "constraint": "This genome has no hero. Do not default to the hero → features → CTA SaaS template. Find a structural pattern that fits the intent."
+    },
+    "navigation_constraints": {
+      "type": "sidebar",
+      "footer": "full",
+      "constraint": "Navigation character derived from genome — the form it takes in your implementation is your decision."
+    },
+    "content_signals": {
+      "_note": "Signals about content character — not a list of required sections.",
+      "information_architecture": "data_dashboard",
+      "content_depth": "extensive",
+      "trust_approach": "credentials",
+      "trust_prominence": "prominent",
+      "trust_layout": "trust_social_proof_logos_0",
+      "social_proof_form": "customer_logos",
+      "social_proof_layout": "carousel",
+      "conversion_oriented": false,
+      "faq_warranted": true,
+      "testimonials_warranted": true
+    },
+    "implementation_tier": {
+      "tier": "endotherm_fauna",
+      "mandate": "Progressive enhancement — HTML structure first, CSS tokens second, interaction third. ecosystemOutput defines component organism counts and hierarchy."
+    }
+  },
+  "creatorDNA": {
+    "genome": {
+      "c0_cultural_vector": [
+        0.046875,
+        -0.8671875,
+        -0.0234375
+      ],
+      "c1_temporal_nostalgia": {
+        "points": [
+          {
+            "position": 0.484375,
+            "weight": 0.592578125
+          },
+          {
+            "position": 0.765625,
+            "weight": 0.723828125
+          },
+          {
+            "position": 0.9140625,
+            "weight": 0.8277343749999999
+          }
+        ],
+        "interpolation": "gaussian"
+      },
+      "c2_obsession_traversal": {
+        "origin_domain": 0.1171875,
+        "depth": 0.536328125,
+        "branching_factor": 0.41171875,
+        "connection_strength": 0.2328125
+      },
+      "c3_formative_era": [
+        -0.34375,
+        0.1171875
+      ],
+      "c4_authorial_embedding": [
+        -0.8046875,
+        0.078125,
+        -0.765625,
+        0.7421875
+      ],
+      "c5_technical_spectrum": [
+        0.09375,
+        0.5390625,
+        0.296875,
+        0.8125,
+        0.984375
+      ],
+      "c6_aesthetic_sensibility": [
+        0.2109375,
+        0.1640625,
+        -0.734375
+      ],
+      "c7_cognitive_pattern": [
+        -0.6015625,
+        -0.6875,
+        -0.4609375
+      ],
+      "c8_social_vector": [
+        0.5234375,
+        -0.296875
+      ],
+      "c9_material_affinity": [
+        0.421875,
+        -0.0234375,
+        -0.65625
+      ],
+      "c10_narrative_pattern": [
+        0.8515625,
+        0.125
+      ],
+      "c11_chaos_tolerance": 0.70625,
+      "c12_cross_pollination": 0.46562500000000007,
+      "c13_temporal_sense": [
+        0.7109375,
+        -0.328125
+      ],
+      "c14_sensory_weights": {
+        "points": [
+          {
+            "position": 0,
+            "weight": 0.10474332398487991
+          },
+          {
+            "position": 0.25,
+            "weight": 0.2792342397268626
+          },
+          {
+            "position": 0.5,
+            "weight": 0.3011827825874894
+          },
+          {
+            "position": 0.75,
+            "weight": 0.2583831240092672
+          },
+          {
+            "position": 1,
+            "weight": 0.05645652969150104
+          }
+        ],
+        "interpolation": "linear"
+      },
+      "c15_coherence_style": 0.2578125,
+      "seed": "creator-genome-mcp-engine-docs",
+      "dna_hash": "CREATOR_D92EED749750493E",
+      "generation_timestamp": 1779406730862
+    },
+    "persona": {
+      "id": "CREATOR_D92EED749750493E",
+      "biography": {
+        "origin": "Born to a Korean mother and a Brazilian father in a rural town in the American Midwest, surrounded by cornfields and old barns",
+        "formative_years": "Spent summers on her grandparents' farm in Korea, learning traditional farming techniques and hearing stories about her ancestors, while also being fascinated by the early days of the internet and spending hours playing video games and experimenting with digital art",
+        "journey": "Studied fine arts and computer science in college, then worked as a freelance graphic designer and artist, eventually landing a job at a tech startup where she designed user interfaces and developed a passion for digital product design, now runs her own design studio focused on sustainable and social impact projects",
+        "current": "Living in a small, eclectic community in the Pacific Northwest, surrounded by nature and like-minded individuals, while still maintaining a strong online presence and collaborating with clients and partners from around the world",
+        "contradictions": [
+          "Struggles to balance her love for technology and innovation with her desire to live a more simple, sustainable life",
+          "Feels a strong connection to her traditional roots, but also values her independence and nonconformity",
+          "Has a hard time deciding between pursuing commercial success and using her design skills for social and environmental causes"
+        ]
+      },
+      "instincts": {
+        "visual_language": [
+          "Earthy, organic textures",
+          "Vibrant, bold colors",
+          "Intricate, hand-drawn patterns",
+          "Dreamy, ethereal landscapes"
+        ],
+        "interaction_metaphors": [
+          "Navigating a winding forest path",
+          "Unfolding a handmade, paper puzzle",
+          "Exploring a vibrant, bustling marketplace"
+        ],
+        "aesthetic_principles": [
+          "Embracing imperfection and impermanence",
+          "Celebrating the beauty of everyday, mundane objects",
+          "Creating immersive, sensory experiences"
+        ],
+        "copy_voice": "whimsical digital folklore"
+      },
+      "worldview": {
+        "core_metaphor": "The world as a complex, interconnected web of stories and relationships",
+        "design_philosophy": "Design should be a process of discovery, experimentation, and co-creation, rather than a rigid, formulaic approach",
+        "unusual_connections": [
+          "Seeing parallels between traditional Korean folk tales and modern video game narratives",
+          "Applying principles of permaculture to digital product design",
+          "Exploring the intersection of neuroscience and interactive art"
+        ],
+        "blind_spots": [
+          "Tending to overlook the commercial, business-side of design projects",
+          "Sometimes neglecting to consider the potential, unintended consequences of her designs on a larger, societal scale"
+        ]
+      },
+      "creative_behavior": {
+        "chaos_tolerance": 0.70625,
+        "cross_pollination": 0.46562500000000007,
+        "coherence_style": "fragmented"
+      }
+    },
+    "brief": {
+      "concept": {
+        "statement": "What if the intricate, hand-drawn patterns of traditional Korean and Brazilian folk art could be woven into the fabric of Genome's documentation, revealing the beauty and complexity of its deterministic design systems?",
+        "insight": "By embracing the organic and the technical, we can create a unique visual language that resonates with software developers and AI agent engineers, making the dense documentation more engaging and accessible.",
+        "tension": "The tension between the organic, earthy textures and the precise, technical tone of the content will create a productive friction, sparking curiosity and encouraging exploration."
+      },
+      "metaphor_system": {
+        "primary": "Genome as a lush, vibrant garden, where each component is a carefully tended plant, and the documentation is the gardener's journal.",
+        "secondary": "The four-layer SHA-256 hash chain as a winding, intricate pathway, guiding the user through the installation, tool reference, and workflow pipelines.",
+        "tertiary": "The interactive demo as a mystical, dreamlike portal, where users can experiment and co-create with the Genome system.",
+        "tension_description": "The primary metaphor's emphasis on growth and nurturing contrasts with the secondary metaphor's focus on structure and precision, while the tertiary metaphor's sense of wonder and exploration disrupts and enriches the overall narrative."
+      },
+      "design_principles": [
+        "Embracing complexity, not simplifying it",
+        "Celebrating the beauty of technical detail",
+        "Creating an immersive, story-driven experience",
+        "Encouraging exploration and co-creation"
+      ],
+      "component_language": {
+        "buttons": " Buttons will be designed as organic, hand-drawn elements, with subtle animations and textures that evoke a sense of tactility.",
+        "navigation": "Navigation will be structured around the winding pathway metaphor, with clear, concise language and intuitive icons.",
+        "forms": "Forms will be designed as interactive, curiosity-driven experiences, with prompts and feedback that guide the user through the process.",
+        "cards": "Cards will be used to present code snippets, CLI commands, and configuration examples, with a focus on legibility and visual hierarchy.",
+        "feedback": "Success states will be celebrated with vibrant, animated patterns, while error states will be handled with clear, concise language and gentle, guiding feedback."
+      }
+    }
+  },
+  "genome_layer_guide": {
+    "L1_design_genome": {
+      "field": "genome",
+      "controls": [
+        "CSS custom properties",
+        "color system",
+        "typography scale",
+        "spacing rhythm",
+        "motion physics",
+        "edge treatment",
+        "visual character"
+      ],
+      "pass_to": [
+        "validate_design (required — pass as genome param)",
+        "generate_design_brief (required — pass as genome param)"
+      ],
+      "do_not_use_for": "state management, routing, component hierarchy — those come from L2/L3"
+    },
+    "L2_ecosystem_genome": {
+      "field": "ecosystemOutput.ecosystemGenome",
+      "controls": [
+        "component organism type (microbial/flora/fauna)",
+        "containment hierarchy (predator→prey)",
+        "organism count scaling",
+        "biome character"
+      ],
+      "pass_to": [
+        "generate_civilization as the `ecosystem` parameter — this wires L2 into L3"
+      ],
+      "chain_note": "To call generate_ecosystem as a standalone tool: pass genome.dnaHash as `seed` to maintain SHA-256 chain continuity"
+    },
+    "L3_civilization_genome": {
+      "field": "civilizationOutput.civilizationGenome",
+      "controls": [
+        "state topology (civ_ch2_governance.model → useState/context/zustand/federated)",
+        "routing pattern (civ_ch7_knowledge.model → single-page/multi-page/platform/federated)",
+        "token inheritance model",
+        "application tier"
+      ],
+      "implement_as": "ecosystem tier — no civilization layer (complexity below tribal threshold)"
+    }
+  },
+  "ecosystemOutput": {
+    "biome": "montane",
+    "biomeDescription": "high-altitude specialist — edge computing and altitude scenarios",
+    "organisms": {
+      "counts": {
+        "microbial": 13,
+        "flora": 8,
+        "fauna": 4,
+        "total": 25
+      },
+      "microbial": [
+        {
+          "id": "M-0-HashIndicator",
+          "name": "HashIndicator",
+          "category": "microbial",
+          "colorTreatment": "secondary"
+        },
+        {
+          "id": "M-1-LayerBadge",
+          "name": "LayerBadge",
+          "category": "microbial",
+          "colorTreatment": "accent"
+        },
+        {
+          "id": "M-2-CodeSnippetInput",
+          "name": "CodeSnippetInput",
+          "category": "microbial",
+          "colorTreatment": "neutral"
+        },
+        {
+          "id": "M-3-CliCommandButton",
+          "name": "CliCommandButton",
+          "category": "microbial",
+          "colorTreatment": "primary"
+        },
+        {
+          "id": "M-4-ConfigExampleIcon",
+          "name": "ConfigExampleIcon",
+          "category": "microbial",
+          "colorTreatment": "secondary"
+        },
+        {
+          "id": "M-5-LoaderSpinner",
+          "name": "LoaderSpinner",
+          "category": "microbial",
+          "colorTreatment": "accent"
+        },
+        {
+          "id": "M-6-DesignSystemStatus",
+          "name": "DesignSystemStatus",
+          "category": "microbial",
+          "colorTreatment": "neutral"
+        },
+        {
+          "id": "M-7-InstallationStepIndicator",
+          "name": "InstallationStepIndicator",
+          "category": "microbial",
+          "colorTreatment": "primary"
+        },
+        {
+          "id": "M-8-PipelineWorkflowIcon",
+          "name": "PipelineWorkflowIcon",
+          "category": "microbial",
+          "colorTreatment": "secondary"
+        },
+        {
+          "id": "M-9-DemoModeToggle",
+          "name": "DemoModeToggle",
+          "category": "microbial",
+          "colorTreatment": "accent"
+        },
+        {
+          "id": "M-10-AltitudeScenarioSelector",
+          "name": "AltitudeScenarioSelector",
+          "category": "microbial",
+          "colorTreatment": "neutral"
+        },
+        {
+          "id": "M-11-EdgeComputingIndicator",
+          "name": "EdgeComputingIndicator",
+          "category": "microbial",
+          "colorTreatment": "primary"
+        },
+        {
+          "id": "M-12-DeterministicDesignSystemBadge",
+          "name": "DeterministicDesignSystemBadge",
+          "category": "microbial",
+          "colorTreatment": "secondary"
+        }
+      ],
+      "flora": [
+        {
+          "id": "F-0-InstallationForm",
+          "name": "InstallationForm",
+          "category": "flora",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-1-ToolReferenceCard",
+          "name": "ToolReferenceCard",
+          "category": "flora",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-2-WorkflowPipelinePanel",
+          "name": "WorkflowPipelinePanel",
+          "category": "flora",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-3-DemoModeNavbar",
+          "name": "DemoModeNavbar",
+          "category": "flora",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-4-ConfigExampleList",
+          "name": "ConfigExampleList",
+          "category": "flora",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-5-DesignSystemForm",
+          "name": "DesignSystemForm",
+          "category": "flora",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-6-CliCommandList",
+          "name": "CliCommandList",
+          "category": "flora",
+          "motionStyle": "active"
+        },
+        {
+          "id": "F-7-AltitudeScenarioFilter",
+          "name": "AltitudeScenarioFilter",
+          "category": "flora",
+          "motionStyle": "active"
+        }
+      ],
+      "fauna": [
+        {
+          "id": "A-0-DesignSystemTable",
+          "name": "DesignSystemTable",
+          "category": "fauna",
+          "complexity": 0.9829963235294118
+        },
+        {
+          "id": "A-1-WorkflowPipelineChart",
+          "name": "WorkflowPipelineChart",
+          "category": "fauna",
+          "complexity": 1.048529411764706
+        },
+        {
+          "id": "A-2-DemoModeDialog",
+          "name": "DemoModeDialog",
+          "category": "fauna",
+          "complexity": 1.1140625
+        },
+        {
+          "id": "A-3-ConfigExampleEditor",
+          "name": "ConfigExampleEditor",
+          "category": "fauna",
+          "complexity": 1.179595588235294
+        }
+      ]
+    },
+    "relationships": [
+      {
+        "container": "F-0-InstallationForm",
+        "contained": "M-5-LoaderSpinner",
+        "pattern": "InstallationForm contains M-5-LoaderSpinner"
+      },
+      {
+        "container": "F-0-InstallationForm",
+        "contained": "M-6-DesignSystemStatus",
+        "pattern": "InstallationForm contains M-6-DesignSystemStatus"
+      },
+      {
+        "container": "F-0-InstallationForm",
+        "contained": "M-7-InstallationStepIndicator",
+        "pattern": "InstallationForm contains M-7-InstallationStepIndicator"
+      },
+      {
+        "container": "F-0-InstallationForm",
+        "contained": "M-8-PipelineWorkflowIcon",
+        "pattern": "InstallationForm contains M-8-PipelineWorkflowIcon"
+      },
+      {
+        "container": "F-1-ToolReferenceCard",
+        "contained": "M-5-LoaderSpinner",
+        "pattern": "ToolReferenceCard contains M-5-LoaderSpinner"
+      },
+      {
+        "container": "F-1-ToolReferenceCard",
+        "contained": "M-6-DesignSystemStatus",
+        "pattern": "ToolReferenceCard contains M-6-DesignSystemStatus"
+      },
+      {
+        "container": "F-1-ToolReferenceCard",
+        "contained": "M-7-InstallationStepIndicator",
+        "pattern": "ToolReferenceCard contains M-7-InstallationStepIndicator"
+      },
+      {
+        "container": "F-1-ToolReferenceCard",
+        "contained": "M-8-PipelineWorkflowIcon",
+        "pattern": "ToolReferenceCard contains M-8-PipelineWorkflowIcon"
+      },
+      {
+        "container": "F-2-WorkflowPipelinePanel",
+        "contained": "M-5-LoaderSpinner",
+        "pattern": "WorkflowPipelinePanel contains M-5-LoaderSpinner"
+      },
+      {
+        "container": "F-2-WorkflowPipelinePanel",
+        "contained": "M-6-DesignSystemStatus",
+        "pattern": "WorkflowPipelinePanel contains M-6-DesignSystemStatus"
+      }
+    ],
+    "evolution": {
+      "complexity": 0.4770833333333334,
+      "diversity": 0.91,
+      "stability": 0.9045833333333333,
+      "generations": 4
+    },
+    "civilizationReady": false,
+    "civilizationGap": 0.333
+  },
+  "civilizationOutput": null,
+  "webglComponents": "// React Three Fiber — Generated by Genome MCP\n// Material: matte | Geometry: monolithic | DNA: 7aab6631\nimport { useRef } from 'react';\nimport { Canvas, useFrame } from '@react-three/fiber';\nimport { Environment } from '@react-three/drei';\nimport type { Mesh } from 'three';\n\nfunction ProceduralOrganism() {\n  const meshRef = useRef<Mesh>(null);\n\n  // Animation disabled by genome (ch18_rendering.animate = false)\n\n  return (\n    <>\n      {/* Background glow */}\n      <mesh scale={2} position={[0, 0, -2]}>\n        <sphereGeometry args={[1.5, 32, 32]} />\n        <meshBasicMaterial color=\"hsl(348, 66%, 42%)\" transparent opacity={0.08} />\n      </mesh>\n\n      {/* Main organism */}\n      <mesh ref={meshRef} scale={1.2}>\n        <boxGeometry args={[1.5, 1.5, 1.5]} />\n        <meshLambertMaterial\n          color=\"hsl(348, 66%, 42%)\"\n          emissive=\"hsl(348, 66%, 42%)\"\n          emissiveIntensity={0.01}\n        />\n      </mesh>\n    </>\n  );\n}\n\nexport function Procedural3D() {\n  return (\n    <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>\n      <ambientLight intensity={0.43} />\n      <pointLight position={[5, 5, 5]} intensity={1.26} color=\"hsl(348, 66%, 42%)\" />\n      <Environment preset=\"apartment\" />\n      <ProceduralOrganism />\n    </Canvas>\n  );\n}",
+  "fxAtmosphere": ".fx-atmosphere { /* ch13 fx: none — intensity: 0.26 */ }",
+  "svgBiomarker": "<svg viewBox=\"0 0 100 100\" class=\"w-full h-full text-current\" xmlns=\"http://www.w3.org/2000/svg\"\n  data-shape-family=\"geometric\"\n  data-anim=\"static\"\n  data-complexity=\"0.000\"\n  data-dna=\"7aab6631\">\n  <!-- Genome Biomarker — geometric/static — technology -->\n  <g stroke-width=\"4.0\" fill=\"none\" stroke=\"currentColor\">\n    <path d=\"M 20 40 L 80 40\" stroke-width=\"3.5\" />\n<path d=\"M 40 20 L 40 80\" stroke-width=\"3.5\" />\n<polygon points=\"20,40 40,60 60,40\" stroke-width=\"4.0\" />\n<polygon points=\"60,60 80,40 60,20\" stroke-width=\"4.0\" />\n<line x1=\"40\" y1=\"20\" x2=\"60\" y2=\"80\" stroke-width=\"4.5\" />\n<line x1=\"60\" y1=\"20\" x2=\"40\" y2=\"80\" stroke-width=\"4.5\" />\n<circle cx=\"50\" cy=\"50\" r=\"10\" fill=\"currentColor\" />\n<path d=\"M 30 50 L 50 70 L 70 50\" stroke-width=\"4.0\" />\n<path d=\"M 50 30 L 70 50 L 50 70\" stroke-width=\"4.0\" />\n  </g>\n</svg>",
+  "icon_library": {
+    "name": "Phosphor Icons",
+    "package": "@phosphor-icons/react",
+    "style": "rounded",
+    "count": 1200,
+    "license": "MIT",
+    "description": "Six-weight flexible system — the most versatile rounded library, duotone capable",
+    "import_example": "import { House } from \"@phosphor-icons/react\";",
+    "cdn": "https://unpkg.com/@phosphor-icons/web@latest",
+    "weight_variants": [
+      "thin",
+      "light",
+      "regular",
+      "bold",
+      "fill",
+      "duotone"
+    ],
+    "note": "/* ── Icon Library ───────────────────────────────────────────\n   Library  : Phosphor Icons\n   Style    : rounded — Six-weight flexible system — the most versatile rounded library, duotone capable\n   Package  : @phosphor-icons/react\n   Count    : ~1,200 icons\n   License  : MIT\n   Variants : thin, light, regular, bold, fill, duotone\n\n   Install  : npm install @phosphor-icons/react\n   Import   : import { House } from \"@phosphor-icons/react\";\n   CDN      : https://unpkg.com/@phosphor-icons/web@latest\n─────────────────────────────────────────────────────────── */"
+  },
+  "animation_library": {
+    "name": "Motion One",
+    "package": "motion",
+    "style": "css",
+    "bundle_size": "~3.8kb",
+    "license": "MIT",
+    "description": "Web Animations API wrapper — standards-based, near-zero bundle cost, hardware accelerated",
+    "choreography": [
+      "smooth",
+      "snappy",
+      "elegant"
+    ],
+    "import_example": "import { animate, inView, scroll } from \"motion\";",
+    "usage_example": "animate(\".card\", { opacity: [0, 1], y: [20, 0] }, { duration: 0.4, easing: [0.25, 0.1, 0.25, 1] });",
+    "cdn": "https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js",
+    "note": "/* ── Animation Library ───────────────────────────────────────\n   Library  : Motion One\n   Style    : css — Web Animations API wrapper — standards-based, near-zero bundle cost, hardware accelerated\n   Package  : motion\n   Size     : ~3.8kb\n   License  : MIT\n   Timing   : smooth, snappy, elegant\n\n   Install  : npm install motion\n   Import   : import { animate, inView, scroll } from \"motion\";\n\n   Usage    :\n   animate(\".card\", { opacity: [0, 1], y: [20, 0] }, { duration: 0.4, easing: [0.25, 0.1, 0.25, 1] });\n   CDN      : https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js\n─────────────────────────────────────────────────────────── */"
+  },
+  "state_library": {
+    "primary": {
+      "name": "Zustand + persist",
+      "package": "zustand",
+      "paradigm": "federated",
+      "bundle_size": "~1.1kb",
+      "description": "Zustand with persist middleware — localStorage/sessionStorage synced cross-tab state",
+      "install": "npm i zustand",
+      "import_example": "import { create } from 'zustand';\nimport { persist } from 'zustand/middleware';",
+      "minimal_example": "const useStore = create(persist((set) => ({ bears: 0 }), { name: 'bear-storage' }));"
+    },
+    "alternative": {
+      "name": "Zustand + persist",
+      "package": "zustand",
+      "paradigm": "federated",
+      "description": "Zustand with persist middleware — localStorage/sessionStorage synced cross-tab state"
+    },
+    "topology": "federated",
+    "routing_pattern": "multi_page",
+    "guarded_routes": 8,
+    "token_inheritance": "semantic",
+    "theme_layers": 3
+  },
+  "styling_system": {
+    "primary": {
+      "name": "shadcn/ui",
+      "package": "shadcn-ui",
+      "paradigm": "component_lib",
+      "bundle_size": "0kb",
+      "description": "Copy-own Radix primitives + Tailwind — genome tokens override CSS vars directly",
+      "install": "npx shadcn-ui@latest init",
+      "import_example": "import { Button } from '@/components/ui/button';",
+      "minimal_example": "<Button variant=\"default\" className=\"bg-primary text-primary-foreground\">",
+      "ssr_safe": true
+    },
+    "alternative": {
+      "name": "Tailwind CSS",
+      "package": "tailwindcss",
+      "paradigm": "tailwind",
+      "description": "Utility-first atomic classes — extend theme with genome tokens for zero divergence"
+    },
+    "personality": "expressive",
+    "edge_style": "organic"
+  },
+  "personalization": {
+    "approach": "behavior_based",
+    "dynamic_content": true,
+    "user_segmentation": true,
+    "segment_count": 4,
+    "ab_testing_ready": false,
+    "_note": "ch24 derived — implement dynamic content, segmentation, or A/B branching if approach !== 'static'"
+  },
+  "patternReport": "❌ Pattern Analysis: 2 errors | 2 warnings\n\nSLOP ERRORS (breaks DNA contract):\n  [parallax_scroll] Line 574: Use DNA physics: spring/step/glitch/none\n  [parallax_scroll] Line 617: Use DNA physics: spring/step/glitch/none\n\nWARNINGS:\n  [trusted_by_logos] Line 510: Use DNA social proof approach from ch22_social_proof\n  [all_caps_body] Line 446: Reserve uppercase for labels/badges only, always with letter-spacing: 0.08em+\n\nINFO:\n  [no_reduced_motion] Line 265: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n  [no_reduced_motion] Line 301: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n  [no_reduced_motion] Line 302: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n  [no_reduced_motion] Line 552: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n  [no_reduced_motion] Line 588: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n  [no_reduced_motion] Line 623: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n  [no_reduced_motion] Line 643: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n  [no_reduced_motion] Line 650: Wrap all animations in @media (prefers-reduced-motion: no-preference)\n",
+  "patternViolations": [
+    {
+      "type": "visual",
+      "pattern": "parallax_scroll",
+      "severity": "error",
+      "line": 574,
+      "suggestion": "Use DNA physics: spring/step/glitch/none"
+    },
+    {
+      "type": "visual",
+      "pattern": "parallax_scroll",
+      "severity": "error",
+      "line": 617,
+      "suggestion": "Use DNA physics: spring/step/glitch/none"
+    }
+  ],
+  "suggested_next": [
+    {
+      "action": "CHECKPOINT",
+      "type": "mandatory_prerequisite",
+      "name": "genome.json",
+      "instruction": "WRITE THIS FILE BEFORE ANYTHING ELSE. Save the `genome` field as JSON to genome.json in the project root. ALL subsequent tools require this exact genome object.",
+      "enforcement": "You CANNOT proceed to generate_design_brief, validate_design, or any implementation without writing genome.json first.",
+      "always": true,
+      "blocking": true
+    },
+    {
+      "action": "CHECKPOINT",
+      "type": "mandatory_prerequisite",
+      "name": "chromosome_verification",
+      "instruction": "Verify you have accessed ALL 32 chromosomes. Check `chromosome_utilization.checklist` — every chromosome marked 'NOT YET ACCESSED' must be read and applied in your implementation.",
+      "enforcement": "Implementation with < 80% chromosome utilization will fail validation.",
+      "always": true,
+      "blocking": true
+    },
+    {
+      "action": "write_file",
+      "file": "design-tokens.css",
+      "field": "css",
+      "instruction": "Write the `css` field to your project's stylesheet — e.g. src/styles/design-tokens.css or public/design-tokens.css. Import it at the root of your app.",
+      "always": true
+    },
+    {
+      "action": "write_file",
+      "file": "public/biomarker.svg",
+      "field": "svgBiomarker",
+      "instruction": "Write the `svgBiomarker` field to public/biomarker.svg (or src/assets/biomarker.svg). This is the unique visual identity mark for this genome.",
+      "always": true
+    },
+    {
+      "tool": "generate_design_brief",
+      "pass": "genome (COMPLETE object, not just dnaHash) + ecosystemOutput.ecosystemGenome (if present) + civilizationOutput.civilizationGenome (if present)",
+      "reason": "LLM synthesizes all genome layers into a design philosophy thesis + DESIGN_SYSTEM.md. Call this BEFORE writing ANY code.",
+      "enforcement": "MANDATORY — You cannot implement without understanding the design philosophy.",
+      "always": true
+    },
+    {
+      "tool": "generate_ecosystem",
+      "pass": "intent + seed: genome.dnaHash (maintains SHA-256 hash chain from L1)",
+      "reason": "Component organism hierarchy — microbial (atoms), flora (composites), fauna (complex). Returns ecosystemGenome (L2).",
+      "genome_produced": "ecosystemOutput.ecosystemGenome — L2, controls component hierarchy and containment depth",
+      "when": "building a design system, component library, or any multi-component UI"
+    },
+    {
+      "tool": "generate_civilization",
+      "pass": "intent + seed + ecosystem: ecosystemOutput (entire object from generate_ecosystem)",
+      "reason": "Application architecture direction — state topology, routing, token inheritance. Complexity 0.77 qualifies.",
+      "genome_produced": "civilizationOutput.civilizationGenome — L3, controls state/routing architecture",
+      "when": "complexity >= 0.68 — this genome qualifies (0.77)"
+    },
+    {
+      "tool": "validate_design",
+      "pass": "genome (L1) + your implemented css string",
+      "reason": "Run before shipping — catches slop patterns and genome drift",
+      "always": true
+    }
+  ],
+  "genome_report": "# Genome Report\n\n## Intent → DNA\n| Field | Value |\n|---|---|\n| Intent | Documentation and product showcase for Genome, a Model Context Protocol server that generates deterministic design systems from a four-layer SHA-256 hash chain. The site covers installation, tool reference, workflow pipelines, and an interactive demo. Audience: software developers and AI agent engineers. Tone: precise, technical, confident. Content: dense documentation, code snippets, CLI commands, configuration examples. |\n| Seed | `genome-mcp-engine-docs` |\n| DNA Hash | `7aab6631671779ad0b25f3d39f35dab4f8b8e12b4a4c3caea937f6507f7ed83f` |\n| Sector detected | **technology** |\n| Complexity | 0.770 → **endotherm_fauna** tier |\n\n## Chromosomes Sequenced\n\n### ch0 — Sector Identity\n- Primary: **technology**\n\n### ch5 + ch6 — Color System\n- Primary hex: `#b02440` (hue 348°, sat 66%, light 42%)\n- Dark mode interactive: `#e991a2` (lightness 74% — visible on dark surfaces)\n- Temperature: warm | Mode: light\n- Palette scale: – steps\n\n### ch3 + ch4 — Typography\n- Display: **Asta Sans, system-ui, -apple-system, sans-serif** @ –\n- Body: **Noto Sans Soyombo, Arial, sans-serif** @ –\n\n### ch1 + ch9 — Layout & Grid\n- Structure: {\"hasSections\":true,\"sectionCount\":7,\"topology\":\"flat\",\"maxNesting\":1,\"scrollBeh\n\n### ch7 — Edge Geometry\n- Radius: 6\n\n### ch8 — Motion\n- Physics: none\n\n### ch11 — Texture\n- Treatment: {\"surface\":\"flat\",\"noiseLevel\":0.484375,\"grainFrequency\":0.2\n\n### ch10 — Visual Hierarchy\n- Strategy: {\"depth\":\"flat\",\"zIndexBehavior\":\"isolation\",\"layerBlur\":7.1\n\n### ch19 — Hero\n- Type: product_ui\n\n## Active Constraints\n- Sector **technology** forbidden hue ranges excluded from palette — primary is freely selected from valid spectrum\n- Dark mode buttons use `darkModeHex` (74% lightness) to remain visible on dark surfaces\n- All slop patterns (gradient text, generic shadows, generic font stacks) are enforced by `validate_design`\n\n## Suggested Workflow\n```\ngenerate_design_genome  ← you are here\n  ↓\ngenerate_design_brief   ← read before writing any code\n  ↓ (if building a UI library)\ngenerate_ecosystem      ← component specs + containment map\n  ↓ (complexity 0.77 qualifies)\ngenerate_civilization   ← architecture direction\n  ↓\nvalidate_design         ← run before shipping CSS/HTML\n```",
+  "chromosome_utilization": {
+    "used": [
+      "ch5_color_primary",
+      "ch6_color_temp",
+      "ch7_edge",
+      "ch8_motion",
+      "ch19_hero_type",
+      "ch3_type_display",
+      "ch4_type_body"
+    ],
+    "unused": [
+      "ch0_sector_primary",
+      "ch0_sector_secondary",
+      "ch0_sub_sector",
+      "ch0_brand_weight",
+      "ch1_structure",
+      "ch2_rhythm",
+      "ch9_grid",
+      "ch10_hierarchy",
+      "ch11_texture",
+      "ch12_signature",
+      "ch13_atmosphere",
+      "ch14_physics",
+      "ch15_biomarker",
+      "ch16_typography",
+      "ch17_accessibility",
+      "ch18_rendering",
+      "ch19_hero_variant_detail",
+      "ch20_visual_treatment",
+      "ch21_trust_signals",
+      "ch21_trust_content",
+      "ch22_social_proof",
+      "ch22_impact_demonstration",
+      "ch23_content_depth",
+      "ch23_information_architecture",
+      "ch24_personalization",
+      "ch25_copy_engine",
+      "ch26_color_system",
+      "ch27_motion_choreography",
+      "ch28_iconography",
+      "ch29_copy_intelligence",
+      "ch30_state_topology",
+      "ch31_routing_pattern",
+      "ch32_token_inheritance",
+      "ch33_composition_strategy",
+      "ch34_component_topology"
+    ],
+    "utilizationRate": 17,
+    "warning": "CRITICAL: Only 17% of L1 chromosomes used. You MUST read and apply all 32 chromosomes.",
+    "critical_note": "You MUST use ALL 32 chromosomes when implementing. Check the genome.chromosomes object and apply every single one. Low utilization indicates incomplete implementation.",
+    "all_chromosomes": [
+      "ch0_sector_primary",
+      "ch0_sector_secondary",
+      "ch0_sub_sector",
+      "ch0_brand_weight",
+      "ch1_structure",
+      "ch2_rhythm",
+      "ch3_type_display",
+      "ch4_type_body",
+      "ch5_color_primary",
+      "ch6_color_temp",
+      "ch7_edge",
+      "ch8_motion",
+      "ch9_grid",
+      "ch10_hierarchy",
+      "ch11_texture",
+      "ch12_signature",
+      "ch13_atmosphere",
+      "ch14_physics",
+      "ch15_biomarker",
+      "ch16_typography",
+      "ch17_accessibility",
+      "ch18_rendering",
+      "ch19_hero_type",
+      "ch19_hero_variant_detail",
+      "ch20_visual_treatment",
+      "ch21_trust_signals",
+      "ch21_trust_content",
+      "ch22_social_proof",
+      "ch22_impact_demonstration",
+      "ch23_content_depth",
+      "ch23_information_architecture",
+      "ch24_personalization",
+      "ch25_copy_engine",
+      "ch26_color_system",
+      "ch27_motion_choreography",
+      "ch28_iconography",
+      "ch29_copy_intelligence",
+      "ch30_state_topology",
+      "ch31_routing_pattern",
+      "ch32_token_inheritance",
+      "ch33_composition_strategy",
+      "ch34_component_topology"
+    ],
+    "checklist": {
+      "ch0_sector_primary": "⚠ NOT YET ACCESSED",
+      "ch0_sector_secondary": "⚠ NOT YET ACCESSED",
+      "ch0_sub_sector": "⚠ NOT YET ACCESSED",
+      "ch0_brand_weight": "⚠ NOT YET ACCESSED",
+      "ch1_structure": "⚠ NOT YET ACCESSED",
+      "ch2_rhythm": "⚠ NOT YET ACCESSED",
+      "ch3_type_display": "✓ USED",
+      "ch4_type_body": "✓ USED",
+      "ch5_color_primary": "✓ USED",
+      "ch6_color_temp": "✓ USED",
+      "ch7_edge": "✓ USED",
+      "ch8_motion": "✓ USED",
+      "ch9_grid": "⚠ NOT YET ACCESSED",
+      "ch10_hierarchy": "⚠ NOT YET ACCESSED",
+      "ch11_texture": "⚠ NOT YET ACCESSED",
+      "ch12_signature": "⚠ NOT YET ACCESSED",
+      "ch13_atmosphere": "⚠ NOT YET ACCESSED",
+      "ch14_physics": "⚠ NOT YET ACCESSED",
+      "ch15_biomarker": "⚠ NOT YET ACCESSED",
+      "ch16_typography": "⚠ NOT YET ACCESSED",
+      "ch17_accessibility": "⚠ NOT YET ACCESSED",
+      "ch18_rendering": "⚠ NOT YET ACCESSED",
+      "ch19_hero_type": "✓ USED",
+      "ch19_hero_variant_detail": "⚠ NOT YET ACCESSED",
+      "ch20_visual_treatment": "⚠ NOT YET ACCESSED",
+      "ch21_trust_signals": "⚠ NOT YET ACCESSED",
+      "ch21_trust_content": "⚠ NOT YET ACCESSED",
+      "ch22_social_proof": "⚠ NOT YET ACCESSED",
+      "ch22_impact_demonstration": "⚠ NOT YET ACCESSED",
+      "ch23_content_depth": "⚠ NOT YET ACCESSED",
+      "ch23_information_architecture": "⚠ NOT YET ACCESSED",
+      "ch24_personalization": "⚠ NOT YET ACCESSED",
+      "ch25_copy_engine": "⚠ NOT YET ACCESSED",
+      "ch26_color_system": "⚠ NOT YET ACCESSED",
+      "ch27_motion_choreography": "⚠ NOT YET ACCESSED",
+      "ch28_iconography": "⚠ NOT YET ACCESSED",
+      "ch29_copy_intelligence": "⚠ NOT YET ACCESSED",
+      "ch30_state_topology": "⚠ NOT YET ACCESSED",
+      "ch31_routing_pattern": "⚠ NOT YET ACCESSED",
+      "ch32_token_inheritance": "⚠ NOT YET ACCESSED",
+      "ch33_composition_strategy": "⚠ NOT YET ACCESSED",
+      "ch34_component_topology": "⚠ NOT YET ACCESSED"
+    }
+  }
+}
