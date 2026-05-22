@@ -14,7 +14,7 @@ interface IterationSite {
   layer: string;
   image?: string;
 }
-
+const sites: IterationSite[] = [
   {
     id: 1,
     name: 'Genome MCP — V1',
