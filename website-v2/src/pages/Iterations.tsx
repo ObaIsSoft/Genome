@@ -52,6 +52,7 @@ interface IterationSite {
     layer: 'L2 Directory',
     tags: ['Hub', 'Grid Layout', 'Fast Navigation'],
     description: 'The definitive hub for exploring all Genome derivations. Dogfoods the MCP to catalog its own outputs in a massive, mathematically sound grid.',
+    image: '/permutations.png',
   },
 ];
 

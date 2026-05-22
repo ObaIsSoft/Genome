@@ -165,6 +165,32 @@ export const Showcase: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* CTA */}
+      <div style={{
+        marginTop: '2rem', marginBottom: '6rem', textAlign: 'center',
+        padding: '3rem', borderRadius: 'var(--radius-lg)', maxWidth: '900px', margin: '0 auto 6rem',
+        background: 'color-mix(in oklch, var(--color-primary) 5%, transparent)',
+        border: '1px solid color-mix(in oklch, var(--color-primary) 20%, transparent)',
+      }}>
+        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', marginBottom: '1rem', color: 'var(--color-text)' }}>
+          Looking for Dogfood Sites?
+        </h3>
+        <p style={{ color: 'var(--color-text-secondary)', marginBottom: '1.75rem', maxWidth: '500px', margin: '0 auto 1.75rem', lineHeight: 1.6 }}>
+          If you want to see sites that fully dogfood the MCP pipeline (like the one you're on right now), check out the Iterations page.
+        </p>
+        <a
+          href="/iterations"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            padding: '0.875rem 2rem', background: 'var(--color-text)', color: 'var(--color-surface)',
+            borderRadius: 'var(--radius-md)', fontWeight: 600, textDecoration: 'none',
+            fontSize: '1rem',
+          }}
+        >
+          View Iterations <ArrowRight size={16} />
+        </a>
+      </div>
     </div>
   );
 };
