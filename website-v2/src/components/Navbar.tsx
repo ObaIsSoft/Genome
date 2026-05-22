@@ -51,6 +51,7 @@ export const Navbar: React.FC = () => {
     { to: '/features', label: 'Features' },
     { to: '/pricing', label: 'Pricing' },
     { to: '/iterations', label: 'Iterations' },
+    { to: '/showcase', label: 'Showcase' },
     { to: '/about', label: 'About' },
     { to: '/docs', label: 'Documentation' },
   ];

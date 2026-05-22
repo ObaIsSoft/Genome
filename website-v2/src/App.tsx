@@ -10,6 +10,7 @@ import { Careers } from './pages/Careers';
 import { Help, Community } from './pages/HelpCommunity';
 import { Privacy, Terms, Cookies } from './pages/Legal';
 import { Iterations } from './pages/Iterations';
+import { Showcase } from './pages/Showcase';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/docs" element={<Docs />} />
         <Route path="/documentation" element={<Docs />} />
         <Route path="/iterations" element={<Iterations />} />
+        <Route path="/showcase" element={<Showcase />} />
         
         {/* Footer Routes */}
         <Route path="/blog" element={<Blog />} />

@@ -15,7 +15,6 @@ interface IterationSite {
   image?: string;
 }
 
-const sites: IterationSite[] = [
   {
     id: 1,
     name: 'Genome MCP — V1',
@@ -26,7 +25,7 @@ const sites: IterationSite[] = [
     accentColor: '#1be4eb',
     layer: 'L1 Standard Flow',
     tags: ['Dark Mode', 'Spring Physics', 'Dense Data'],
-    description: 'The original cold-obsidian documentation portal. Generated from a single SHA-256 seed with Cybernetic Typographer persona. Establishes the baseline aesthetic: tight monospace grids, cyan glows, and spring-physics micro-interactions.',
+    description: 'The original cold-obsidian documentation portal. Generated from a single SHA-256 seed with Cybernetic Typographer persona. Establishes the baseline aesthetic.',
     image: '/v1.png',
   },
   {
@@ -39,34 +38,20 @@ const sites: IterationSite[] = [
     accentColor: '#b02440',
     layer: 'L1 + L2 Ecosystem',
     tags: ['Multi-Route', '3D Canvas', 'Semantic Navigation'],
-    description: 'Second iteration pushing the architecture further. A full React SPA with 4-layer pipeline, 3D WebGL wireframe, and a complete multi-page documentation system. Demonstrates Genome operating across L1 token derivation and L2 ecosystem hierarchy simultaneously.',
+    description: 'Second iteration pushing the architecture further. A full React SPA with 4-layer pipeline and a complete multi-page documentation system.',
     image: '/v2.png',
   },
   {
     id: 3,
-    name: 'Faceoff Vehicles',
-    url: 'https://faceoffvehicles.netlify.app/',
-    seed: 'faceoff-vehicles-brutalist',
-    persona: 'Editorial Brutalist',
-    palette: 'Pitch Black + Signal White',
-    accentColor: '#ffffff',
-    layer: 'L1 Creator Persona Flow',
-    tags: ['E-Commerce', 'Brutalist', 'High Contrast'],
-    description: 'A live production use-case. An aggressive, high-contrast automotive catalog. Genome generated a stark 0%–100% grayscale scaling system with dominant typographic weights — the antithesis of generic e-commerce templates.',
-    image: '/faceoff.png',
-  },
-  {
-    id: 4,
-    name: 'Obafemi Portfolio',
-    url: 'https://obafemiadebayo.netlify.app/',
-    seed: 'obafemi-portfolio-multi-theme',
-    persona: 'Modernist Minimalist',
-    palette: 'Per-Route Genome Derivatives',
-    accentColor: '#7c5fe6',
-    layer: 'L0 + Multi L2 Sub-Genomes',
-    tags: ['Portfolio', 'Multi-Theme', 'Per-Page Genomes'],
-    description: 'The most architecturally complex use-case. Demonstrates Genome\'s sub-system capabilities: separate L2 Component Genomes per subpage, each deriving independent fonts, color scales, and motion curves from the same L0 creator persona. One seed, infinite derivations.',
-    image: '/portfolio.png',
+    name: 'PermutationsOnly',
+    url: 'https://permutationsonly.vercel.app/',
+    seed: 'genome-permutations-hub',
+    persona: 'Information Curator',
+    palette: 'Graphite + Neon Yellow',
+    accentColor: '#facc15',
+    layer: 'L2 Directory',
+    tags: ['Hub', 'Grid Layout', 'Fast Navigation'],
+    description: 'The definitive hub for exploring all Genome derivations. Dogfoods the MCP to catalog its own outputs in a massive, mathematically sound grid.',
   },
 ];
 
@@ -108,7 +93,7 @@ export const Iterations: React.FC = () => {
           border: '1px solid color-mix(in oklch, var(--color-text) 8%, transparent)',
           borderRadius: 'var(--radius-lg)',
         }}>
-          {[{ v: '4', l: 'Sites Built' }, { v: '4', l: 'Unique Seeds' }, { v: '0', l: 'Shared Templates' }].map((s, i) => (
+          {[{ v: '3', l: 'Dogfood Sites' }, { v: '1', l: 'Core Idea' }, { v: '0', l: 'Shared Templates' }].map((s, i) => (
             <div key={i} style={{ textAlign: 'center' }}>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-primary)' }}>{s.v}</div>
               <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase' as const, letterSpacing: '0.06em', fontWeight: 600 }}>{s.l}</div>
@@ -293,15 +278,13 @@ export const Iterations: React.FC = () => {
           border: '1px solid color-mix(in oklch, var(--color-primary) 20%, transparent)',
         }}>
           <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', marginBottom: '1rem', color: 'var(--color-text)' }}>
-            Your next site could be iteration #5.
+            See Genome in the Wild.
           </h3>
           <p style={{ color: 'var(--color-text-secondary)', marginBottom: '1.75rem', maxWidth: '500px', margin: '0 auto 1.75rem', lineHeight: 1.6 }}>
-            We iterated and got multiple results. View the full collection of Genome-generated permutations at the link below.
+            The Iterations above dogfood the MCP fully. To see real-world projects that utilized Genome for component and token styling, check out the Showcase.
           </p>
           <a
-            href="https://permutationsonly.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/showcase"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.875rem 2rem', background: 'var(--color-primary)', color: '#fff',
@@ -309,7 +292,7 @@ export const Iterations: React.FC = () => {
               fontSize: '1rem', boxShadow: '0 8px 24px color-mix(in oklch, var(--color-primary) 30%, transparent)',
             }}
           >
-            Explore PermutationsOnly <ExternalLink size={16} />
+            View Showcase <ExternalLink size={16} />
           </a>
         </div>
       </section>
